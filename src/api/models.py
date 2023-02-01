@@ -6,7 +6,7 @@ from flask_sqlalchemy import ForeignKey
 db = SQLAlchemy()
 
 class User(db.Model):
-    __tablename__ = "user"
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -26,7 +26,7 @@ class User(db.Model):
         }
 
 class Events(db.Model):
-    __tablename__ = "events"
+    __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
     date = db.Column(db.String(120), nullable=False)
@@ -35,12 +35,24 @@ class Events(db.Model):
     location = db.Column(db.String(240), nullable=False)
     guests = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(360), nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey("user.id"))
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user = relationship()
 
 
 class Contacts(db.Model):
-    __tablename_ = "contacts"
+    __tablename__ = 'contacts'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user = relationship()
+
+
+class Event_Guests(db.Model):
+    __tablename__ = 'event_guests'
+    id = db.Column(db.Integer, primary_key=True)
+    contact_mail = db.Column(db.String(120), unique=True, nullable=False, ForeignKey('contacts.mail'))
+    contact = relationship()
+    event_id = 
+    event = relationship()
     user_id = 
+    user = relationship()
