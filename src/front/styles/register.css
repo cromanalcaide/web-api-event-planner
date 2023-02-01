@@ -38,11 +38,10 @@
     border-bottom-style: solid;
     border-bottom-color: #667dd2;
     border-bottom-width: 3px;
-    margin-right: 0px;
+    width: 100%;
    
+    
 }
-
-
 
 .reg-link{
     text-decoration: none;

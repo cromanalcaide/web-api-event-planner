@@ -19,14 +19,14 @@ export const Login = () => {
 
   return (
     <section className="vh-100 bg">
-      <div className="container h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-10 col-md-6 col-lg-4 col-xl-4">
+      <div className="container h-100 ">
+        <div className="row d-flex justify-content-center align-items-center h-100 ">
+          <div className="col-10 col-md-6 col-lg-4 col-xl-4 ">
             <div className="card ">
               <div className="card-body p-5 text-center">
                 <div className="mb-md-5 mt-md-4 ">
                   <h2 className="title mb-2 pb-5">Login</h2>
-                  <div className="form-outline form-white mb-4">
+                  <div className="form-outline form-white mb-2 ml-2 d-flex justify-content-center">
                     <input
                       type="email"
                       id="typeEmailX"
@@ -36,7 +36,7 @@ export const Login = () => {
                       onChange= {(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <div className="form-outline form-white mb-5">
+                  <div className="form-outline form-white mb-3 d-flex justify-content-center">
                     <input
                       type="password"
                       id="typePasswordX"
