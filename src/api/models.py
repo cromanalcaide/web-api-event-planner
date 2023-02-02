@@ -8,21 +8,24 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), unique=True, nullable=False) #nosotros pedimos NOMBRE por lo que el username no deberia ser unico, si el email.
+    name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    phone = db.Column(db.Integer, unique=False)
+    password = db.Column(db.String(80), nullable=False)
+    phone = db.Column(db.Integer, unique=True)
     city = db.Column(db.String(120), nullable=False)
     country = db.Coumn(db.String(120), nullable=False)
 
     def __repr__(self):
-        return f'<User {self.email}>'  
-#tengo entendido que siempre lo ideal es utilizar el id, es decir self.id (entiendo que en la plantilla venia asi pero recuerdo eso)
+        return f'<User: {self.id}>'  
+    
     def serialize(self):
         return {
-            "id": self.id,
-            "email": self.email,
-            # acá hay que devolver toda la info, o sea agregar el phone, city, country etc. es lo que despues vamos a usar en el GET PUT etc. 
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'city': self.city
+            'country': self.country
         }
 
 class Events(db.Model):
@@ -38,9 +41,7 @@ class Events(db.Model):
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user = relationship()
 
-    #En cada clase tenes que agregar el serialize (en caso del serialize no es que sea obligatorio pero si recomendado, luego puede ser sustituido por 
-    # metodos especificos.)y el repr. 
-    #Ej. en esta clase sería 
+
     
     # def __repr__(self):
     #   return f'<Events {self.id}>'  
@@ -70,12 +71,11 @@ class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
     contact_mail = db.Column(db.String(120), unique=True, nullable=False, ForeignKey('contacts.mail'))
-    contact = relationship(contactos, )
-    event_id =                    #event_id = db.Column(db.Integer, ForeignKey('events.id'))
+    contact = relationship()
+    event_id = db.Column(db.Integer, ForeignKey('events.id'))
     event = relationship()
-    user_id =                     #user_id = db.Column(db.Integer, ForeignKey('user.id'))  
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))  
     user = relationship()
     # relaciones según entiendo no es obligatorio declararlas, pero si recomendado. En ese caso está bien como las declaraste ya que los argumentos no son obligatorios. 
     #para finalizar, a medida que avancemos vamos a ir necesitando agregar métodos dentro de las clases tal y como hicimos en el ejercicio de la Family api. para poder modificar usuarios por ej. 
    
-    
