@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy import ForeignKey
 
 
 db = SQLAlchemy()
@@ -42,7 +41,7 @@ class Events(db.Model):
     guests = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(360), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = relationship()
+    user = db.relationship()
 
 
     
@@ -67,16 +66,16 @@ class Contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    user = relationship()
+    user = db.relationship()
 
 
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
     contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False)
-    contact = relationship()
+    contact = db.relationship()
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-    event = relationship()
+    event = db.relationship()
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
-    user = relationship()
+    user = db.relationship()
 
