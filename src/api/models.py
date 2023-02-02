@@ -26,7 +26,10 @@ class User(db.Model):
             'phone': self.phone,
             'city': self.city
             'country': self.country
-        }
+    }
+
+    def edit_user(self):
+
 
 class Events(db.Model):
     __tablename__ = 'events'
@@ -43,21 +46,21 @@ class Events(db.Model):
 
 
     
-    # def __repr__(self):
-    #   return f'<Events {self.id}>'  
+    def __repr__(self):
+        return f'<Events {self.id}>'  
 
-    # def serialize(self):
-    #    return {
-    #        "id": self.id,
-    #        "title": self.title,
-    #        "date": self.date,
-    #        "time": self.time,
-    #        "description": self.description,
-    #        "location": self.location,
-    #        "guests": self.guests,
-    #        "image": self.image,
-    #        "user_id": self.user_id,
-    #    }
+    def serialize(self):
+        return {
+        "id": self.id,
+        "title": self.title,
+        "date": self.date,
+        "time": self.time,
+        "description": self.description,
+        "location": self.location,
+        "guests": self.guests,
+        "image": self.image,
+        "user_id": self.user_id,
+    }
 
 class Contacts(db.Model):
     __tablename__ = 'contacts'
@@ -76,6 +79,4 @@ class Event_Guests(db.Model):
     event = relationship()
     user_id = db.Column(db.Integer, ForeignKey('user.id'))  
     user = relationship()
-    # relaciones según entiendo no es obligatorio declararlas, pero si recomendado. En ese caso está bien como las declaraste ya que los argumentos no son obligatorios. 
-    #para finalizar, a medida que avancemos vamos a ir necesitando agregar métodos dentro de las clases tal y como hicimos en el ejercicio de la Family api. para poder modificar usuarios por ej. 
-   
+
