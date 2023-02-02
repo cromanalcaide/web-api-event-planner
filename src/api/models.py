@@ -13,7 +13,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     phone = db.Column(db.Integer, unique=True)
     city = db.Column(db.String(120), nullable=False)
-    country = db.Coumn(db.String(120), nullable=False)
+    country = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
         return f'<User: {self.id}>'  
@@ -41,7 +41,7 @@ class Events(db.Model):
     location = db.Column(db.String(240), nullable=False)
     guests = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(360), nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = relationship()
 
 
@@ -73,10 +73,10 @@ class Contacts(db.Model):
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
-    contact_email = db.Column(db.String(120),  ForeignKey('contacts.email'), unique=True, nullable=False)
+    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False)
     contact = relationship()
-    event_id = db.Column(db.Integer, ForeignKey('events.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     event = relationship()
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))  
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
     user = relationship()
 
