@@ -73,7 +73,7 @@ class Contacts(db.Model):
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
-    contact_mail = db.Column(db.String(120), unique=True, nullable=False, ForeignKey('contacts.mail'))
+    contact_email = db.Column(db.String(120),  ForeignKey('contacts.email'), unique=True, nullable=False)
     contact = relationship()
     event_id = db.Column(db.Integer, ForeignKey('events.id'))
     event = relationship()
