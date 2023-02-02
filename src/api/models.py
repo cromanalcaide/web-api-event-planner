@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
+
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -23,11 +24,11 @@ class User(db.Model):
             'name': self.name,
             'email': self.email,
             'phone': self.phone,
-            'city': self.city
+            'city': self.city,
             'country': self.country
     }
 
-    def edit_user(self):
+
 
 
 class Events(db.Model):
@@ -41,7 +42,7 @@ class Events(db.Model):
     guests = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(360), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship()
+    user = db.relationship(User)
 
 
     
@@ -65,17 +66,16 @@ class Contacts(db.Model):
     __tablename__ = 'contacts'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    user = db.relationship()
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User)
 
 
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
-    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False)
-    contact = db.relationship()
+    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False, )
+    contact = db.relationship(Contacts)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-    event = db.relationship()
+    event = db.relationship(Events)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
-    user = db.relationship()
-
+    user = db.relationship(User)
