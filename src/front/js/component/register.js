@@ -31,7 +31,7 @@ export const Register = () => {
               <div className="card-body px-5 pt-5  text-center">
                 <div className="mb-md-5 mt-md-2">
                   <h2 className="title mb-2 pb-4">Registro</h2>
-                  <div class="row row-cols-2 ">  
+                  <div className="row row-cols-2 ">  
                     <div className="form-outline form-white">
                       <input
                         type="text"
