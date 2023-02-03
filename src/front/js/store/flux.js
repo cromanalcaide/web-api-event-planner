@@ -53,7 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 			},
 
-			register: async (email, password)=>{
+			register: async (email, password, name, phone, city, country)=>{
 				const requestOptions = {
 					method : "POST",
 					headers : {
@@ -61,7 +61,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body : JSON.stringify({
 						email : email,
-						password : password
+						password : password,
+						name : name,
+						phone : phone, 
+						city : city,
+						country : country,
 					})
 				};
 				try {

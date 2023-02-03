@@ -25,7 +25,12 @@ def handle_hello():
 @api.route('/register', methods=['POST'])
 def create_user():
     body = json.loads(request.data)
-    user = User(email = body["email"], password= body["password"], name= body["name"], city= body["city"], country=body["country"], phone=body["phone"])
+    user = User(email = body["email"],
+                password= body["password"],
+                name= body["name"],
+                city= body["city"], 
+                country=body["country"], 
+                phone=body["phone"])
     db.session.add(user)
     db.session.commit()
 

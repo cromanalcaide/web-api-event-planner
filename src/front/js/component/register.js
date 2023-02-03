@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 import "../../styles/register.css";
 import { Link } from "react-router-dom";
 
 export const Register = () => {
-  //   const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
@@ -14,12 +14,13 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   
 
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
-  const handleClick = () => {
-    //     actions.login(email, password);
-    //     navigate("/private");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    actions.register(name, email, password, city, country, phone);
+    navigate("/login");
   };
 
   return (
@@ -31,7 +32,8 @@ export const Register = () => {
               <div className="card-body px-5 pt-5  text-center">
                 <div className="mb-md-5 mt-md-2">
                   <h2 className="title mb-2 pb-4">Registro</h2>
-                  <div className="row row-cols-2 ">  
+                  <form onSubmit={handleSubmit}>
+                    <div className="row row-cols-2 ">  
                     <div className="form-outline form-white">
                       <input
                         type="text"
@@ -93,18 +95,19 @@ export const Register = () => {
                       />
                     </div>
                     
-                  </div>  
-                  {/* <p className="small mb-5 pb-lg-2">
-                    <a className="text-black-50" href="#!">
-                      Olvidaste tu contraseña?
-                    </a>
-                  </p> */}
-                  <button
-                    className="lg-btn btn-primary btn-lg px-5 "
-                    type="submit"
-                  >
-                    Registrarme
-                  </button>
+                    </div>  
+                    {/* <p className="small mb-5 pb-lg-2">
+                      <a className="text-black-50" href="#!">
+                        Olvidaste tu contraseña?
+                      </a>
+                    </p> */}
+                    <button
+                      className="lg-btn btn-primary btn-lg px-5 "
+                      type="submit"
+                    >
+                      Registrarme
+                    </button>
+                  </form>  
                 </div>
                 <div className="pb-2">
                   <p className="mb-0">
