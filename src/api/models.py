@@ -69,57 +69,13 @@ class Contacts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
 
-    def __repr__(self):
-        return f'<Contacts {self.id}>'  
-
-    def serialize(self):
-        return {
-        "id": self.id,
-        "email": self.email,
-        "user_id": self.user_id,
-    } 
-
 
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
-    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False)
+    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False, )
     contact = db.relationship(Contacts)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     event = db.relationship(Events)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
     user = db.relationship(User)
-
-    def __repr__(self):
-        return f'<Event_Guests {self.id}>'  
-
-    def serialize(self):
-        return {
-        "id": self.id,
-        "contact_email": self.contact_email,
-        "contact": self.contact,
-        "event_id": self.event_id,
-        "event": self.event,
-        "user_id": self.user_id,
-    }
-
-class Contact_Forms(db.Model):
-    __tablename__='contact_forms'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
-    user = db.relationship(User)
-
-    def __repr__(self):
-        return f'<Contact_Forms {self.id}>'  
-
-    def serialize(self):
-        return {
-        "id": self.id,
-        "name": self.name,
-        "email": self.email,
-        "message": self.message,
-        "user_id": self.user_id,
-    }
