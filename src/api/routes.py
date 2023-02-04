@@ -89,3 +89,27 @@ def delete_user(user_id):
         "message": "User deleted correctly"}    
     return jsonify(response_body), 200
 
+
+@api.route('/users/<int:user_id>', methods=['PUT'])
+def modify_user(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        raise APIException('User not found', status_code=404)
+
+    user.name = request.json.get('name', user.name)
+    user.email = request.json.get('email', user.email)
+    user.password = request.json.get('password', user.password)
+    user.phone = request.json.get('phone', user.phone)
+    user.city = request.json.get('city', user.city)
+    user.country = request.json.get('country', user.country)
+    db.session.commit()
+
+    response_body = {'name': user.name,
+                     'phone': user.phone,
+                     'email': user.email,
+                     'password': user.password,
+                     'city': user.city,
+                     'country': user.country}
+
+    return jsonify(response_body), 200
+    
