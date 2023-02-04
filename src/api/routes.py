@@ -22,6 +22,26 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
+@api.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    results = [user.serialize() for user in users]
+    response_body = {'message': 'OK',
+                     'total_records': len(results),
+                     'results': results}
+    return jsonify(response_body), 200
+
+
+@api.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = User.query.get(user_id)
+    result = user.serialize()
+    response_body = {'message': 'OK',
+                     'result': result}
+    return jsonify(response_body), 200
+
+
 @api.route('/register', methods=['POST'])
 def create_user():
     body = json.loads(request.data)
@@ -42,7 +62,7 @@ def create_user():
 
 
 @api.route("/login", methods=["POST"])
-def login():
+def user_login():
     
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -57,4 +77,15 @@ def login():
                      "access_token": access_token}    
     return jsonify(response_body), 200
 
+
+@api.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        raise APIException('User not found', status_code=404)
+    db.session.delete(user)
+    db.session.commit()
+    response_body = {
+        "message": "User deleted correctly"}    
+    return jsonify(response_body), 200
 
