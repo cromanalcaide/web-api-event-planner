@@ -12,6 +12,7 @@ import { Footer } from "./component/footer";
 import { Login } from "./component/login";
 import { Register } from "./component/register";
 import { ContactForm } from "./component/contactForm";
+import { Jumbotron } from "./component/jumbotron";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<ContactForm />} path="/contact" />
+                        <Route element={<Jumbotron />} path="/hero" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
