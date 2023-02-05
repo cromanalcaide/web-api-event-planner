@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.navbar{
+    background-color: #F1EEEE;
+}
+.nav-link{
+    font-family: 'Puritan', sans-serif;
+    color: black;
+    
+}
+
+.navbar-brand{
+    font-family: 'Merienda One', cursive;
+    font-size: x-large;
+    margin-left: 2em;
+}
+
+.link{
+    text-decoration: none;
+}
