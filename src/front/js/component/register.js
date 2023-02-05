@@ -114,7 +114,7 @@ export const Register = () => {
                     ¿Ya tienes una cuenta?
                   </p>
 
-                  <Link to="/login">
+                  <Link to="/login" className="reg-link">
                     <span className="reg-link ">
                       Ingresa
                     </span>
