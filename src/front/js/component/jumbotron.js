@@ -11,43 +11,43 @@ export const Jumbotron = () => {
 
     return (
         <section className="vh-100 bg">
-            <div class="container col-xxl-8 px-4 py-5">
-                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src={jumbimage1} class="d-block w-100" alt="..."/>
+            <div className="container col-xxl-8 px-4 py-5">
+                <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div className="col-10 col-sm-8 col-lg-6">
+                        <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img src={jumbimage1} className="d-block w-100" alt="..."/>
                                 </div>
-                                <div class="carousel-item">
-                                    <img src={jumbimage2} class="d-block w-100" alt="..."/>
+                                <div className="carousel-item">
+                                    <img src={jumbimage2} className="d-block w-100" alt="..."/>
                                 </div>
-                                <div class="carousel-item">
-                                    <img src={jumbimage3} class="d-block w-100" alt="..."/>
+                                <div className="carousel-item">
+                                    <img src={jumbimage3} className="d-block w-100" alt="..."/>
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
+                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span className="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
+                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span className="visually-hidden">Next</span>
                             </button>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="lc-block mb-3">
+                    <div className="col-lg-6">
+                        <div className="lc-block mb-3">
                             <div editable="rich">
-                                <h1 class="hero-text fw-bold display-5">Con <span>ComMeet</span> ya no tienes más excusas!</h1>
+                                <h1 className="hero-text fw-bold display-5">Con <span>ComMeet</span> ya no tienes más excusas!</h1>
                             </div>
                         </div>
-                        <div class="lc-block mb-3">
+                        <div className="lc-block mb-3">
                             <div editable="rich">
-                                <p class="hero-subtext lead">Organizá tu evento o salida de forma rápida y sencilla!. </p>
+                                <p className="hero-subtext lead">Organizá tu evento o salida de forma rápida y sencilla!. </p>
                             </div>
                         </div>
-                        <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start">
+                        <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-start">
                             <Link to="/register">
                                 <button type="button" className="start-btn btn btn-primary btn-lg px-4 me-md-2">Comienza ahora <i class="fa-solid fa-arrow-right"></i></button>
                             </Link>
