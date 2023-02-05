@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+ p{
+    font-family: 'Puritan', sans-serif;
+    font-size:small;
+}
+
+h6{
+    font-weight: bold;
+    color: #66B3D2;
+}
+.container {
+    background-image: url("../img/footerbg.png");
+}
+
+.logo {
+    font-family: 'Merienda One', cursive;
+    font-size: x-large;
+
+}
+
+
+.link:hover{
+    color: #667DD2;
+}
+
+.fa-brands{
+    color: #38A2CD;
+}
