@@ -29,3 +29,8 @@
 span{
     font-family: 'Merienda', cursive;
 }
+
+.d-block {
+    filter: drop-shadow(15px 15px 0px #667DD2);
+    padding: 15px;
+}
