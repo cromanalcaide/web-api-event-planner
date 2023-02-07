@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3f270a8a25e9
+Revision ID: bb2398e20aef
 Revises: 
-Create Date: 2023-02-02 18:42:52.964798
+Create Date: 2023-02-07 20:24:09.617286
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3f270a8a25e9'
+revision = 'bb2398e20aef'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,16 +27,23 @@ def upgrade():
     sa.Column('city', sa.String(length=120), nullable=False),
     sa.Column('country', sa.String(length=120), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('phone')
+    sa.UniqueConstraint('email')
+    )
+    op.create_table('contact_forms',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=120), nullable=False),
+    sa.Column('email', sa.String(length=120), nullable=False),
+    sa.Column('message', sa.Text(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('contacts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('events',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -53,14 +60,11 @@ def upgrade():
     )
     op.create_table('event_guests',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('contact_email', sa.String(length=120), nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['contact_email'], ['contacts.email'], ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('contact_email')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 
@@ -70,5 +74,6 @@ def downgrade():
     op.drop_table('event_guests')
     op.drop_table('events')
     op.drop_table('contacts')
+    op.drop_table('contact_forms')
     op.drop_table('user')
     # ### end Alembic commands ###
