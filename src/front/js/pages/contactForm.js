@@ -49,8 +49,8 @@ export const ContactForm = () => {
                                     <div className="w-50 p-3 text-start">
                                         <img className="contact-img w-100 p-1" src={contact} alt="contact illustration" />
                                         <p className="contact-info ps-5 ms-5 mb-0 mt-5"><i className="fa-solid-c fa-solid fa-location-dot"></i> 123, Madrid, España</p> <br/>
-                                        <p className="contact-info ps-5 ms-5 mb-0" ><i class="fa-solid-c fa-solid fa-phone"></i>911 123 456</p> <br/>
-                                        <p className="contact-info ps-5 ms-5"><i class="fa-solid-c fa-solid fa-envelope"></i>info@commeet.com</p>
+                                        <p className="contact-info ps-5 ms-5 mb-0" ><i className="fa-solid-c fa-solid fa-phone"></i>911 123 456</p> <br/>
+                                        <p className="contact-info ps-5 ms-5"><i className="fa-solid-c fa-solid fa-envelope"></i>info@commeet.com</p>
                                     </div>
                                 </div>
                             </div>

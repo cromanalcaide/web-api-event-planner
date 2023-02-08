@@ -50,7 +50,7 @@ export const Description = () => {
             </div>
             <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-center">
                  <Link to="/register">
-                    <button type="button" className="start-btn btn btn-primary btn-lg px-4 mt-2 ">Comienza ahora <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="button" className="start-btn btn btn-primary btn-lg px-4 mt-2 ">Comienza ahora <i className="fa-solid fa-arrow-right"></i></button>
                 </Link>
             </div>
         </div> 

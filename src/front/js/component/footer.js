@@ -39,7 +39,7 @@ export const Footer = () => {
 							<div className="row">
 								<div className="box">
 									<button className="btn btn-floating m-1 text-black"role="button">
-										<i class="fa-brands fa-facebook-f"></i>
+										<i className="fa-brands fa-facebook-f"></i>
 									</button>
 								</div>
 								<div className="box">

@@ -2,8 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
-
 db = SQLAlchemy()
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -37,7 +37,6 @@ class Events(db.Model):
     time = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(360), nullable=False)
     location = db.Column(db.String(240), nullable=False)
-    guests = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(360), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
@@ -55,7 +54,6 @@ class Events(db.Model):
         "time": self.time,
         "description": self.description,
         "location": self.location,
-        "guests": self.guests,
         "image": self.image,
         "user_id": self.user_id,
     }
@@ -81,7 +79,7 @@ class Contacts(db.Model):
 class Event_Guests(db.Model):
     __tablename__ = 'event_guests'
     id = db.Column(db.Integer, primary_key=True)
-    contact_email = db.Column(db.String(120), db.ForeignKey('contacts.email'), unique=True, nullable=False)
+    contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'))
     contact = db.relationship(Contacts)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     event = db.relationship(Events)
@@ -94,12 +92,13 @@ class Event_Guests(db.Model):
     def serialize(self):
         return {
         "id": self.id,
-        "contact_email": self.contact_email,
+        "contact_id": self.contact_id,
         "contact": self.contact,
         "event_id": self.event_id,
         "event": self.event,
         "user_id": self.user_id,
     }
+
 
 class Contact_Forms(db.Model):
     __tablename__='contact_forms'
