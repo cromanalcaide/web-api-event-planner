@@ -220,6 +220,7 @@ def modify_contact(contact_id):
     db.session.commit()
 
     response_body = {'email': contact.email,
+                     'name': contact.name,   
                      'user_id': contact.user_id}
 
     return jsonify(response_body), 200
