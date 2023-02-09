@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+*{
+    background-image: url("../img/footerbg.png");
+}
+
+
+p{
+    font-family: 'Puritan', sans-serif;
+    font-size:small;
+}
+
+h6{
+    font-weight: bold;
+    color: #66B3D2;
+}
+
+.logo {
+    font-family: 'Merienda One', cursive;
+    font-size: x-large;
+}
+
+.link:hover{
+    color: #ACDBEE;
+}
+
+.fa-brands:hover{
+    color: #ACDBEE;
+}
+
+.fa-brands{
+    color: #38A2CD;
+    font-size: medium;
+ 
+}
+
+.trademark{
+    font-size: smaller;
+    padding-top: 15px;
+}
+
+footer{
+    padding: 5% 0 5% 0;
+    background-color: #F1EEEE;
+}
+
+.box{
+    background-color: #ACDBEE;
+    width:fit-content;
+    padding: 0px;
+    border-radius: 50px;
+    margin: 0px 10px 0px 3px;
+    
+}
+
+/* .row{
+    margin-left: 3.5em;
+} */
+
+.left-div{
+    padding: 0px;
+    margin-left: 5em;
+}
+
+.right-div{
+    margin: 4em 5em 0 0;
+}
+
+.sm-div{
+    padding: 1.3em 1.5em 0em 10em ;
+}

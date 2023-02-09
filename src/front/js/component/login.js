@@ -67,8 +67,8 @@ export const Login = () => {
                   Aún no tienes una cuenta?
                 </p>
 
-                <Link to="/register">
-                  <span className="reg-link mb-5">
+                <Link to="/register" className="reg-link">
+                  <span className=" reg-link mb-5">
                     Registrate
                   </span>
                 </Link>

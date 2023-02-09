@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,8 +39,6 @@ class Events(db.Model):
     image = db.Column(db.String(360), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
-
-
     
     def __repr__(self):
         return f'<Events {self.id}>'  
@@ -55,6 +54,7 @@ class Events(db.Model):
         "image": self.image,
         "user_id": self.user_id
     }
+
 
 class Contacts(db.Model):
     __tablename__ = 'contacts'
@@ -93,6 +93,31 @@ class Event_Guests(db.Model):
         return {
         "id": self.id,
         "contact_id": self.contact_id,
+        "contact": self.contact,
         "event_id": self.event_id,
         "user_id": self.user_id,
+
     }
+
+
+class Contact_Forms(db.Model):
+    __tablename__='contact_forms'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
+    user = db.relationship(User)
+
+    def __repr__(self):
+        return f'<Contact_Forms {self.id}>'  
+
+    def serialize(self):
+        return {
+        "id": self.id,
+        "name": self.name,
+        "email": self.email,
+        "message": self.message,
+        "user_id": self.user_id,
+    }
+

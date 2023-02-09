@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
 
 .title{
-    font-size:xx-large;
+    font-size:x-large;
 }
 
 .text-area {
     height: 8.2em;
 }
 
-.fa-solid{
+.fa-solid-c{
     padding-right: 2em;
     color: #667DD2;
 }

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+
+.about {
+    background-color: #F1eeee;
+}
+
+.about-title{
+    color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+    margin: 1.5em;
+}
+
+.about-text{
+    font-family: 'Puritan', sans-serif;
+    font-size: medium;
+}
+
+.about-subtitle{
+    margin: 2em;
+    font-family: 'Puritan', sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+}
+

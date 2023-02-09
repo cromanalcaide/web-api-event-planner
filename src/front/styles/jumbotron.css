@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.bg{
+    background-color: #F1EEEE;
+}
+
+.start-btn {
+    background-color: #667DD2;
+    border-color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-size: large;
+    padding: 3px ;
+    
+}
+
+.fa-solid {
+    padding: 0px 10px 0px 10px;
+    font-size: medium;
+    color: white;
+}
+
+.hero-text {
+    font-size:xx-large;
+}
+.hero-subtext {
+    font-size: medium;
+}
+
+span{
+    font-family: 'Merienda', cursive;
+}
+
+.d-block {
+    filter: drop-shadow(15px 15px 0px #667DD2);
+    padding: 15px;
+}

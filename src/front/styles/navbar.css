@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.navbar{
+    background-color: #F1EEEE;
+}
+.nav-link{
+    font-family: 'Puritan', sans-serif;
+    color: black;
+    
+}
+
+.navbar-brand{
+    font-family: 'Merienda One', cursive;
+    font-size: x-large;
+    margin-left: 2em;
+}
+
+.link{
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: end;
+    border-radius: 10px;
+  
+  }
+  ul li {
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+  }
+  li.active::after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: #667DD2;
+    left: 0;
+    bottom: -2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    animation: appear 0.2s linear;
+  }
+  @keyframes appear {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
