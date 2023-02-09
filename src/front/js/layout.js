@@ -9,6 +9,7 @@ import { Footer } from "./component/footer";
 import { Login } from "./component/login";
 import { Register } from "./component/register";
 import { ContactForm } from "./pages/contactForm";
+import { About } from "./pages/about";
 
 
 //create your first component
@@ -27,7 +28,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<ContactForm />} path="/contact" />
-
+                        <Route element={<About />} path="/about" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

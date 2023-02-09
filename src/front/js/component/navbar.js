@@ -24,7 +24,7 @@ export const Navbar = () => {
 								</Link>
 							</li>
 							<li className={activeButton === 2 ? 'active' : ''} onClick={() => handleClick(2)}>	
-								<Link to="" className="link">
+								<Link to="/about" className="link">
 									<span className="nav-link">¿QUÉ ES COMMEET?</span>
 								</Link>
 							</li>

@@ -40,8 +40,6 @@ class Events(db.Model):
     image = db.Column(db.String(360), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
-
-
     
     def __repr__(self):
         return f'<Events {self.id}>'  
@@ -57,6 +55,7 @@ class Events(db.Model):
         "image": self.image,
         "user_id": self.user_id,
     }
+
 
 class Contacts(db.Model):
     __tablename__ = 'contacts'
