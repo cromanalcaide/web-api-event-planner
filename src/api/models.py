@@ -60,7 +60,7 @@ class Contacts(db.Model):
     __tablename__ = 'contacts'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
 
@@ -70,6 +70,7 @@ class Contacts(db.Model):
     def serialize(self):
         return {
         "id": self.id,
+        "name": self.name,
         "email": self.email,
         "user_id": self.user_id,
     } 

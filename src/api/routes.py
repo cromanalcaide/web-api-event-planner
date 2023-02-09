@@ -104,7 +104,9 @@ def modify_user(user_id):
 
     return jsonify(response_body), 200
     
+
 # EVENTS
+
 
 @api.route('events', methods=['GET'])
 def get_all_events():
@@ -115,12 +117,14 @@ def get_all_events():
                      'results': results}
     return jsonify(response_body), 200
 
+
 @api.route('/event/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
     print(event_id)
     event = Events.query.get(event_id)
     print(event)
     return jsonify(event.serialize()), 200
+
 
 @api.route('/event/register', methods=['POST'])
 def create_event():
@@ -131,6 +135,7 @@ def create_event():
     db.session.add(new_event)
     db.session.commit()
     return jsonify(new_event.serialize()), 200
+
 
 @api.route('/events/<int:event_id>', methods=['PUT'])
 def modify_event(event_id):
@@ -158,6 +163,7 @@ def modify_event(event_id):
 
     return jsonify(response_body), 200
 
+
 @api.route('/events/<int:event_id>', methods=['DELETE'])
 def delete_event(event_id):
     event = Events.query.get(event_id)
@@ -169,7 +175,9 @@ def delete_event(event_id):
         "message": "Event deleted correctly"}    
     return jsonify(response_body), 200
 
+
 # CONTACTS
+
 
 @api.route('/contacts', methods=['GET'])
 def get_all_contacts():
@@ -180,6 +188,7 @@ def get_all_contacts():
                      'results': results}
     return jsonify(response_body), 200
 
+
 @api.route('/contact/<contact_id>', methods=['GET'])
 def get_contacts_by_id(contact_id):
     print(contact_id)
@@ -187,15 +196,17 @@ def get_contacts_by_id(contact_id):
     print(contact)
     return jsonify(contact.serialize()), 200
 
+
 @api.route('/contact/register', methods=['POST'])
 def create_contact():
     body = request.get_json()
-    new_contact = Contacts(email=body["email"], user_id=body["user_id"])
+    new_contact = Contacts(email=body["email"], name=body["name"], user_id=body["user_id"])
     print(body)
     print(new_contact)
     db.session.add(new_contact)
     db.session.commit()
     return jsonify(new_contact.serialize()), 200
+
 
 @api.route('/contacts/<int:contact_id>', methods=['PUT'])
 def modify_contact(contact_id):
@@ -204,6 +215,7 @@ def modify_contact(contact_id):
         raise APIException('Contact not found', status_code=404)
 
     contact.email = request.json.get('email', contact.email)
+    contact.name = rquest.json.get('name', contact.name)
     contact.user_id = request.json.get('user_id', contact.user_id)
     db.session.commit()
 
@@ -211,6 +223,7 @@ def modify_contact(contact_id):
                      'user_id': contact.user_id}
 
     return jsonify(response_body), 200
+
 
 @api.route('/contacts/<int:contact_id>', methods=['DELETE'])
 def delete_contact(contact_id):
@@ -223,7 +236,9 @@ def delete_contact(contact_id):
         "message": "Contact deleted correctly"}    
     return jsonify(response_body), 200
 
+
 # EVENTS_GUESTS
+
 
 @api.route('/events_guests', methods=['GET'])
 def get_all_events_guests():
@@ -234,10 +249,12 @@ def get_all_events_guests():
                      'results': results}
     return jsonify(response_body), 200
 
+
 @api.route('/events_guest/<events_guest_id>', methods=['GET'])
 def get_events_guests_by_id(events_guest_id):
     events_guest = Event_Guests.query.get(events_guest_id)
     return jsonify(events_guest.serialize()), 200
+
 
 @api.route('/events_guest/register', methods=['POST'])
 def create_events_guests():
@@ -246,6 +263,7 @@ def create_events_guests():
     db.session.add(new_events_guest)
     db.session.commit()
     return jsonify(new_events_guest.serialize()), 200
+
 
 @api.route('/events_guests/<int:events_guest_id>', methods=['PUT'])
 def modify_events_guests(events_guest_id):
@@ -263,6 +281,7 @@ def modify_events_guests(events_guest_id):
                      'user_id': events_guests.user_id}
 
     return jsonify(response_body), 200
+
 
 @api.route('/events_guests/<int:events_guest_id>', methods=['DELETE'])
 def delete_events_guests(events_guest_id):
