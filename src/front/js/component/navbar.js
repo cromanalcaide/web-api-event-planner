@@ -20,7 +20,7 @@ export const Navbar = () => {
 						<ul>
 							<li className={activeButton === 1 ? 'active' : ''} onClick={() => handleClick(1)}>
 								<Link to="/" className="link">
-									<span className="nav-link">HOME</span>
+									<span className="nav-link">INICIO</span>
 								</Link>
 							</li>
 							<li className={activeButton === 2 ? 'active' : ''} onClick={() => handleClick(2)}>	
@@ -35,7 +35,7 @@ export const Navbar = () => {
 							</li>	
 							<li className={activeButton === 4 ? 'active' : ''} onClick={() => handleClick(4)}>
 								<Link to="/login" className="link">
-									<span className="nav-link">LOGIN/REGISTRO</span>
+									<span className="nav-link">INGRESO/REGISTRO</span>
 								</Link>
 							</li>	
 						</ul>
