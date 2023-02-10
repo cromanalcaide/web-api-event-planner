@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					};
 					console.log(requestOptions);
 					try {
-						const resp = await fetch("https://3001-cromanalcai-webapievent-ea08gykxjdl.ws-us86.gitpod.io/api/register", requestOptions)
+						const resp = await fetch("https://3001-cromanalcai-webapievent-nrv56nuvlh3.ws-eu86.gitpod.io/api/register", requestOptions)
 						if (resp.status != 200){
 							alert("An error has occurred");
 							return false;
@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				};
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-ea08gykxjdl.ws-us86.gitpod.io/api/register", requestOptions)
+					const resp = await fetch("https://3001-cromanalcai-webapievent-nrv56nuvlh3.ws-eu86.gitpod.io/api/register", requestOptions)
 					if (resp.status != 200){
 						alert("An error has occurred while creating the user");
 						return false;
@@ -75,7 +75,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("There has been an error creating a user")
 				}
 			},
+			getUserData:
+				async () => {
+					const store = getStore();
+					const requestOptions = {
+					  method: "GET",
+					  headers: {
+						Authorization: `Bearer ${store.token}`,
+					  },
+					};
+					try {
+					  const res = await fetch("https://3001-cromanalcai-webapievent-nrv56nuvlh3.ws-eu86.gitpod.io/api/private", requestOptions);
+					  const data = await res.json();
+					  return data;
+					} catch (error) {
+					  console.log(error);
+					}
+			},
 
+			logout: ()=>{
+				const token = localStorage.removeItem("token");
+				setStore({token:null}); 
+			},
 		}
 	};
 };

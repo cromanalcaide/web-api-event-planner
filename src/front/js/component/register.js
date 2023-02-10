@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/register.css";
 import { Link } from "react-router-dom";
 
+
 export const Register = () => {
   const { store, actions } = useContext(Context);
   const [name, setName] = useState("");

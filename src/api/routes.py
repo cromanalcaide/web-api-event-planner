@@ -294,3 +294,12 @@ def delete_events_guests(events_guest_id):
     response_body = {
         "message": "Events_guest deleted correctly"}    
     return jsonify(response_body), 200
+
+@api.route("/private", methods=["GET"])
+@jwt_required()
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+if __name__ == "__main__":
+    app.run()
