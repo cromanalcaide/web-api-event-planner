@@ -11,6 +11,7 @@ import { Register } from "./component/register";
 import { ContactForm } from "./pages/contactForm";
 import { About } from "./pages/about";
 import { Private } from "./pages/private";
+import { TermsAndConditions } from "./pages/termsandconditions";
 
 
 //create your first component
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
+                        <Route element={<TermsAndConditions />} path="/termsandconditions"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
