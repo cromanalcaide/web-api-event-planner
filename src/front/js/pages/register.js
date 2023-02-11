@@ -49,7 +49,7 @@ export const Register = () => {
                         <input
                           type="email"
                           id="typeEmailX"
-                          className="form-control form-control-lg mb-4"
+                          className="form-control form-control-lg mb-4 text-lowercase"
                           placeholder="Correo electrónico"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}

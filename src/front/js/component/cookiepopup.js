@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "../../styles/cookiepolicy.css"
+import "../../styles/cookiepopup.css"
 import { Link } from "react-router-dom";
 
-export const CookiePolicy = () => {
+export const CookiePopUp = () => {
     const [showPopUp, setShowPopUp] = useState(true);
 
     const handleClose = () => {
+        localStorage.setItem("acceptedCookiePolicy", true);
 		setShowPopUp(false);
 	};
 

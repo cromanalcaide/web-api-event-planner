@@ -1,0 +1,39 @@
+/* .cookies-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+} */
+.cookies-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e0d6f2;
+    color: #667DD2;
+    padding: 5px;
+    text-align: center;
+    z-index: 999;
+    border-radius: 50px;
+
+}
+  
+.cookie-text{
+    font-size: medium;
+    margin: 0;
+}
+
+.cookie-btn{
+    color: white ;
+    cursor: pointer;
+    font-size: medium;
+    background-color: #667DD2;
+    margin-left: 1em;
+}
+
+.cookie-btn:hover{
+    color: white;
+    font-weight: 700;
+}

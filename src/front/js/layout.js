@@ -6,12 +6,13 @@ import { Home } from "./pages/home";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Login } from "./component/login";
-import { Register } from "./component/register";
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import { ContactForm } from "./pages/contactForm";
 import { About } from "./pages/about";
 import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
+import { CookiePolicy } from "./pages/cookiepolicy";
 
 
 //create your first component
@@ -33,6 +34,7 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>
+                        <Route element={<CookiePolicy />} path="/cookies-policy"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
