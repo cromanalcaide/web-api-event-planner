@@ -48,3 +48,17 @@
     font-family: 'Puritan', sans-serif;
     font-size: small;
 }
+
+.check-bt{
+    margin-bottom: 1em;
+}
+
+.form-check-label{
+   font-size: smaller;
+   margin-left: 0.5em;
+   
+}
+
+.terms-link{
+    text-decoration: none;
+}

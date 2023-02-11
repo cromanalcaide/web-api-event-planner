@@ -13,7 +13,7 @@ export const Register = () => {
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  
+
 
   const navigate = useNavigate();
 
@@ -34,81 +34,84 @@ export const Register = () => {
                 <div className="mb-md-5 mt-md-2">
                   <h2 className="title mb-2 pb-4">Registro</h2>
                   <form onSubmit={handleSubmit}>
-                    <div className="row row-cols-2 ">  
-                    <div className="form-outline form-white">
-                      <input
-                        type="text"
-                        id="typeName"
-                        className="form-control form-control-lg mb-4 mr-5"
-                        placeholder="Nombre"
-                        value={name}
-                        onChange= {(e) => setName(e.target.value)}
-                      />
+                    <div className="row row-cols-2 ">
+                      <div className="form-outline form-white">
+                        <input
+                          type="text"
+                          id="typeName"
+                          className="form-control form-control-lg mb-4 mr-5"
+                          placeholder="Nombre"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline form-white ">
+                        <input
+                          type="email"
+                          id="typeEmailX"
+                          className="form-control form-control-lg mb-4"
+                          placeholder="Correo electrónico"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline form-white ">
+                        <input
+                          type="text"
+                          id="typeCountry"
+                          className="form-control form-control-lg mb-4 mr-5"
+                          placeholder="País"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline form-white ">
+                        <input
+                          type="city"
+                          id="typeCity"
+                          className="form-control form-control-lg mb-4"
+                          placeholder="Ciudad"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline form-white ">
+                        <input
+                          type="phone"
+                          id="typePhone"
+                          className="form-control form-control-lg mb-4 mr-5"
+                          placeholder="Teléfono"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline form-white mb-5">
+                        <input
+                          type="password"
+                          id="typePasswordX"
+                          className="form-control form-control-lg mb-4"
+                          placeholder="Contraseña"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
+
                     </div>
-                    <div className="form-outline form-white ">
-                      <input
-                        type="email"
-                        id="typeEmailX"
-                        className="form-control form-control-lg mb-4"
-                        placeholder="Correo electrónico"
-                        value={email}
-                        onChange= {(e) => setEmail(e.target.value)}
-                      />
+                    <div className="check-bt d-flex form-check justify-content-center mx-5">
+                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" required/>
+                        <label className="form-check-label" htmlFor="defaultCheck1">
+                          Para registrarte debes aceptar nuestros
+                          <Link className="terms-link" to="/termsandconditions">
+                            {" "}Términos y condiciones
+                          </Link>
+                        </label>
                     </div>
-                    <div className="form-outline form-white ">
-                      <input
-                        type="text"
-                        id="typeCountry"
-                        className="form-control form-control-lg mb-4 mr-5"
-                        placeholder="País"
-                        value={country}
-                        onChange= {(e) => setCountry(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline form-white ">
-                      <input
-                        type="city"
-                        id="typeCity"
-                        className="form-control form-control-lg mb-4"
-                        placeholder="Ciudad"
-                        value={city}
-                        onChange= {(e) => setCity(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline form-white ">
-                      <input
-                        type="phone"
-                        id="typePhone"
-                        className="form-control form-control-lg mb-4 mr-5"
-                        placeholder="Teléfono"
-                        value={phone}
-                        onChange= {(e) => setPhone(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline form-white mb-5">
-                      <input
-                        type="password"
-                        id="typePasswordX"
-                        className="form-control form-control-lg mb-4"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange= {(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    
-                    </div>  
-                    {/* <p className="small mb-5 pb-lg-2">
-                      <a className="text-black-50" href="#!">
-                        Olvidaste tu contraseña?
-                      </a>
-                    </p> */}
                     <button
                       className="lg-btn btn-primary btn-lg px-5 "
-                      type="submit"
-                    >
+                      type="submit">
                       Registrarme
                     </button>
-                  </form>  
+                  </form>
                 </div>
                 <div className="pb-2">
                   <p className="mb-0">
@@ -120,7 +123,7 @@ export const Register = () => {
                       Ingresa
                     </span>
                   </Link>
-                 
+
                 </div>
               </div>
             </div>

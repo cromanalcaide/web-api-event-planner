@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+
+.team-title{
+    font-family: 'Merienda', cursive;
+    color: #667DD2;
+    font-weight: 700;
+    font-size: xx-large;
+    margin-top: 1em;
+}
+
+.name{
+    font-family: 'Merienda', cursive;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.team-pic{
+    width: 18em;
+}
+
+.ca-r{
+    padding-left: 1em;
+}
+.lu-b{
+   padding-left: 2em; 
+}
+
+.ju-m{
+    padding-left: 1em;
+}
+
+.team-photos{
+    margin-bottom: 3em;
+}
