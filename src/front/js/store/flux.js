@@ -113,6 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			getMapImage: (lat, lon, zoom) {
+				const API_KEY = EexLvDRGKsJnz6qWU1FpK5YmUgbbsZC1;
+				const BASE_URL = `https://api.tomtom.com/map/1/staticimage?layer=basic&style=main&format=png&center=${lon},${lat}&zoom=${zoom}&width=500&height=500&key=${API_KEY}`;
+				return fetch(BASE_URL)
+					.then(response => response.blob())
+					.then(data => URL.createObjectURL(data))
+					.catch(error => console.error(error));
 			}
 		}
 	};
