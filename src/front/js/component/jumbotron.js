@@ -10,10 +10,10 @@ import "../../styles/jumbotron.css"
 export const Jumbotron = () => {
 
     return (
-        <section className="vh-100 bg">
+        <section className="vh-100 bg d-flex justify-content-center">
             <div className="container col-xxl-8 px-4 py-5">
-                <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div className="col-10 col-sm-8 col-lg-6">
+                <div className="row flex-lg-row-reverse align-items-center hero">
+                    <div className="col-10 col-sm-8 col-lg-6 hero-imgs">
                         <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
@@ -36,7 +36,7 @@ export const Jumbotron = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6 hero-content">
                         <div className="lc-block mb-3">
                             <div editable="rich">
                                 <h1 className="hero-text fw-bold display-5">Con <span>ComMeet</span> ya no tienes más excusas!</h1>
@@ -47,7 +47,7 @@ export const Jumbotron = () => {
                                 <p className="hero-subtext lead">Organizá tu evento o salida de forma rápida y sencilla!. </p>
                             </div>
                         </div>
-                        <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-start">
+                        <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-start button-div">
                             <Link to="/register">
                                 <button type="button" className="start-btn btn btn-primary btn-lg px-4 me-md-2">Comienza ahora <i className="fa-solid fa-arrow-right"></i></button>
                             </Link>

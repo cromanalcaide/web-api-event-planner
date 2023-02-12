@@ -34,3 +34,40 @@ span{
     filter: drop-shadow(15px 15px 0px #667DD2);
     padding: 15px;
 }
+
+section{
+    padding-bottom: 1em;
+}
+
+@media (max-width: 575px) {
+  .hero-imgs{
+    margin: 0em 1.5em 1em 1.5em ;
+  }
+  .hero-content{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-text{
+    text-align: center;
+  }
+  .hero-subtext{
+    text-align: center;
+  }
+  .button-div{
+   justify-content: center;
+  }
+  }
+
+  @media (min-width: 576px) and (max-width:992px)  {
+    
+    .hero-content{
+        width: 50%;
+    }
+
+    .hero-imgs{
+        width: 50%;
+        height: 50%;   
+    }
+
+  }
