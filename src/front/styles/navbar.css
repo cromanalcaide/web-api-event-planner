@@ -3,7 +3,7 @@
 .navbar{
     background-color: #F1EEEE;
 }
-.nav-link{
+.nav-item{
     font-family: 'Puritan', sans-serif;
     color: black;
     
@@ -12,10 +12,17 @@
 .navbar-brand{
     font-family: 'Merienda One', cursive;
     font-size: x-large;
-    margin-left: 2em;
+    
 }
 
-.link{
+@media (min-width: 576px) {
+  .navbar-brand {
+    margin-left: 1rem;
+  }
+}
+
+
+.nav-link{
     text-decoration: none;
 }
 
@@ -51,3 +58,13 @@ ul {
       width: 100%;
     }
   }
+
+  .navbar-toggler:active,
+  .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  
+
+  
