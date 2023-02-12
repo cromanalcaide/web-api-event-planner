@@ -10,7 +10,7 @@ import "../../styles/jumbotron.css"
 export const Jumbotron = () => {
 
     return (
-        <section className="vh-100 bg d-flex justify-content-center">
+        <section className="bg d-flex justify-content-center">
             <div className="container col-xxl-8 px-4 py-5">
                 <div className="row flex-lg-row-reverse align-items-center hero">
                     <div className="col-10 col-sm-8 col-lg-6 hero-imgs">

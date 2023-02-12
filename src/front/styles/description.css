@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
 
-
-
 .card-title{
     font-size: medium;
     font-family: 'Puritan', sans-serif;
@@ -31,4 +29,38 @@
 
 .descript-cont{
     padding: 0 0 5% 0
+}
+
+@media (max-width: 575px) {
+    .descript-cont{
+        display: flex;
+        flex-direction: column;
+    }
+    .descr-card{
+        justify-content: center;
+        margin: auto;
+    }
+    .button-div{
+        justify-content: center;
+    }
+}
+
+@media (min-width: 576px) and (max-width:880px)  {
+    .descript-cont{
+        padding: 5rem;
+    }
+    .each-card{
+        height: fit-content;
+        width: fit-content !important;
+    }
+    .button-div{
+        justify-content: center;
+    }    
+}
+
+@media (min-width: 881px) and (max-width:1125px)  {
+    .each-card{
+        width:min-content !important;
+        padding: 0 5rem 0 5rem !important;
+    }
 }
