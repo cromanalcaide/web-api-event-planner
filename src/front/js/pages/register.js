@@ -5,10 +5,12 @@ import "../../styles/register.css";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import countriesList from "countries-list";
 
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ export const Register = () => {
       typeEmailX: '',
       typePhone: '',
       typeCity: '',
-      typeCountry: '',
+      // typeCountry: '',
       typePasswordX: '',
 
     },
@@ -28,14 +30,14 @@ export const Register = () => {
         .min(3, 'El nombre debe tener al menos 3 caracteres')
         .max(20, 'El nombre no puede tener más de 20 caracteres')
         .required('Este campo es requerido'),
-      typeEmailX: Yup.string().matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/,'Correo electrónico inválido').required('Este campo es requerido'),
+      typeEmailX: Yup.string().matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, 'Correo electrónico inválido').required('Este campo es requerido'),
       typePhone: Yup.number().required('Este campo es requerido'),
       typeCity: Yup.string()
         .max(20, 'Máximo 20 caracteres')
         .required('Este campo es requerido'),
-      typeCountry: Yup.string()
-        .max(20, 'Máximo 20 caracteres')
-        .required('Este campo es requerido'),
+      // typeCountry: Yup.string()
+      //   .max(20, 'Máximo 20 caracteres')
+      //   .required('Este campo es requerido'),
       typePasswordX: Yup.string()
         .min(6, 'Debe tener al menos 6 caracteres')
         .max(15, 'Debe tener máximo 15 caracteres')
@@ -89,19 +91,19 @@ export const Register = () => {
                         ) : null}
                       </div>
                       <div className="form-outline form-white ">
-                        <input
-                          type="text"
-                          id="typeCountry"
-                          name="typeCountry"
-                          className="form-control form-control-lg mb-4 mr-5"
-                          placeholder="País"
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          value={formik.values.typeCountry}
-                        />
-                        {formik.touched.typeCountry && formik.errors.typeCountry ? (
-                          <div className="text-danger">{formik.errors.typeCountry}</div>
-                        ) : null}
+                        <select
+                          type="country"
+                          className="form-select form-control form-control-lg mb-4"
+                          value={selectedCountry}
+                          onChange={(e) => setSelectedCountry(e.target.value)}
+                        >
+                          <option value="country" className="country-selection">Selecciona un país </option>
+                          {Object.values(countriesList.countries).map((country) => (
+                            <option key={country.code} value={country.name}>
+                              {country.name}
+                            </option>
+                          ))}
+                        </select>
                       </div>
                       <div className="form-outline form-white ">
                         <input

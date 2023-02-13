@@ -73,6 +73,7 @@
 		]
 	},
 	"dependencies": {
+		"countries-list": "^2.6.1",
 		"formik": "^2.2.9",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
