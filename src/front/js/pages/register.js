@@ -21,7 +21,6 @@ export const Register = () => {
       typeEmailX: '',
       typePhone: '',
       typeCity: '',
-      // typeCountry: '',
       typePasswordX: '',
 
     },
@@ -35,16 +34,13 @@ export const Register = () => {
       typeCity: Yup.string()
         .max(20, 'Máximo 20 caracteres')
         .required('Este campo es requerido'),
-      // typeCountry: Yup.string()
-      //   .max(20, 'Máximo 20 caracteres')
-      //   .required('Este campo es requerido'),
       typePasswordX: Yup.string()
         .min(6, 'Debe tener al menos 6 caracteres')
         .max(15, 'Debe tener máximo 15 caracteres')
         .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/, 'La contraseña deber tener 6 a 15 caracteres, 1 mayúscula, 1 minúscula y 1 número. No puede tener caracteres especiales').required('Este campo es requerido'),
     }),
     onSubmit: values => {
-      actions.register(values.typeName, values.typeEmailX, values.typePasswordX, values.typeCity, values.typeCountry, values.typePhone);
+      actions.register(values.typeName, values.typeEmailX, values.typePasswordX, values.typeCity, selectedCountry,  values.typePhone);
       navigate("/login");
     },
   });
@@ -99,8 +95,8 @@ export const Register = () => {
                         >
                           <option value="country" className="country-selection">Selecciona un país </option>
                           {Object.values(countriesList.countries).map((country) => (
-                            <option key={country.code} value={country.name}>
-                              {country.name}
+                            <option key={country.emoji} value={country.name}>
+                              {country.name} 
                             </option>
                           ))}
                         </select>
@@ -134,7 +130,21 @@ export const Register = () => {
                         {formik.touched.typePhone && formik.errors.typePhone ? (
                           <div className="text-danger">{formik.errors.typePhone}</div>
                         ) : null}
-                      </div>
+                        </div>
+                        {/* <input
+                          type="phone"
+                          name="typePhone"
+                          id="typePhone"
+                          className="form-control form-control-lg mb-4 mr-5"
+                          placeholder="Teléfono"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.typePhone}
+                        />
+                        {formik.touched.typePhone && formik.errors.typePhone ? (
+                          <div className="text-danger">{formik.errors.typePhone}</div>
+                        ) : null} */}
+                      {/* </div> */}
                       <div className="form-outline form-white mb-5">
                         <input
                           type="password"
