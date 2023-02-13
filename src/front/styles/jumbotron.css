@@ -35,8 +35,11 @@ span{
     padding: 15px;
 }
 
-section{
-    padding-bottom: 1em;
+@media (min-width: 992px) {
+  section{
+    
+    padding: 4em 0 2em 0;
+  }
 }
 
 @media (max-width: 575px) {
@@ -72,4 +75,9 @@ section{
     .container {
         height: 50%;
     }
+    section{
+    
+      padding: 2em 0 1em 0;
+    }
+    
   }

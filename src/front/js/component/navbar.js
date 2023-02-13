@@ -12,7 +12,7 @@ export const Navbar = () => {
 	};
 
 	return (
-		<nav className="navbar navbar-expand-lg sticky-top">
+		<nav className="navbar navbar-expand-lg fixed-top">
 			<div className="container-fluid">
 				<p className="navbar-brand">ComMeet</p>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
