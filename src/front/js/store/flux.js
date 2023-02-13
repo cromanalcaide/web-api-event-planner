@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const resp = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/login", requestOptions)
 						console.log("resp", resp)
 						if (resp.status != 200){
-							alert("An error has occurred");
+							// alert("An error has occurred");
 							return false;
 						} 
 						const data = await resp.json();	

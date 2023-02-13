@@ -8,14 +8,19 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    actions.login(email, password);
-    navigate("/private");
+    const loginSuccesful = actions.login(email, password);
+    if (loginSuccesful) {
+      navigate("/private");
+    } else {
+      setError("Correo electrónico o contraseña incorrectos");
+    }
   };
 
   return (
@@ -59,6 +64,7 @@ export const Login = () => {
                     >
                       Ingresar
                     </button>
+                    {error && <div className="text-danger mt-3">{error}</div>}
                   </form>
               </div>
 
