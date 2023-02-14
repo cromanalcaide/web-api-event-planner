@@ -49,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// register: async (email, password, name, phone, city, country)=>{
 			// los parámetros deben estar en el mismo orden en que se llaman (register.js 22)
 			register: async (name, email, password, city, country, phone) => {
+				
 				const requestOptions = {
 					method : "POST",
 					headers : {
@@ -63,8 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"password" : password
 					})
 				};
+				
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/register", requestOptions)
+					const resp = await fetch("https://3001-cromanalcai-webapievent-rxvf69gg0tc.ws-eu86.gitpod.io/api/register", requestOptions)
 					if (resp.status != 200){
 						alert("An error has occurred while creating the user");
 						return false;

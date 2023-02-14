@@ -1,18 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/register.css";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import countriesList from "countries-list";
+import { getCountries, getCities } from "countries-cities";
+
+const countries = getCountries();
 
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
+
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [cities, setCities] = useState([]);
+
 
   const navigate = useNavigate();
+
+  const handleCountryChange = (event) => {
+
+  const countryCode = event.target.value;
+  setSelectedCountry(countryCode);
+  setCities(getCities(countryCode));
+};
 
 
   const formik = useFormik({
@@ -31,16 +44,13 @@ export const Register = () => {
         .required('Este campo es requerido'),
       typeEmailX: Yup.string().matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, 'Correo electrónico inválido').required('Este campo es requerido'),
       typePhone: Yup.number().required('Este campo es requerido'),
-      typeCity: Yup.string()
-        .max(20, 'Máximo 20 caracteres')
-        .required('Este campo es requerido'),
       typePasswordX: Yup.string()
         .min(6, 'Debe tener al menos 6 caracteres')
         .max(15, 'Debe tener máximo 15 caracteres')
         .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/, 'La contraseña deber tener 6 a 15 caracteres, 1 mayúscula, 1 minúscula y 1 número. No puede tener caracteres especiales').required('Este campo es requerido'),
     }),
     onSubmit: values => {
-      actions.register(values.typeName, values.typeEmailX, values.typePasswordX, values.typeCity, selectedCountry,  values.typePhone);
+      actions.register(values.typeName, values.typeEmailX, values.typePasswordX, selectedCity, selectedCountry, values.typePhone);
       navigate("/login");
     },
   });
@@ -88,63 +98,51 @@ export const Register = () => {
                       </div>
                       <div className="form-outline form-white ">
                         <select
-                          type="country"
+                          id="typeCountry"
+                          name="typeCountry"
                           className="form-select form-control form-control-lg mb-4"
                           value={selectedCountry}
-                          onChange={(e) => setSelectedCountry(e.target.value)}
+                          // onChange={(e) => setSelectedCountry(e.target.value)}
+                          onChange={handleCountryChange}>
+                          <option value="">Seleccione un país</option>
+                          {countries.map((country, id) => (
+                            <option key={id} value={country}>
+                              {country}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="form-outline form-white ">
+                        <select
+                          id="typeCity"
+                          name="typeCity"
+                          className="form-select form-control form-control-lg mb-4"
+                          value={selectedCity}
+                          onChange={(e) => setSelectedCity(e.target.value)}
                         >
-                          <option value="country" className="country-selection">Selecciona un país </option>
-                          {Object.values(countriesList.countries).map((country) => (
-                            <option key={country.emoji} value={country.name}>
-                              {country.name} 
+                          <option value="">Seleccione una ciudad</option>
+                          {cities.map((city, id) => (
+                            <option key={id} value={city}>
+                              {city}  
                             </option>
                           ))}
                         </select>
                       </div>
                       <div className="form-outline form-white ">
                         <input
-                          type="city"
-                          id="typeCity"
-                          name="typeCity"
-                          className="form-control form-control-lg mb-4"
-                          placeholder="Ciudad"
+                          type="phone"
+                          name="typePhone"
+                          id="typePhone"
+                          className="form-control form-control-lg mb-4 mr-5"
+                          placeholder="Teléfono"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.typeCity}
+                          value={formik.values.typePhone}
                         />
-                        {formik.touched.typeCity && formik.errors.typeCity ? (
-                          <div className="text-danger">{formik.errors.typeCity}</div>
+                        {formik.touched.typePhone && formik.errors.typePhone ? (
+                          <div className="text-danger">{formik.errors.typePhone}</div>
                         ) : null}
                       </div>
-                      <div className="form-outline form-white ">
-                        <input
-                          type="phone"
-                          name="typePhone"
-                          id="typePhone"
-                          className="form-control form-control-lg mb-4 mr-5"
-                          placeholder="Teléfono"
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          value={formik.values.typePhone}
-                        />
-                        {formik.touched.typePhone && formik.errors.typePhone ? (
-                          <div className="text-danger">{formik.errors.typePhone}</div>
-                        ) : null}
-                        </div>
-                        {/* <input
-                          type="phone"
-                          name="typePhone"
-                          id="typePhone"
-                          className="form-control form-control-lg mb-4 mr-5"
-                          placeholder="Teléfono"
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          value={formik.values.typePhone}
-                        />
-                        {formik.touched.typePhone && formik.errors.typePhone ? (
-                          <div className="text-danger">{formik.errors.typePhone}</div>
-                        ) : null} */}
-                      {/* </div> */}
                       <div className="form-outline form-white mb-5">
                         <input
                           type="password"
