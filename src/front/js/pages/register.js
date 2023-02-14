@@ -21,7 +21,6 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const handleCountryChange = (event) => {
-
   const countryCode = event.target.value;
   setSelectedCountry(countryCode);
   setCities(getCities(countryCode));
@@ -33,7 +32,6 @@ export const Register = () => {
       typeName: '',
       typeEmailX: '',
       typePhone: '',
-      typeCity: '',
       typePasswordX: '',
 
     },
@@ -43,7 +41,7 @@ export const Register = () => {
         .max(20, 'El nombre no puede tener más de 20 caracteres')
         .required('Este campo es requerido'),
       typeEmailX: Yup.string().matches(/[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/, 'Correo electrónico inválido').required('Este campo es requerido'),
-      typePhone: Yup.number().required('Este campo es requerido'),
+      typePhone: Yup.number("El teléfono debe ser numérico").required('Este campo es requerido'),
       typePasswordX: Yup.string()
         .min(6, 'Debe tener al menos 6 caracteres')
         .max(15, 'Debe tener máximo 15 caracteres')
@@ -102,7 +100,6 @@ export const Register = () => {
                           name="typeCountry"
                           className="form-select form-control form-control-lg mb-4"
                           value={selectedCountry}
-                          // onChange={(e) => setSelectedCountry(e.target.value)}
                           onChange={handleCountryChange}>
                           <option value="">Seleccione un país</option>
                           {countries.map((country, id) => (
