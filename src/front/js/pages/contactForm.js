@@ -4,12 +4,12 @@ import "../../styles/contact.css";
 import emailjs from 'emailjs-com';
 
 
-
 export const ContactForm = () => {
     const form = useRef();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -18,13 +18,18 @@ export const ContactForm = () => {
         emailjs.sendForm('service_yrjx7ri', 'template_4c8z3k2', form.current, 'DSeMYPcDEYnErZESa')
             .then((result) => {
                 console.log('El mensaje ha sido enviado con éxito', result.text);
+                setShowMessage(true);
             }, (error) => {
                 console.log('Error al enviar correo', error.text);
             });
+            setMessage('')
+            setEmail('')
+            setName('')
         }
         else {
             console.log('Por favor complete todos los campos');
         }
+
     };
 
     return (
@@ -39,6 +44,7 @@ export const ContactForm = () => {
                                         <div className="mb-md-5 mt-md-2">
                                             <h1 className="title pb-2">Contáctanos</h1>
                                             <h6 className="sub-title mb-2 pb-4">¿En qué podemos ayudarte? </h6>
+                                            {showMessage ? <p className="form-message"><b>Su mensaje ha sido enviado correctamente. Muchas gracias por contactarse con el equipo de ComMeet.</b></p> : null}
                                             <input
                                                 type="text"
                                                 id="typeName"
@@ -47,6 +53,7 @@ export const ContactForm = () => {
                                                 placeholder="Nombre"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
+                                                required
                                             />
                                             <input
                                                 type="email"
@@ -56,6 +63,7 @@ export const ContactForm = () => {
                                                 placeholder="Correo electrónico"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
+                                                required
                                             />
                                             <textarea
                                                 type="text-area"
@@ -65,10 +73,12 @@ export const ContactForm = () => {
                                                 placeholder="Te leemos..."
                                                 value={message}
                                                 onChange={(e) => setMessage(e.target.value)}
+                                                required
                                             />
                                             <button className="d-grid gap-2 lg-btn btn-primary btn-lg px-5" type="submit">
                                                 Enviar
                                             </button>
+                                            
                                         </div>
                                         <div className="w-50 p-3 text-start">
                                             <img className="contact-img w-100 p-1" src={contact} alt="contact illustration" />
