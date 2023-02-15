@@ -13,6 +13,7 @@ import { About } from "./pages/about";
 import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
+import { LeftSideBar } from "./component/sidebarleft";
 
 
 //create your first component
@@ -35,6 +36,7 @@ const Layout = () => {
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>
                         <Route element={<CookiePolicy />} path="/cookies-policy"/>
+                        <Route element={<LeftSideBar />} path="/sidebar1"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

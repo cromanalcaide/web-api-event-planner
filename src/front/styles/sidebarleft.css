@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.sidebar-logo{
+    font-family: 'Merienda One', cursive ;
+    font-size: x-large;
+    color: black;
+    margin-bottom: 2em;
+}
+
+.fa-icon, .bi-box-arrow {
+    color: black;
+}
+
+.ms-1, .user-name, .contact-name, .contact-title{
+    font-family: 'Puritan', sans-serif;
+    font-size: small;
+    color: black;
+}
+
+img, .user-name{
+    font-size: medium;
+    margin-left: 0.5em;
+}
+
+.contact-title{
+    font-size: medium;
+    font-weight: 700;
+
+}
+
+.fa-pen-to-square{
+    opacity: 0.30;
+    font-size: smaller;
+    justify-content: flex-end;
+}

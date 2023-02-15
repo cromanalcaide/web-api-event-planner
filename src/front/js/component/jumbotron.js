@@ -49,7 +49,7 @@ export const Jumbotron = () => {
                         </div>
                         <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-start button-div">
                             <Link to="/register">
-                                <button type="button" className="start-btn btn btn-primary btn-lg px-4 me-md-2">Comienza ahora <i className="fa-solid fa-arrow-right"></i></button>
+                                <button type="button" className="start-btn btn btn-primary btn-lg px-4 me-md-2">Comienza ahora <i className="arrow fa-solid fa-arrow-right"></i></button>
                             </Link>
                         </div>
                     </div>
