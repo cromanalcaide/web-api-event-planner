@@ -21,7 +21,7 @@ export const LeftSideBar = () => {
                     <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <h3 className="sidebar-logo">ComMeet</h3>
                         <div className="d-flex align-items-center text-decoration-none">
-                            <img src="https://ui-avatars.com/api/?name=John+Doe" alt="hugenerd" width="30" height="30" className="rounded-circle" />
+                            <img src="https://ui-avatars.com/api/?name=John+Doe" alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
                             <span className="user-name d-none d-sm-inline">Nombre</span>
                         </div>
                         <div className="pt-3">

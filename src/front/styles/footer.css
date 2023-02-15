@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
-*{
-    background-image: url("../img/footerbg.png");
-}
-
 
 p{
     font-family: 'Puritan', sans-serif;
@@ -25,7 +21,8 @@ h6{
 }
 
 .fa-brands:hover{
-    color: #ACDBEE;
+    color: white;
+    
 }
 
 .fa-brands{
@@ -40,7 +37,7 @@ h6{
 }
 
 footer{
-    padding: 5% 0 5% 0;
+    
     background-color: #F1EEEE;
 }
 
@@ -50,6 +47,7 @@ footer{
     padding: 0px;
     border-radius: 50px;
     margin: 0px 10px 0px 3px;
+    box-shadow: 2px 1px 3px 0px lightgrey;
     
 }
 

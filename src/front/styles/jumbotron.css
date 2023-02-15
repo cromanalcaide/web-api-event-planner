@@ -32,14 +32,19 @@ span{
 
 .d-block {
     filter: drop-shadow(15px 15px 0px #667DD2);
-    padding: 15px;
+    padding: 0 2em 1em 0;
+    
+}
+
+.hero{
+  padding-top: 2em;
 }
 
 @media (min-width: 992px) {
   section{
-    
-    padding: 4em 0 2em 0;
+    padding: 4em 0 4em 0;
   }
+ 
 }
 
 @media (max-width: 575px) {
