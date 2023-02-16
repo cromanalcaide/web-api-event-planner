@@ -1,0 +1,16 @@
+#map {
+  height: 300px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mapContainer {
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapCard {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
