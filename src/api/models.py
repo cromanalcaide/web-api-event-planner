@@ -26,7 +26,10 @@ class User(db.Model):
             'email': self.email,
             'phone': self.phone,
             'city': self.city,
-            'country': self.country
+            'country': self.country,
+            'avatar_url': self.avatar_url,
+            'accept_news': self.accept_news
+           
     }
 
 
@@ -97,6 +100,7 @@ class Event_Guests(db.Model):
         "id": self.id,
         "contact_id": self.contact_id,
         "contact": self.contact,
+        "email": self.email,
         "event_id": self.event_id,
         "user_id": self.user_id,
 
@@ -120,6 +124,5 @@ class Contact_Forms(db.Model):
         "name": self.name,
         "email": self.email,
         "message": self.message,
-        "user_id": self.user_id,
     }
 
