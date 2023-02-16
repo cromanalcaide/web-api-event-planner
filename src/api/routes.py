@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from api.encripted import compare_pass, encripted_pass
 import json
 
 
@@ -37,7 +38,7 @@ def get_user(user_id):
 def create_user():
     body = json.loads(request.data)
     user = User(email = body["email"],
-                password= body["password"],
+                password= encripted_pass(body["password"]),
                 name= body["name"],
                 city= body["city"], 
                 country=body["country"], 
@@ -54,12 +55,16 @@ def create_user():
 
 @api.route("/login", methods=["POST"])
 def user_login():
-    
+    body = request.get_json()
     email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    user = User.query.filter(User.email == email, User.password == password).first()
+    # password = request.json.get("password", None)
+    user = User.query.filter(User.email == body['email']).first()
     
-    if not user :
+    if user is None:
+        return jsonify({"msg": "El usuario no existe"}), 404
+    
+    compare = compare_pass(body['password'], user.password )
+    if compare == False :
         return jsonify({"msg": "Nombre de usuario o contraseña incorrectos"}), 401
 
     else:    

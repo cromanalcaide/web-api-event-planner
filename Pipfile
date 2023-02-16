@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-swagger = "*"
@@ -20,6 +19,7 @@ flask-admin = "*"
 typing-extensions = "*"
 flask-jwt-extended = "*"
 sqlalchemy = "==1.4.42"
+bcrypt = "*"
 
 [requires]
 python_version = "3.10"
