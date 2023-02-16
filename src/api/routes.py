@@ -42,7 +42,10 @@ def create_user():
                 name= body["name"],
                 city= body["city"], 
                 country=body["country"], 
-                phone=body["phone"])
+                phone=body["phone"],
+                avatar_url=body["avatar_url"],
+                accept_news=body["accept_news"]
+                )
     db.session.add(user)
     db.session.commit()
 
@@ -98,6 +101,8 @@ def modify_user(user_id):
     user.phone = request.json.get('phone', user.phone)
     user.city = request.json.get('city', user.city)
     user.country = request.json.get('country', user.country)
+    user.avatar_url = request.json.get('avatar_url', user.avatar_url)
+    user.accept_news = request.json.get('accept_news', user.accept_news)
     db.session.commit()
 
     response_body = {'name': user.name,
@@ -105,7 +110,9 @@ def modify_user(user_id):
                      'email': user.email,
                      'password': user.password,
                      'city': user.city,
-                     'country': user.country}
+                     'country': user.country,
+                     'avatar_url': user.country,
+                     'accept_news' : user.accept_news}
 
     return jsonify(response_body), 200
     
@@ -249,7 +256,7 @@ def delete_contact(contact_id):
 @api.route('/events_guests', methods=['GET'])
 def get_all_events_guests():
     events_guests = Event_Guests.query.all()
-    results = [events_guests.serialize() for events_guest in events_guests]
+    results = [events_guest.serialize() for events_guest in events_guests]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
@@ -265,7 +272,7 @@ def get_events_guests_by_id(events_guest_id):
 @api.route('/events_guest/register', methods=['POST'])
 def create_events_guests():
     body = request.get_json()
-    new_events_guest = Event_Guests(contact_id=body["contact_id"], event_id=body["event_id"], user_id=body["user_id"])
+    new_events_guest = Event_Guests(email=body["email"], contact_id=body["contact_id"], event_id=body["event_id"], user_id=body["user_id"])
     db.session.add(new_events_guest)
     db.session.commit()
     return jsonify(new_events_guest.serialize()), 200
@@ -280,11 +287,13 @@ def modify_events_guests(events_guest_id):
     events_guests.contact_id = request.json.get('contact_id', events_guests.contact_id)
     events_guests.event_id = request.json.get('event_id', events_guests.event_id)
     events_guests.user_id = request.json.get('user_id', events_guests.user_id)
+    events_guests.email = request.json.get('email', events_guests.email)
     db.session.commit()
 
     response_body = {'contact_id': events_guests.contact_id,
                      'event_id': events_guests.event_id,
-                     'user_id': events_guests.user_id}
+                     'user_id': events_guests.user_id,
+                     'email': events_guests.email}
 
     return jsonify(response_body), 200
 
