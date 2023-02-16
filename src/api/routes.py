@@ -113,7 +113,7 @@ def modify_user(user_id):
 # EVENTS
 
 
-@api.route('events', methods=['GET'])
+@api.route('/events', methods=['GET'])
 def get_all_events():
     events = Events.query.all()
     results = [event.serialize() for event in events]
@@ -220,7 +220,7 @@ def modify_contact(contact_id):
         raise APIException('Contact not found', status_code=404)
 
     contact.email = request.json.get('email', contact.email)
-    contact.name = rquest.json.get('name', contact.name)
+    contact.name = request.json.get('name', contact.name)
     contact.user_id = request.json.get('user_id', contact.user_id)
     db.session.commit()
 
@@ -249,7 +249,7 @@ def delete_contact(contact_id):
 @api.route('/events_guests', methods=['GET'])
 def get_all_events_guests():
     events_guests = Event_Guests.query.all()
-    results = [events_guest.serialize() for events_guest in events_guests]
+    results = [events_guests.serialize() for events_guest in events_guests]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}

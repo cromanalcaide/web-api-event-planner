@@ -13,6 +13,8 @@ class User(db.Model):
     phone = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
+    avatar_url = db.Column(db.String(300), nullable=True)
+    accept_news = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         return f'<User: {self.id}>'  
@@ -36,7 +38,7 @@ class Events(db.Model):
     time = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(360), nullable=False)
     location = db.Column(db.String(240), nullable=False)
-    image = db.Column(db.String(360), nullable=False)
+    image = db.Column(db.String(360), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
     
@@ -81,6 +83,7 @@ class Event_Guests(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'))
     contact = db.relationship(Contacts)
+    email = db.Column(db.String(120))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     event = db.relationship(Events)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
@@ -106,8 +109,7 @@ class Contact_Forms(db.Model):
     name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
-    user = db.relationship(User)
+    
 
     def __repr__(self):
         return f'<Contact_Forms {self.id}>'  
