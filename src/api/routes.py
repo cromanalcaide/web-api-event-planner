@@ -77,18 +77,6 @@ def user_login():
     return jsonify(response_body), 200
 
 
-@api.route('/users/<int:user_id>', methods=['DELETE'])
-def delete_user(user_id):
-    user = User.query.get(user_id)
-    if user is None:
-        raise APIException('User not found', status_code=404)
-    db.session.delete(user)
-    db.session.commit()
-    response_body = {
-        "message": "User deleted correctly"}    
-    return jsonify(response_body), 200
-
-
 @api.route('/users/<int:user_id>', methods=['PUT'])
 def modify_user(user_id):
     user = User.query.get(user_id)
@@ -116,6 +104,17 @@ def modify_user(user_id):
 
     return jsonify(response_body), 200
     
+
+@api.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        raise APIException('User not found', status_code=404)
+    db.session.delete(user)
+    db.session.commit()
+    response_body = {
+        "message": "User deleted correctly"}    
+    return jsonify(response_body), 200
 
 # EVENTS
 
