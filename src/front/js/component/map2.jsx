@@ -4,8 +4,9 @@ import "../../styles/mapcomponent2.css";
 
 export const MapComponent2 = () => {
   useEffect(() => {
-    const map = L.map("map").setView([51.505, -0.09], 13);
-    const polygon = L.polygon([
+    const map = L.map("map").setView([51.509, -0.08], 15);
+
+    let polygon = L.polygon([
       [51.509, -0.08],
       [51.503, -0.06],
       [51.51, -0.047],
@@ -17,9 +18,20 @@ export const MapComponent2 = () => {
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
-    function onMapClick(e) {
-      polygon.bindPopup("You clicked the map at " + e.latlng).openOn(map);
-    }
+    // function onMapClick(e) {
+    //   alert("You clicked the map at " + e.latlng);
+    // }
+
+    // map.on("click", onMapClick);
+
+    var popup = L.popup();
+
+    const onMapClick = (e) => {
+      popup
+        .setLatLng(e.latlng)
+        .setContent("badabim badabum " + e.latlng.toString())
+        .openOn(map);
+    };
 
     map.on("click", onMapClick);
   }, []);
@@ -30,7 +42,7 @@ export const MapComponent2 = () => {
         <h5 className="card-title">Texto de la polaroid</h5>
       </div>
       <div className="mapContainer">
-        <div id="map"></div>
+        <div id="map" onClick></div>
       </div>
       <div className="bg-white"></div>
     </div>
