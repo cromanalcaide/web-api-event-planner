@@ -14,6 +14,7 @@ import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
 import { LeftSideBar } from "./component/sidebarleft";
+import { Dashboard } from "./pages/dashboard";
 
 
 //create your first component
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
+                        <Route element={<Dashboard />} path="/dashboard" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
