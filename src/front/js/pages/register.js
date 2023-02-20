@@ -169,6 +169,12 @@ export const Register = () => {
                           </Link>
                         </label>
                       </div>
+                      <div className="check-bt d-flex form-check justify-content-center mx-5">
+                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck2" />
+                        <label className="form-check-label" htmlFor="defaultCheck2">
+                          Acepto recibir novedades y noticias a mi correo electrónico
+                        </label>
+                      </div>
                       <button
                         className="lg-btn btn-primary btn-lg px-5 "
                         type="submit">

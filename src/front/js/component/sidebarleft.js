@@ -5,10 +5,10 @@ import "../../styles/sidebarleft.css"
 
 export const LeftSideBar = () => {
     const { store, actions } = useContext(Context);
-    
-    const userInfo = store.user
 
     const navigate = useNavigate();
+
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
     const handleClick = () => {
         actions.logout()

@@ -1,8 +1,10 @@
+const BACKEND_URL = "https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/"
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
-			user: [],
+			contacts: [],
 
 		},
 		actions: {
@@ -36,8 +38,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await resp.json();
-					console.log("data", data);
-					localStorage.setItem("token", data.access_token);
+					localStorage.setItem("token", data.access_token, );
+					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password }
+					localStorage.setItem("userInfo", JSON.stringify(userInfo))
 					setStore({ token: data.access_token, user: data  })
 
 					return true;
@@ -67,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-rxvf69gg0tc.ws-eu86.gitpod.io/api/register", requestOptions)
+					const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/register", requestOptions)
 					if (resp.status != 200) {
 						alert("An error has occurred while creating the user");
 						return false;
@@ -101,17 +104,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout: () => {
 				const token = localStorage.removeItem("token");
+				const userInfo = localStorage.removeItem("userInfo")
 				setStore({ token: null });
 			},
-			// getUserInformation: async (user_id) => {
+			// getContactsOfUser: async (user_id) => {
 			// 	const requestOptions = {
 			// 		method: "GET",
 
 			// 	};
 			// 	try {
-			// 		const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/user/" + user_id, requestOptions);
+			// 		const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/contacts/" + user_id, requestOptions);
 			// 		const data = await res.json();
-			// 		return data;
+			// 		setstore(contacts: data);
 			// 	} catch (error) {
 			// 		console.log(error);
 			// 	}

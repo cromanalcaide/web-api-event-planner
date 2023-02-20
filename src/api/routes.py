@@ -208,6 +208,17 @@ def get_all_contacts():
     return jsonify(response_body), 200
 
 
+@api.route('/contacts/<user_id>', methods=['GET'])
+def get_contacts_by_user_id(user_id):
+    print(int(user_id))
+    contacts = Contacts.query.filter(Contacts.user_id == int(user_id))
+    results = [contact.serialize() for contact in contacts]
+    response_body = {'message': 'OK',
+                     'total_records': len(results),
+                     'results': results}
+    return jsonify(response_body), 200
+
+
 @api.route('/contact/<contact_id>', methods=['GET'])
 def get_contacts_by_id(contact_id):
     print(contact_id)
