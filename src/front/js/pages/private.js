@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import {LeftSideBar} from "../component/sidebarleft"
 
 export const Private = () => {
     const { store, actions } = useContext(Context);
@@ -19,7 +20,7 @@ export const Private = () => {
     return (
         <div> {store.token && store.token != "" && store.token != undefined ? (
             <div>
-                You are IN
+                <LeftSideBar/>
             </div>
         ) : (
         <div> You need to login to enter this page </div> 

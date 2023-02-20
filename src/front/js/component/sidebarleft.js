@@ -5,6 +5,8 @@ import "../../styles/sidebarleft.css"
 
 export const LeftSideBar = () => {
     const { store, actions } = useContext(Context);
+    
+    const userInfo = store.user
 
     const navigate = useNavigate();
 
@@ -21,9 +23,10 @@ export const LeftSideBar = () => {
                     <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <h3 className="sidebar-logo">ComMeet</h3>
                         <div className="d-flex align-items-center text-decoration-none">
-                            <img src="https://ui-avatars.com/api/?name=John+Doe" alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
-                            <span className="user-name d-none d-sm-inline">Nombre</span>
+                            <img src={userInfo.avatar_url} alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
+                            <span className="user-name d-none d-sm-inline">{userInfo.name}</span>
                         </div>
+                   
                         <div className="pt-3">
                             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                 <li className="nav-item">
@@ -47,7 +50,7 @@ export const LeftSideBar = () => {
                             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
                                 <li>
                                     <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                    <i className="fa-icon fa-solid fa-address-book"></i><span className="contact-title d-none d-sm-inline ">Contactos</span> </a>
+                                    <i className="fa-icon fa-solid fa-address-book"></i><span className="contact-title d-none d-sm-inline px-2 ">Contactos</span> </a>
                                     <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                         <li className="w-100  pt-1 pb-1">
                                             <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/singer-shakira-attends-the-screening-of-elvis-during-the-news-photo-1674386012.jpg?crop=0.88889xw:1xh;center,top&resize=1200:*" alt="hugenerd" width="25" height="25" className="rounded-circle" />

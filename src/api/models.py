@@ -13,7 +13,7 @@ class User(db.Model):
     phone = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
-    avatar_url = db.Column(db.String(300), nullable=True)
+    avatar_url = db.Column(db.String(300), nullable=True, default="https://res.cloudinary.com/dkcoownwg/image/upload/v1676742580/avatar_sxohxx.png" ) 
     accept_news = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
@@ -99,12 +99,9 @@ class Event_Guests(db.Model):
         return {
         "id": self.id,
         "contact_id": self.contact_id,
-        "contact": self.contact,
         "email": self.email,
         "event_id": self.event_id,
-        "user_id": self.user_id,
-
-    }
+        "user_id": self.user_id,}
 
 
 class Contact_Forms(db.Model):
@@ -123,6 +120,5 @@ class Contact_Forms(db.Model):
         "id": self.id,
         "name": self.name,
         "email": self.email,
-        "message": self.message,
-    }
+        "message": self.message }
 

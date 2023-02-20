@@ -42,7 +42,8 @@ def create_user():
                 name= body["name"],
                 city= body["city"], 
                 country=body["country"], 
-                phone=body["phone"])
+                phone=body["phone"],
+                )
     db.session.add(user)
     db.session.commit()
 
@@ -60,9 +61,16 @@ def user_login():
     # password = request.json.get("password", None)
     user = User.query.filter(User.email == body['email']).first()
     
+    avatar_url = user.avatar_url
+    phone = user.phone
+    city = user.city
+    country = user.country
+    name = user.name
+    password = user.password
+
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 404
-    
+
     compare = compare_pass(body['password'], user.password )
     if compare == False :
         return jsonify({"msg": "Nombre de usuario o contraseña incorrectos"}), 401
@@ -70,6 +78,12 @@ def user_login():
     else:    
         access_token = create_access_token(identity=email)
         response_body = {"email": email,
+                        "avatar_url": avatar_url,
+                        "phone": phone,
+                        "city": city,
+                        "country": country,
+                        "name": name,
+                        "password": password, 
                      "access_token": access_token}    
     return jsonify(response_body), 200
 
@@ -249,11 +263,11 @@ def delete_contact(contact_id):
 @api.route('/events_guests', methods=['GET'])
 def get_all_events_guests():
     events_guests = Event_Guests.query.all()
-    results = [events_guests.serialize() for events_guest in events_guests]
+    results = [guests.serialize() for guests in events_guests]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return jsonify(response_body), 200
+    return response_body, 200
 
 
 @api.route('/events_guest/<events_guest_id>', methods=['GET'])
@@ -276,15 +290,17 @@ def modify_events_guests(events_guest_id):
     events_guests = Event_Guests.query.get(events_guest_id)
     if events_guests is None:
         raise APIException('Event_Guest not found', status_code=404)
-
+    print(events_guests)
     events_guests.contact_id = request.json.get('contact_id', events_guests.contact_id)
     events_guests.event_id = request.json.get('event_id', events_guests.event_id)
     events_guests.user_id = request.json.get('user_id', events_guests.user_id)
+    events_guests.email = request.json.get('email', events_guests.email)
     db.session.commit()
 
     response_body = {'contact_id': events_guests.contact_id,
                      'event_id': events_guests.event_id,
-                     'user_id': events_guests.user_id}
+                     'user_id': events_guests.user_id,
+                     'email': events_guests.email}
 
     return jsonify(response_body), 200
 

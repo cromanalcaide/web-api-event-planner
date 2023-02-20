@@ -1,82 +1,83 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			token : null,
-	
+			token: null,
+			user: [],
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			synctoken : () =>{
+			synctoken: () => {
 				const token = localStorage.getItem("token");
 				console.log("App just loaded, synching the local storage");
-				if (token && token != "" && token != undefined) setStore({token: token}); 
-			},	
+				if (token && token != "" && token != undefined) setStore({ token: token });
+			},
 
 			login: async (email, password) => {
-				
-					const requestOptions = {
-						method : "POST",
-						headers : {
-							"Content-type": "application/json"
 
-						},
-						body : JSON.stringify({
-							"email" : email,
-							"password" : password
-						})
-					};
-					console.log(requestOptions);
-					
-					try {
-						const resp = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/login", requestOptions)
-						console.log("resp", resp)
-						if (resp.status != 200){
-							console.log("An error has occurred");
-							return false;
-						} 
-						const data = await resp.json();	
-						console.log("data", data);					
-						localStorage.setItem("token", data.access_token);
-						setStore({token: data.access_token})
+				const requestOptions = {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
 
-						return true;
+					},
+					body: JSON.stringify({
+						"email": email,
+						"password": password
+					})
+				};
+				console.log(requestOptions);
+
+				try {
+					const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/login", requestOptions)
+					console.log("resp", resp)
+					if (resp.status != 200) {
+						console.log("An error has occurred");
+						return false;
 					}
-					catch(error){
-						console.error("There has been an error login in")
-					}
+					const data = await resp.json();
+					console.log("data", data);
+					localStorage.setItem("token", data.access_token);
+					setStore({ token: data.access_token, user: data  })
+
+					return true;
+				}
+				catch (error) {
+					console.error("There has been an error login in")
+				}
 			},
 
 			// register: async (email, password, name, phone, city, country)=>{
 			// los parámetros deben estar en el mismo orden en que se llaman (register.js 22)
 			register: async (name, email, password, city, country, phone) => {
-				
+
 				const requestOptions = {
-					method : "POST",
-					headers : {
+					method: "POST",
+					headers: {
 						"Content-type": "application/json"
 					},
-					body : JSON.stringify({
-						"name" : name,
-						"email" : email,
-						"country" : country,
-						"city" : city,
-						"phone" : phone, 
-						"password" : password
+					body: JSON.stringify({
+						"name": name,
+						"email": email,
+						"country": country,
+						"city": city,
+						"phone": phone,
+						"password": password
 					})
 				};
-				
+
 				try {
 					const resp = await fetch("https://3001-cromanalcai-webapievent-rxvf69gg0tc.ws-eu86.gitpod.io/api/register", requestOptions)
-					if (resp.status != 200){
+					if (resp.status != 200) {
 						alert("An error has occurred while creating the user");
 						return false;
-					} 
-					const data = await resp.json();	
-					console.log(data);					
+					}
+					const data = await resp.json();
+					console.log(data);
 
 					return true;
 				}
-				catch(error){
+				catch (error) {
 					console.error("There has been an error creating a user")
 				}
 			},
@@ -84,26 +85,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				async () => {
 					const store = getStore();
 					const requestOptions = {
-					  method: "GET",
-					  headers: {
-						Authorization: `Bearer ${store.token}`,
-					  },
+						method: "GET",
+						headers: {
+							Authorization: `Bearer ${store.token}`,
+						},
 					};
 					try {
-					  const res = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/private", requestOptions);
-					  const data = await res.json();
-					  return data;
+						const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/private", requestOptions);
+						const data = await res.json();
+						return data;
 					} catch (error) {
-					  console.log(error);
+						console.log(error);
 					}
-			},
+				},
 
-			logout: ()=>{
+			logout: () => {
 				const token = localStorage.removeItem("token");
-				setStore({token:null}); 
+				setStore({ token: null });
 			},
+			// getUserInformation: async (user_id) => {
+			// 	const requestOptions = {
+			// 		method: "GET",
+
+			// 	};
+			// 	try {
+			// 		const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/user/" + user_id, requestOptions);
+			// 		const data = await res.json();
+			// 		return data;
+			// 	} catch (error) {
+			// 		console.log(error);
+			// 	}
+			// },
+
 		}
-	};
+	}
 };
+
 
 export default getState;
