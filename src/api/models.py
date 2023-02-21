@@ -9,10 +9,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(220), nullable=False)
     phone = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
+    avatar_url = db.Column(db.String(300), nullable=True, default="https://res.cloudinary.com/dkcoownwg/image/upload/v1676742580/avatar_sxohxx.png" ) 
+    accept_news = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         return f'<User: {self.id}>'  
@@ -24,7 +26,10 @@ class User(db.Model):
             'email': self.email,
             'phone': self.phone,
             'city': self.city,
-            'country': self.country
+            'country': self.country,
+            'avatar_url': self.avatar_url,
+            'accept_news': self.accept_news
+           
     }
 
 
@@ -36,7 +41,7 @@ class Events(db.Model):
     time = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(360), nullable=False)
     location = db.Column(db.String(240), nullable=False)
-    image = db.Column(db.String(360), nullable=False)
+    image = db.Column(db.String(360), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
     
@@ -81,6 +86,7 @@ class Event_Guests(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'))
     contact = db.relationship(Contacts)
+    email = db.Column(db.String(120))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     event = db.relationship(Events)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
@@ -93,11 +99,9 @@ class Event_Guests(db.Model):
         return {
         "id": self.id,
         "contact_id": self.contact_id,
-        "contact": self.contact,
+        "email": self.email,
         "event_id": self.event_id,
-        "user_id": self.user_id,
-
-    }
+        "user_id": self.user_id,}
 
 
 class Contact_Forms(db.Model):
@@ -106,8 +110,7 @@ class Contact_Forms(db.Model):
     name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
-    user = db.relationship(User)
+    
 
     def __repr__(self):
         return f'<Contact_Forms {self.id}>'  
@@ -117,7 +120,4 @@ class Contact_Forms(db.Model):
         "id": self.id,
         "name": self.name,
         "email": self.email,
-        "message": self.message,
-        "user_id": self.user_id,
-    }
-
+        "message": self.message }

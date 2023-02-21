@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/mapcomponent2.css";
+import Register from "./register.js";
 
 export const MapComponent2 = () => {
   useEffect(() => {
     const map = L.map("map").setView([51.509, -0.08], 15);
-
-    let polygon = L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047],
-    ]).addTo(map);
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
@@ -29,7 +24,7 @@ export const MapComponent2 = () => {
     const onMapClick = (e) => {
       popup
         .setLatLng(e.latlng)
-        .setContent("badabim badabum " + e.latlng.toString())
+        .setContent("Has clickado en" + e.latlng.toString())
         .openOn(map);
     };
 
@@ -39,10 +34,10 @@ export const MapComponent2 = () => {
   return (
     <div className="mapCard card col-l-5 col-md-5 col-sm-10 col-xs-10">
       <div className="card-body">
-        <h5 className="card-title">Texto de la polaroid</h5>
+        <p className="card-title">Ubicación de tus próximos eventos</p>
       </div>
       <div className="mapContainer">
-        <div id="map" onClick></div>
+        <div id="map"></div>
       </div>
       <div className="bg-white"></div>
     </div>

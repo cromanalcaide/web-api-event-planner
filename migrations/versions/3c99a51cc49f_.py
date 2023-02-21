@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: bb2398e20aef
+Revision ID: 3c99a51cc49f
 Revises: 
-Create Date: 2023-02-07 20:24:09.617286
+Create Date: 2023-02-21 17:34:29.632978
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bb2398e20aef'
+revision = '3c99a51cc49f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,6 +40,7 @@ def upgrade():
     )
     op.create_table('contacts',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
@@ -52,7 +53,6 @@ def upgrade():
     sa.Column('time', sa.String(length=120), nullable=False),
     sa.Column('description', sa.String(length=360), nullable=False),
     sa.Column('location', sa.String(length=240), nullable=False),
-    sa.Column('guests', sa.String(length=240), nullable=False),
     sa.Column('image', sa.String(length=360), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
@@ -60,8 +60,10 @@ def upgrade():
     )
     op.create_table('event_guests',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('contact_id', sa.Integer(), nullable=True),
     sa.Column('event_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['contact_id'], ['contacts.id'], ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
