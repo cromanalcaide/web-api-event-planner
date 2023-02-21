@@ -1,20 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/sidebarleft.css"
+import { AddContactPopover } from "./contactPopover";
+import { Button } from "reactstrap";
+
 
 export const LeftSideBar = () => {
     const { store, actions } = useContext(Context);
+
+    const [popoverOpen, setPopoverOpen] = useState(false);
+
+    const togglePopover = () => {
+        setPopoverOpen(!popoverOpen);
+    };
 
     const navigate = useNavigate();
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const userContacts = JSON.parse(localStorage.getItem('userContacts'));
     
-    const contacts = ()=>{
-        actions.getContactsOfUser()
-    }
-
     const handleClick = () => {
         actions.logout()
         navigate('/')
@@ -57,16 +62,18 @@ export const LeftSideBar = () => {
                                     <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                                     <i className="fa-icon fa-solid fa-address-book"></i><span className="contact-title d-none d-sm-inline px-2 ">Contactos</span> </a>
                                     <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                        <li className="w-100  pt-1 pb-1">
-                                            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/singer-shakira-attends-the-screening-of-elvis-during-the-news-photo-1674386012.jpg?crop=0.88889xw:1xh;center,top&resize=1200:*" alt="hugenerd" width="25" height="25" className="rounded-circle" />
-                                            <span className="contact-name d-none d-sm-inline px-2">Sha Kira </span><i className="fa-icon fa-solid fa-pen-to-square"></i>
-                                        </li>
-                                        <li className="w-100 pt-1 pb-1">
-                                            <img src="https://img.a.transfermarkt.technology/portrait/big/18944-1667548226.jpg?lm=1" alt="hugenerd" width="25" height="25" className="rounded-circle" />
-                                            <span className="contact-name d-none d-sm-inline px-2">Sal Pique</span><i className="fa-icon fa-solid fa-pen-to-square"></i>
-                                        </li>
+                                        {userContacts.map((e) => {
+                                            return (
+                                            <li className="w-100  pt-1 pb-1" key={e.id}>
+                                                <img src="https://res.cloudinary.com/dkcoownwg/image/upload/v1676742580/avatar_sxohxx.png" alt="hugenerd" width="25" height="25" className="rounded-circle" />
+                                                <span className="contact-name d-none d-sm-inline px-2">{e.name} </span><i className="fa-icon fa-solid fa-pen-to-square"></i>
+                                            </li> 
+                                        );
+                                        })}
                                     </ul>
                                 </li>
+                                <button className="btn add-contact-btn pt-2" id="popoverButton" onClick={togglePopover}><i className="fa-solid fa-plus px-2"></i>Añadir Contacto</button>
+                                <AddContactPopover isOpen={popoverOpen} target="popoverButton" />
                             </ul>
                         </div>
                     </div>

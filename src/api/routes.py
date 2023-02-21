@@ -232,8 +232,9 @@ def get_contacts_by_id(contact_id):
 @api.route('/contact/register', methods=['POST'])
 def create_contact():
     body = request.get_json()
-    new_contact = Contacts(email=body["email"], name=body["name"], user_id=body["user_id"])
     print(body)
+    new_contact = Contacts(email=body["email"], name=body["name"], user_id=body["user_id"])
+   
     print(new_contact)
     db.session.add(new_contact)
     db.session.commit()

@@ -33,3 +33,20 @@
     font-size: smaller;
     justify-content: flex-end;
 }
+
+.add-contact-btn{
+    padding: 0px;
+    font-size: smaller;
+
+}
+
+/* POPOVER */
+
+.add-contact{
+    background-color: #F1EEEE;
+    border-radius: 20px;
+}
+
+/* .add-contact-header{
+
+} */

@@ -38,12 +38,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json();
 					
 					try { 
-						const response = await fetch ((`${BACKEND_URL}api/contacts/${data.id}`))
+						const response = await fetch (`${BACKEND_URL}api/contacts/${data.id}`)
 						const contacts = await response.json();
 						console.log(contacts)
 						const userContacts = contacts.results.map(contact => ({
 							name: contact.name,
-							email: contact.email
+							email: contact.email,
+							id: contact.id
 						  }));
 						// const userContacts = {name: contacts.results.name, email: contacts.results.email, id: contacts.results.id }
 						console.log(userContacts)
@@ -54,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					};
 									
 					localStorage.setItem("token", data.access_token, );
-					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password }
+					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password, id: data.id }
 					localStorage.setItem("userInfo", JSON.stringify(userInfo))
 					setStore({ token: data.access_token })
 					
@@ -85,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/register", requestOptions)
+					const resp = await fetch(`${BACKEND_URL}api/register`, requestOptions)
 					if (resp.status != 200) {
 						alert("An error has occurred while creating the user");
 						return false;
@@ -109,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					};
 					try {
-						const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/private", requestOptions);
+						const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
 						const data = await res.json();
 						return data;
 					} catch (error) {
@@ -123,22 +124,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const userContacts = localStorage.removeItem("userContacts")
 				setStore({ token: null });
 			},
-			// getContactsOfUser: async (userId) => {
-			// 	const requestOptions = {
-			// 		method: "GET",
-
-			// 	};
-			// 	try {
-			// 		const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/contacts/" + userId, requestOptions);
-				// 	const data = await resp.json();
-				// 	const userContacts = {name: data.name, email: data.email }
-				// 	localStorage.setItem("userContacts", JSON.stringify(userContacts))
-				// 	setStore({ userContacts: data  })
-				// } catch (error) {
-				// 	console.log(error);
-				// }
-			// },
-
+			addNewContact: async (name, email, userId) => {
+				const requestOptions = {
+					method : "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						"name": name,
+						"email": email,
+						"user_id": userId
+					})
+				}
+				try {
+					const res = await fetch(`${BACKEND_URL}api/contact/register`, requestOptions);
+					if (res.status != 200) {
+						alert("An error has occurred while adding the new contact");
+						return false;
+					}
+					const data = await res.json();
+					console.log(data)
+					return true
+				}
+				catch (error) {
+					console.log(error);
+				}
+			}
 		}
 	}
 };
