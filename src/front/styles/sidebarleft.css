@@ -47,6 +47,11 @@
     border-radius: 20px;
 }
 
-/* .add-contact-header{
+.add-contact-header{
+    font-size: medium;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    background-color: #667DD2;
 
-} */
+}

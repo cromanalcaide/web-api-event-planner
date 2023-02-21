@@ -23,7 +23,7 @@ export const AddContactPopover = (props) => {
 
     return (
         <Popover className="add-contact" placement="right" isOpen={props.isOpen} target={props.target}>
-            <PopoverHeader className="add-contact-header">Agrega el Nombre y Correo electrónico del nuevo contacto</PopoverHeader>
+            <PopoverHeader className="add-contact-header">Agregar un nuevo contacto</PopoverHeader>
             <PopoverBody>
                 <Input name="name" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
                 <Input name="email" placeholder="Correo Electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />

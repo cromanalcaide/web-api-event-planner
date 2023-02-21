@@ -47,9 +47,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 							id: contact.id
 						  }));
 						// const userContacts = {name: contacts.results.name, email: contacts.results.email, id: contacts.results.id }
-						console.log(userContacts)
+						
 						localStorage.setItem("userContacts", JSON.stringify(userContacts))
-						setStore({ userContacts: contacts  })
+						setStore({...getStore(), userContacts  })
+						
 					} catch (error) {
 						console.log(error);
 					};
@@ -57,8 +58,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem("token", data.access_token, );
 					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password, id: data.id }
 					localStorage.setItem("userInfo", JSON.stringify(userInfo))
-					setStore({ token: data.access_token })
-					
+					setStore({...getStore(), token: data.access_token })
+					console.log(getStore());
 					return true;
 				}
 				catch (error) {
