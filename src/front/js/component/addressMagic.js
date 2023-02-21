@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import ReactGoogleAutocomplete from "react-google-autocomplete";
+import React, { useState } from "react";
+import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 export const AddressMagic = () => {
 
@@ -12,7 +12,7 @@ export const AddressMagic = () => {
                 <input type="text" placeholder="Enter your address" />
                 <p>Your address: {location}</p>
             </div>
-            {/* <ReactGoogleAutocomplete
+            <ReactGoogleAutocomplete
                 className="form-control m-2"
                 placeholder="Location"
                 apiKey={config}
@@ -20,7 +20,7 @@ export const AddressMagic = () => {
                     setLocation(place.formatted_address);
                 }}
                 style={{ height: "50px" }}
-            /> */}
+            />
         </div>
     )
 }

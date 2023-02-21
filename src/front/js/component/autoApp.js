@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import InputAddress from './inputAddress.js';
-import ReactGoogleAutocomplete from "react-google-autocomplete";
-const config = process.env.REACT_APP_GOOGLEPLACES_API_KEY;
+import React, { useState, useRef, useEffect } from 'react';
 
-export const AutoApp = () => {
+export const AutoApp = (onAddressChange) => {
     const [address, setAddress] = useState('');
     const inputRef = useRef(null);
     const [autocomplete, setAutocomplete] = useState(null);
+    const apiKey = process.env.REACT_APP_GOOGLEPLACES_API_KEY;
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -31,14 +29,11 @@ export const AutoApp = () => {
                 onAddressChange(address);
             });
         }
-    }, [autocomplete, onAddressChange]);
+    }, [autocomplete]);
 
     return (
         <div>
-            <InputAddress
-                onAddressChange={setAddress}
-                apiKey="AIzaSyBF5QV-j7b79_4-mlZeEiIlCzuckjzxlrk"
-            />
+            <input ref={inputRef} type="text" placeholder="Enter your address" />
             <p>Your address: {address}</p>
         </div>
     );

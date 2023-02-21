@@ -11,6 +11,8 @@ import { Register } from "./component/register";
 import { ContactForm } from "./pages/contactForm";
 import { About } from "./pages/about";
 import { AddressMagic } from "./component/addressMagic.js";
+import { AutoApp } from "./component/autoApp.js";
+import { InputAddress } from "./component/inputAddress";
 import { MapComponent2 } from "./component/map2.jsx";
 
 
@@ -33,6 +35,8 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<MapComponent2 />} path="/map2" />
                         <Route element={<AddressMagic />} path="/magic" />
+                        <Route element={<AutoApp />} path="/autoapp" />
+                        <Route element={<InputAddress />} path="/inputaddress" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
