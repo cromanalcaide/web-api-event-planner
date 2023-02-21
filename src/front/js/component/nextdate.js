@@ -4,27 +4,31 @@ import Button from 'react-bootstrap/Button';
 
 import "../../styles/nextdate.css"
 
+// Dudas: Como coger el número de usuario para hacer el filtro de eventos
+// Pero entonces sólo saldrían eventos por usuario: y si soy invitado.
+// Poner campos de entrada con máximo de palabras para no desbordar texto
+// O dar opción a seguir leyendo en la ventana de texto
+// Esta es la primera página que ve el usuario despues de registrarse
+// Si es así: link Listado de eventos por usuario y desde éste a evento
+// en concreto. Crear página listado eventos y evento en concreto. 
+// Quitar de base de datos "time" y ver como coger la fecha completa inclui-
+// la hora en el formulario. Trabajos pendientes y repartin.
 
 export const Nextdate = ()=>{
 
     const [todoDates, setTodoDates] = useState([]);  
-  
-    let futureDate = [];
 
-    for (let i = 0; i< todoDates.length; i++) {
-      if (new Date (todoDates[i].date).getTime() > new Date().getTime()){
-        futureDate.push(todoDates[i]);
-    }
-
-    }
-    let arrayNumbers = [];
+    let actualTime = new Date().getTime();
+    let user = 9; 
+    let futureDate = todoDates.filter(item => new Date (item.date).getTime() > actualTime && item.user_id === user );
+    
+    let arrayData = [];
     for (let j = 0; j< futureDate.length; j++) {
-    arrayNumbers.push(new Date (futureDate[j].date).getTime());
+    arrayData.push(new Date (futureDate[j].date).getTime());
     }
    
-    let min = Math.min(...arrayNumbers);
-    
-    let resFin = futureDate.filter(item => new Date (item.date).getTime()  === min);
+    let minDate = Math.min(...arrayData);
+    let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
   
     const getAlldates = () =>{
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu87.gitpod.io/api/events', {method:"GET"})
@@ -45,10 +49,10 @@ export const Nextdate = ()=>{
     return (
      
         <div className='nexdate-main container text-center'>
-          {resFin.map((el) => {
+          {resFin.map((el, index) => {
 					return (
-				  <>
-            <div className='row'>
+				  <div key={index} >
+            <div  className='row'>
               <h1>Próximo Evento</h1>
               <h1></h1>
               <div className="col-sm-2">
@@ -66,7 +70,7 @@ export const Nextdate = ()=>{
               <Button variant="light">Ver Evento</Button>{' '}
               </div>
             </div>
-          </>
+          </div>
           )})}
         </div>
           );
