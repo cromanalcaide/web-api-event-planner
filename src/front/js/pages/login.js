@@ -17,9 +17,11 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const loginSuccesful = actions.login(email, password);
+   
+    const loginSuccesful = actions.login(email, password); 
     if (loginSuccesful) {
       navigate("/private");
+     
     } else {
       setError("Correo electrónico o contraseña incorrectos");
     }

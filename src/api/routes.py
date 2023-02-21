@@ -67,6 +67,7 @@ def user_login():
     country = user.country
     name = user.name
     password = user.password
+    id = user.id
 
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 404
@@ -83,7 +84,8 @@ def user_login():
                         "city": city,
                         "country": country,
                         "name": name,
-                        "password": password, 
+                        "password": password,
+                        "id": id, 
                      "access_token": access_token}    
     return jsonify(response_body), 200
 

@@ -9,6 +9,11 @@ export const LeftSideBar = () => {
     const navigate = useNavigate();
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userContacts = JSON.parse(localStorage.getItem('userContacts'));
+    
+    const contacts = ()=>{
+        actions.getContactsOfUser()
+    }
 
     const handleClick = () => {
         actions.logout()

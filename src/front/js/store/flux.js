@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
-			contacts: [],
+			userContacts: [],
 
 		},
 		actions: {
@@ -28,21 +28,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"password": password
 					})
 				};
-				console.log(requestOptions);
-
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/login", requestOptions)
+					const resp = await fetch((`${BACKEND_URL}api/login/`), requestOptions)
 					console.log("resp", resp)
 					if (resp.status != 200) {
 						console.log("An error has occurred");
 						return false;
 					}
 					const data = await resp.json();
+					
+					try { 
+						const response = await fetch ((`${BACKEND_URL}api/contacts/${data.id}`))
+						const contacts = await response.json();
+						console.log(contacts)
+						const userContacts = contacts.results.map(contact => ({
+							name: contact.name,
+							email: contact.email
+						  }));
+						// const userContacts = {name: contacts.results.name, email: contacts.results.email, id: contacts.results.id }
+						console.log(userContacts)
+						localStorage.setItem("userContacts", JSON.stringify(userContacts))
+						setStore({ userContacts: contacts  })
+					} catch (error) {
+						console.log(error);
+					};
+									
 					localStorage.setItem("token", data.access_token, );
 					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password }
 					localStorage.setItem("userInfo", JSON.stringify(userInfo))
-					setStore({ token: data.access_token, user: data  })
-
+					setStore({ token: data.access_token })
+					
 					return true;
 				}
 				catch (error) {
@@ -105,20 +120,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				const token = localStorage.removeItem("token");
 				const userInfo = localStorage.removeItem("userInfo")
+				const userContacts = localStorage.removeItem("userContacts")
 				setStore({ token: null });
 			},
-			// getContactsOfUser: async (user_id) => {
+			// getContactsOfUser: async (userId) => {
 			// 	const requestOptions = {
 			// 		method: "GET",
 
 			// 	};
 			// 	try {
-			// 		const res = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/contacts/" + user_id, requestOptions);
-			// 		const data = await res.json();
-			// 		setstore(contacts: data);
-			// 	} catch (error) {
-			// 		console.log(error);
-			// 	}
+			// 		const resp = await fetch("https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/api/contacts/" + userId, requestOptions);
+				// 	const data = await resp.json();
+				// 	const userContacts = {name: data.name, email: data.email }
+				// 	localStorage.setItem("userContacts", JSON.stringify(userContacts))
+				// 	setStore({ userContacts: data  })
+				// } catch (error) {
+				// 	console.log(error);
+				// }
 			// },
 
 		}
