@@ -10,7 +10,7 @@ import { Login } from "./component/login";
 import { Register } from "./component/register";
 import { ContactForm } from "./pages/contactForm";
 import { About } from "./pages/about";
-import { InputAddress } from "./component/inputAddress.js";
+import { AddressMagic } from "./component/addressMagic.js";
 import { MapComponent2 } from "./component/map2.jsx";
 
 
@@ -32,7 +32,7 @@ const Layout = () => {
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<About />} path="/about" />
                         <Route element={<MapComponent2 />} path="/map2" />
-                        <Route element={<InputAddress />} path="/inputaddress" />
+                        <Route element={<AddressMagic />} path="/magic" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

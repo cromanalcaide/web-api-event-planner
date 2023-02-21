@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/mapcomponent2.css";
-import Register from "./register.js";
 
 export const MapComponent2 = () => {
   useEffect(() => {
