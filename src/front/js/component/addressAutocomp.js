@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "../../styles/addressautocomp.css";
-import axios from 'axios';
 
 export const AddressAutocomp = () => {
   const [address, setAddress] = useState('');
