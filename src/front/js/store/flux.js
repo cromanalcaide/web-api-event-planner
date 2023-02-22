@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			userContacts: [],
+			user: []
 
 		},
 		actions: {
@@ -36,30 +37,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await resp.json();
-					
-					try { 
-						const response = await fetch (`${BACKEND_URL}api/contacts/${data.id}`)
-						const contacts = await response.json();
-						console.log(contacts)
-						const userContacts = contacts.results.map(contact => ({
-							name: contact.name,
-							email: contact.email,
-							id: contact.id
-						  }));
-						// const userContacts = {name: contacts.results.name, email: contacts.results.email, id: contacts.results.id }
-						
-						localStorage.setItem("userContacts", JSON.stringify(userContacts))
-						setStore({...getStore(), userContacts  })
-						
-					} catch (error) {
-						console.log(error);
-					};
 									
 					localStorage.setItem("token", data.access_token, );
-					const userInfo = {name: data.name, email: data.email, phone: data.email, city: data.city, country: data.country, avatar_url: data.avatar_url, password:data.password, id: data.id }
-					localStorage.setItem("userInfo", JSON.stringify(userInfo))
+					const userId = { id: data.id }
+					localStorage.setItem("userId", JSON.stringify(userId))
+
 					setStore({...getStore(), token: data.access_token })
-					console.log(getStore());
 					return true;
 				}
 				catch (error) {
@@ -93,8 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await resp.json();
-					console.log(data);
-
 					return true;
 				}
 				catch (error) {
@@ -113,16 +94,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					try {
 						const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
 						const data = await res.json();
+						console.log("this is data:",data)
 						return data;
+						
 					} catch (error) {
 						console.log(error);
 					}
+
 				},
 
 			logout: () => {
 				const token = localStorage.removeItem("token");
 				const userInfo = localStorage.removeItem("userInfo")
-				const userContacts = localStorage.removeItem("userContacts")
+
 				setStore({ token: null });
 			},
 			addNewContact: async (name, email, userId) => {
@@ -150,6 +134,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 					console.log(error);
 				}
+			},
+			getUserContacts : async () =>{
+				const requestOptions = {
+					method : "GET",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+				const userId = JSON.parse(localStorage.getItem("userId"))
+				try { 
+					const response = await fetch (`${BACKEND_URL}api/contacts/${userId.id}`, requestOptions)
+					const contacts = await response.json();
+					console.log(contacts)
+					const userContacts = contacts.results.map(contact => ({
+						name: contact.name,
+						email: contact.email,
+						id: contact.id
+					}));
+					setStore({...getStore(), userContacts  })
+				} catch (error) {
+					console.log(error);
+				};
+			},
+			getUserInfo : async () => {
+				const requestOptions = {
+					method : "GET",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+				const userId = JSON.parse(localStorage.getItem("userId"))
+				try { 
+					const response = await fetch (`${BACKEND_URL}api/users/${userId.id}`, requestOptions)
+					const user = await response.json();
+					console.log(user)
+					setStore({...getStore(), user })
+				} catch (error) {
+					console.log(error);
+				};
 			}
 		}
 	}

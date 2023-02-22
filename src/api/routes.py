@@ -61,12 +61,6 @@ def user_login():
     # password = request.json.get("password", None)
     user = User.query.filter(User.email == body['email']).first()
     
-    avatar_url = user.avatar_url
-    phone = user.phone
-    city = user.city
-    country = user.country
-    name = user.name
-    password = user.password
     id = user.id
 
     if user is None:
@@ -78,14 +72,7 @@ def user_login():
 
     else:    
         access_token = create_access_token(identity=email)
-        response_body = {"email": email,
-                        "avatar_url": avatar_url,
-                        "phone": phone,
-                        "city": city,
-                        "country": country,
-                        "name": name,
-                        "password": password,
-                        "id": id, 
+        response_body = { "id": id, 
                      "access_token": access_token}    
     return jsonify(response_body), 200
 
