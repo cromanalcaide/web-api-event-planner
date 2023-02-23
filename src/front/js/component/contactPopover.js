@@ -18,13 +18,14 @@ export const AddContactPopover = (props) => {
         actions.getUserContacts()
     }
 
+       
     return (
         <Popover className="add-contact" placement="right" isOpen={props.isOpen} target={props.target}>
-            <PopoverHeader className="add-contact-header">Agregar un nuevo contacto</PopoverHeader>
+            <PopoverHeader className="add-contact-header">Agregar un nuevo contacto<i className="ms-2 fa-solid fa-xmark close-btn" onClick={props.onClose} ></i></PopoverHeader>
             <PopoverBody>
                 <Input name="name" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
-                <Input name="email" placeholder="Correo Electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button className="add-btn btn justify-content-center" onClick={handleClick}><i className="fa-solid fa-plus mx-2"></i>Agregar</button>
+                <Input className="mt-2" name="email" placeholder="Correo Electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <button className="add-btn btn mt-3" onClick={handleClick}><i className="fa-solid fa-plus "></i>Agregar</button>
             </PopoverBody>
         </Popover>
     );

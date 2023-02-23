@@ -123,13 +123,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				try {
 					const res = await fetch(`${BACKEND_URL}api/contact/register`, requestOptions);
-					if (res.status != 200) {
+					if (res.status !== 200) {
 						alert("An error has occurred while adding the new contact");
 						return false;
 					}
-					const data = await res.json();
-					console.log(data)
-					return true
+					const newContact = await res.json();
+					const currentContacts = getStore().userContacts;
+					const updatedContacts = currentContacts.concat(newContact);
+					setStore({ ...getStore(), userContacts: updatedContacts });
+					return true;
 				}
 				catch (error) {
 					console.log(error);
@@ -190,7 +192,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions)
 					const updatedContact = await response.json();
 					console.log(updatedContact)
-					// Obtener el estado anterior y actualizar solo el contacto modificado
+
 					const prevStore = getStore();
 					const updatedContacts = prevStore.userContacts.map((contact) => {
 						if (contact.id === contactId) {
@@ -200,7 +202,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 
-					// Actualizar el estado global con los nuevos datos de contacto modificados
 					setStore({
 						...prevStore,
 						userContacts: updatedContacts
@@ -208,11 +209,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
-			}
-		},
+			},
+			deleteContact: async (contactId) => {
+				const requestOptions = {
+					method: "DELETE",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+				try {
+					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions);
+					const data = await response.json();
+					console.log(data);
+
+					setStore({
+						...getStore(),
+						userContacts: getStore().userContacts.filter((contact) => contact.id !== contactId),
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			},
+		}
 	}
 }
-	
+
+
 
 
 

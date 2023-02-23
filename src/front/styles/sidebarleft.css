@@ -7,6 +7,13 @@
     margin-bottom: 2em;
 }
 
+@media (max-width:800px) {
+    .sidebar-logo{
+        font-size: smaller;
+    }
+    
+}
+
 .fa-icon, .bi-box-arrow {
     color: black;
 }
@@ -28,11 +35,14 @@
 
 }
 
-.fa-pen-to-square{
+.fa-pen-to-square, .trash-icon{
     opacity: 0.30;
     font-size: smaller;
     justify-content: flex-end;
+    margin: 0.5em;
+    cursor: pointer;
 }
+
 
 .add-contact-btn{
     padding: 0px;
@@ -40,11 +50,11 @@
 
 }
 
-/* POPOVER */
 
 .add-contact{
     background-color: #F1EEEE;
     border-radius: 20px;
+    
 }
 
 .add-contact-header{
@@ -56,10 +66,42 @@
 
 }
 
-.add-btn{
+.add-btn, .save-edit-btn{
     background-color:#667DD2 ;
     color: white;
-    border-radius: 10px;
-    padding: 0.5em;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: 600;
+    border: none;
+}
+
+
+.add-btn:hover, .save-edit-btn:hover{
+    color:white;
+    background-color: #8494ca;
+}
+
+.close-btn{
+    cursor: pointer;
+}
+
+.close-btn:hover{
+    color: rgb(241, 230, 230);
+}
+
+.edit-contact{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-contact-info{
+    border-radius: 5px;
+    box-shadow: -7px 7px 11px 1px rgba(77, 77, 77, 0.25);
+    border-radius: 5px;
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: #8b9cda;
+    border-bottom-width: 3px;
+    margin-right: 0px;
 }
 
