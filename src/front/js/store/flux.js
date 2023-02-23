@@ -37,12 +37,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await resp.json();
-									
-					localStorage.setItem("token", data.access_token, );
+
+					localStorage.setItem("token", data.access_token,);
 					const userId = { id: data.id }
 					localStorage.setItem("userId", JSON.stringify(userId))
 
-					setStore({...getStore(), token: data.access_token })
+					setStore({ ...getStore(), token: data.access_token })
 					return true;
 				}
 				catch (error) {
@@ -94,9 +94,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					try {
 						const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
 						const data = await res.json();
-						console.log("this is data:",data)
+						console.log("this is data:", data)
 						return data;
-						
+
 					} catch (error) {
 						console.log(error);
 					}
@@ -111,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addNewContact: async (name, email, userId) => {
 				const requestOptions = {
-					method : "POST",
+					method: "POST",
 					headers: {
 						"Content-type": "application/json"
 					},
@@ -135,16 +135,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			getUserContacts : async () =>{
+			getUserContacts: async () => {
 				const requestOptions = {
-					method : "GET",
+					method: "GET",
 					headers: {
 						"Content-type": "application/json"
 					},
 				}
 				const userId = JSON.parse(localStorage.getItem("userId"))
-				try { 
-					const response = await fetch (`${BACKEND_URL}api/contacts/${userId.id}`, requestOptions)
+				try {
+					const response = await fetch(`${BACKEND_URL}api/contacts/${userId.id}`, requestOptions)
 					const contacts = await response.json();
 					console.log(contacts)
 					const userContacts = contacts.results.map(contact => ({
@@ -152,31 +152,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 						email: contact.email,
 						id: contact.id
 					}));
-					setStore({...getStore(), userContacts  })
+					setStore({ ...getStore(), userContacts })
 				} catch (error) {
 					console.log(error);
 				};
 			},
-			getUserInfo : async () => {
+			getUserInfo: async () => {
 				const requestOptions = {
-					method : "GET",
+					method: "GET",
 					headers: {
 						"Content-type": "application/json"
 					},
 				}
 				const userId = JSON.parse(localStorage.getItem("userId"))
-				try { 
-					const response = await fetch (`${BACKEND_URL}api/users/${userId.id}`, requestOptions)
+				try {
+					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, requestOptions)
 					const user = await response.json();
 					console.log(user)
-					setStore({...getStore(), user })
+					setStore({ ...getStore(), user })
 				} catch (error) {
 					console.log(error);
 				};
+			},
+			editContact: async (contactId, updatedName, updatedEmail) => {
+				const requestOptions = {
+					method: "PUT",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						name: updatedName,
+						email: updatedEmail
+					})
+				}
+
+				try {
+					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions)
+					const updatedContact = await response.json();
+					console.log(updatedContact)
+					// Obtener el estado anterior y actualizar solo el contacto modificado
+					const prevStore = getStore();
+					const updatedContacts = prevStore.userContacts.map((contact) => {
+						if (contact.id === contactId) {
+							return updatedContact;
+						} else {
+							return contact;
+						}
+					});
+
+					// Actualizar el estado global con los nuevos datos de contacto modificados
+					setStore({
+						...prevStore,
+						userContacts: updatedContacts
+					});
+				} catch (error) {
+					console.log(error);
+				}
 			}
-		}
+		},
 	}
-};
+}
+	
+
 
 
 export default getState;
