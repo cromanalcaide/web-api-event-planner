@@ -18,12 +18,25 @@ import "../../styles/nextdate.css"
 export const Nextdate = ()=>{
 
     const [eventDates, setEventDates] = useState([]);  
+    const [eventGuests, setEventGhests] = useState([]);  
 
-    let actualTime = new Date().getTime();
-    let user = 9; 
-    let futureDate = eventDates.filter(item => new Date (item.date).getTime() > actualTime && item.user_id === user );
-    futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
-    console.log(futureDate)
+    console.log(eventDates);
+    console.log(eventGuests);
+
+    let getGuestsEmail = eventGuests.filter(item => item.email === "juanmism@gmail.com");
+
+    let eventsByGuests = [];
+    for (let i = 0; i < eventDates.length; i++) {
+      for (let j = 0; j < getGuestsEmail.length; j++) {
+        if (eventDates[i].id === getGuestsEmail[j].event_id) {
+          eventsByGuests.push(eventDates[i]);
+        }
+      }
+    }
+
+    let actualTime = new Date().getTime(); 
+    let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
+    //futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
    
     let arrayData = [];
     for (let j = 0; j< futureDate.length; j++) {
@@ -31,10 +44,20 @@ export const Nextdate = ()=>{
     }
     let minDate = Math.min(...arrayData);
     let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
-    let restFin = [futureDate[0]];
-    console.log(resFin);
-    console.log(restFin);
-    
+    //let restFin = [futureDate[0]];
+ 
+    const getEventsGuests = () =>{
+      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setEventGhests(data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   
     const getAllEvents = () =>{
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
@@ -50,6 +73,7 @@ export const Nextdate = ()=>{
     }
     useEffect( () => {
       getAllEvents();
+      getEventsGuests();
     }, []);
 
     return (
