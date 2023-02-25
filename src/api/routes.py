@@ -136,7 +136,6 @@ def get_event_by_id(event_id):
     print(event)
     return jsonify(event.serialize()), 200
 
-
 @api.route('/event/register', methods=['POST'])
 def create_event():
     body = request.get_json()

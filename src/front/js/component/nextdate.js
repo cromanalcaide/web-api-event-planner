@@ -1,3 +1,4 @@
+import { array } from 'prop-types';
 import React, {useState, useEffect} from 'react'
 
 import Button from 'react-bootstrap/Button';
@@ -16,34 +17,40 @@ import "../../styles/nextdate.css"
 
 export const Nextdate = ()=>{
 
-    const [todoDates, setTodoDates] = useState([]);  
+    const [eventDates, setEventDates] = useState([]);  
 
     let actualTime = new Date().getTime();
     let user = 9; 
-    let futureDate = todoDates.filter(item => new Date (item.date).getTime() > actualTime && item.user_id === user );
-    
+    let futureDate = eventDates.filter(item => new Date (item.date).getTime() > actualTime && item.user_id === user );
+    futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
+    console.log(futureDate)
+   
     let arrayData = [];
     for (let j = 0; j< futureDate.length; j++) {
     arrayData.push(new Date (futureDate[j].date).getTime());
     }
-   
     let minDate = Math.min(...arrayData);
     let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
+    let restFin = [futureDate[0]];
+    console.log(resFin);
+    //console.log(restFin);
   
-    const getAlldates = () =>{
-      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu87.gitpod.io/api/events', {method:"GET"})
+  
+    const getAllEvents = () =>{
+
+      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        setTodoDates(data.results);
+        setEventDates(data.results);
       })
       .catch((err) => {
         console.log(err);
       })
     }
     useEffect( () => {
-      getAlldates();
+      getAllEvents();
     }, []);
 
     return (
@@ -53,21 +60,21 @@ export const Nextdate = ()=>{
 					return (
 				  <div key={index} >
             <div  className='row'>
-              <h1>Próximo Evento</h1>
+              <h1 id= "h1-nextdate">Próximo Evento</h1>
               <h1></h1>
               <div className="col-sm-2">
                 <img className="image-nexdate" src={el.image}/>
               </div>
               <div className="col-sm-3">
-                <p>{el.title}</p>
-                <p>{el.date}</p>
+                <p className="p-nextdate"><strong>{el.title}</strong></p>
+                <p className="p-nextdate"><strong>Horario: </strong>{el.date}</p>
               </div>
-              <div className="col-sm-6">
-                <p>{el.location}</p>
-                <p>{el.description}</p>
+              <div className="col-sm-5">
+                <p className="p-nextdate"><strong>Lugar: </strong>{el.location}</p>
+                <p className="p-nextdate" ><strong>Descripcion: </strong>{el.description}</p>
                 </div>
-              <div className="col-sm-1">
-              <Button variant="light">Ver Evento</Button>{' '}
+              <div className="col-sm-2">
+              <a className="p-nexdate" href="">Ir a Evento</a>
               </div>
             </div>
           </div>
