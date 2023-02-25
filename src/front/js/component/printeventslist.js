@@ -3,9 +3,9 @@ import React, {useState, useEffect} from 'react'
 
 import Button from 'react-bootstrap/Button';
 
-import "../../styles/nextdate.css"
+import "../../styles/printeventslists.css"
 
-export const Nextdate = ()=>{
+export const Printeventslist = ()=>{
 
     const [eventDates, setEventDates] = useState([]);  
     const [eventGuests, setEventGhests] = useState([]);  
@@ -23,16 +23,10 @@ export const Nextdate = ()=>{
 
     let actualTime = new Date().getTime(); 
     let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
-    //futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
-   
-    let arrayData = [];
-    for (let j = 0; j< futureDate.length; j++) {
-    arrayData.push(new Date (futureDate[j].date).getTime());
-    }
-    let minDate = Math.min(...arrayData);
-    let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
-    //let restFin = [futureDate[0]];
- 
+    futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
+    console.log(futureDate);
+    
+
     const getEventsGuests = () =>{
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
       .then((res) => {
@@ -64,31 +58,13 @@ export const Nextdate = ()=>{
     }, []);
 
     return (
-     
-        <div className='nexdate-main container text-center'>
-          {resFin.map((el, index) => {
-					return (
-				  <div key={index} >
-            <div  className='row'>
-              <h1 id= "h1-nextdate">Próximo Evento</h1>
-              <h1></h1>
-              <div className="col-sm-2">
-                <img className="image-nexdate" src={el.image}/>
-              </div>
-              <div className="col-sm-3">
-                <p className="p-nextdate"><strong>{el.title}</strong></p>
-                <p className="p-nextdate"><strong>Horario: </strong>{el.date}</p>
-              </div>
-              <div className="col-sm-5">
-                <p className="p-nextdate"><strong>Lugar: </strong>{el.location}</p>
-                <p className="p-nextdate" ><strong>Descripcion: </strong>{el.description}</p>
-                </div>
-              <div className="col-sm-2">
-              <a className="p-nexdate" href="">Ir a Evento</a>
-              </div>
-            </div>
-          </div>
-          )})}
+        <div className='next-events'  >
+            <h1>Lista Eventos</h1>
+          {futureDate.map((el, index) => {
+				return (
+                    <p className='p-event' key={index}> Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location}</p>
+                )})}
         </div>
+
           );
         };
