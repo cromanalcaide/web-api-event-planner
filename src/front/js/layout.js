@@ -10,9 +10,10 @@ import { About } from "./pages/about";
 import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
+import { Profile } from "./component/profile";
 
 
-//create your first component
+
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>
                         <Route element={<CookiePolicy />} path="/cookies-policy"/>
+                        <Route element={<Profile />} path="/profile"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

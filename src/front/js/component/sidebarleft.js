@@ -20,9 +20,7 @@ export const LeftSideBar = () => {
         actions.editContact(contactId, updatedName, updatedEmail)
         setEditingContactId(null);
     }
-
     
-
     const togglePopover = () => {
         setPopoverOpen(!popoverOpen);
     };
@@ -31,7 +29,6 @@ export const LeftSideBar = () => {
 
     const userContacts = store.userContacts
     const user = store.user.result
-    console.log("this is user", user)
 
     useEffect(() => {
         actions.getUserContacts();

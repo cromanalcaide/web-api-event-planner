@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu87.gitpod.io/"
+const BACKEND_URL = "https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu88.gitpod.io/"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -230,6 +230,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			editUserInfo: async (field, value) => {
+				const userId = JSON.parse(localStorage.getItem("userId"));
+			  
+				try {
+				  const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, {
+					method: "PUT",
+					headers: {
+					  "Content-type": "application/json"
+					},
+					body: JSON.stringify({ [field]: value })
+					
+				  },);
+				  
+				  const updatedUser = await response.json();
+				  console.log(updatedUser);
+			  
+				  const prevStore = getStore();
+				  setStore({
+					...prevStore,
+					user: updatedUser
+				  });
+				} catch (error) {
+				  console.log(error);
+				}
+			  },
 		}
 	}
 }
