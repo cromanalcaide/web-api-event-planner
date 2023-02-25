@@ -33,11 +33,10 @@ export const Nextdate = ()=>{
     let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
     let restFin = [futureDate[0]];
     console.log(resFin);
-    //console.log(restFin);
-  
+    console.log(restFin);
+    
   
     const getAllEvents = () =>{
-
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
       .then((res) => {
         return res.json();
