@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token : null,
-	
+			eventguests: [],
+			events: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -101,6 +102,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: ()=>{
 				const token = localStorage.removeItem("token");
 				setStore({token:null}); 
+			},
+
+			getEventsGuests: () =>{
+				fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
+				.then((res) => {
+				  return res.json();
+				})
+				.then((data) => {
+					setStore({ eventguests: data.results });
+				})
+				.catch((err) => {
+				  console.log(err);
+				})
+			},
+			  getAllEvents: () =>{
+				fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
+				.then((res) => {
+				  return res.json();
+				})
+				.then((data) => {
+					setStore({ events: data.results });
+					console.log(data)
+				})
+				.catch((err) => {
+				  console.log(err);
+				})
 			},
 		}
 	};

@@ -1,12 +1,15 @@
 import { array } from 'prop-types';
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import Button from 'react-bootstrap/Button';
 
 import "../../styles/nextevents.css"
 
 export const Nextevent = ()=>{
+
+    const { store, actions } = useContext(Context);
 
     const [eventDates, setEventDates] = useState([]);  
     const [eventGuests, setEventGhests] = useState([]);  

@@ -1,5 +1,6 @@
 import { array } from 'prop-types';
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { Context } from "../store/appContext";
 
 import Button from 'react-bootstrap/Button';
 
@@ -7,16 +8,21 @@ import "../../styles/printeventslists.css"
 
 export const Printeventslist = ()=>{
 
-    const [eventDates, setEventDates] = useState([]);  
-    const [eventGuests, setEventGhests] = useState([]);  
+    const { store, actions } = useContext(Context);
 
-    let getGuestsEmail = eventGuests.filter(item => item.email === "juanmism@gmail.com");
+    const eventos = store.events;
+    console.log(eventos);
+
+    const evguest = store.eventguests;
+    console.log(evguest);
+
+    let getGuestsEmail = evguest.filter(item => item.email === "juanmism@gmail.com");
 
     let eventsByGuests = [];
-    for (let i = 0; i < eventDates.length; i++) {
+    for (let i = 0; i < eventos.length; i++) {
       for (let j = 0; j < getGuestsEmail.length; j++) {
-        if (eventDates[i].id === getGuestsEmail[j].event_id) {
-          eventsByGuests.push(eventDates[i]);
+        if (eventos[i].id === getGuestsEmail[j].event_id) {
+          eventsByGuests.push(eventos[i]);
         }
       }
     }
@@ -24,37 +30,6 @@ export const Printeventslist = ()=>{
     let actualTime = new Date().getTime(); 
     let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
     futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
-
-    const getEventsGuests = () =>{
-      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setEventGhests(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-  
-    const getAllEvents = () =>{
-      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setEventDates(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      
-    }
-    useEffect( () => {
-      getAllEvents();
-      getEventsGuests();
-    }, []);
 
     return (
             <div className='next-events'  >
