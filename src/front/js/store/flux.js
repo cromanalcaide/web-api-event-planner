@@ -232,29 +232,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			editUserInfo: async (field, value) => {
 				const userId = JSON.parse(localStorage.getItem("userId"));
-			  
+				const user = getStore().user;
+			
+				const updatedUser = {
+					...user,
+					[field]: value
+				};
+			
 				try {
-				  const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, {
-					method: "PUT",
-					headers: {
-					  "Content-type": "application/json"
-					},
-					body: JSON.stringify({ [field]: value })
-					
-				  },);
-				  
-				  const updatedUser = await response.json();
-				  console.log(updatedUser);
-			  
-				  const prevStore = getStore();
-				  setStore({
-					...prevStore,
-					user: updatedUser
-				  });
+				
+					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, {
+						method: "PUT",
+						headers: {
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(updatedUser)
+					});
+			
+				
+					const updatedUserInfo = await fetch(`${BACKEND_URL}api/users/${userId.id}`);
+					const updatedUserObject = await updatedUserInfo.json();
+			
+					const prevStore = getStore();
+					setStore({
+						...prevStore,
+						user: updatedUserObject 
+					});
 				} catch (error) {
-				  console.log(error);
+					console.log(error);
 				}
-			  },
+			},
 		}
 	}
 }

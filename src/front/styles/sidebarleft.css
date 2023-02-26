@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
+.left-side-container{
+    background-color: white;
+}
+
 .sidebar-logo{
     font-family: 'Merienda One', cursive ;
     font-size: x-large;
     color: black;
     margin-bottom: 2em;
+   
 }
 
 @media (max-width:800px) {
@@ -27,6 +32,7 @@
 .user-img, .user-name{
     font-size: medium;
     margin-left: 0.5em;
+   
 }
 
 .contact-title{

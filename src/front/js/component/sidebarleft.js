@@ -45,9 +45,9 @@ export const LeftSideBar = () => {
     }
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid w-100 left-side-container">
             <div className="row ">
-                <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+                <div className="col-auto col-md-3 col-xl-10 px-sm-2 px-0 ">
                     <div className="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <h3 className="sidebar-logo">ComMeet</h3>
                         <div className="d-flex align-items-center text-decoration-none">

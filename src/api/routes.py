@@ -60,7 +60,7 @@ def user_login():
     email = request.json.get("email", None)
     # password = request.json.get("password", None)
     user = User.query.filter(User.email == body['email']).first()
-    
+    print(user)
     id = user.id
 
     if user is None:
