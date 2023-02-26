@@ -24,8 +24,7 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
 			state.actions.getEventsGuests();
 			state.actions.getAllEvents();
-			state.actions.eventsOrder();
-			//  state.actions.getMessage(); // <---- calling this function from the flux.js actions
+			state.actions.getContacts();
 			 state.actions.synctoken();// sincroniza el token con el local storage
 		}, []);
 

@@ -58,7 +58,7 @@ export const Nextevent = ()=>{
                 </div>
               <div className="col-sm-2">
               <Link to={"/singleevent/" + el.id}>
-              <p className="p-nexdate" >Ir a Evento</p>
+              <h6 className="p-nexdate" >IR AL EVENTO</h6>
               </Link>
               </div>
             </div>

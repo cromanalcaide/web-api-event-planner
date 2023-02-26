@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token : null,
 			eventguests: [],
 			events: [],
-			eventsOrder: [],
+			contacts: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -129,29 +129,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 		
 				setStore({ events: data.results });
-
 			  },  
-			eventsOrder: () => {
-				const eventos = [...getStore().events];
-    			const evguest = [...getStore().eventguests];
-				console.log(eventos);
 
-    			let getGuestsEmail = evguest.filter(item => item.email === "juanmism@gmail.com");
-
-				let eventsByGuests = [];
-				for (let i = 0; i < eventos.length; i++) {
-				for (let j = 0; j < getGuestsEmail.length; j++) {
-					if (eventos[i].id === getGuestsEmail[j].event_id) {
-					eventsByGuests.push(eventos[i]);
-					}
-				}
-				}
-
-				let actualTime = new Date().getTime(); 
-				let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
-				futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
-				setStore({eventsOrder: futureDate})
-				console.log(futureDate);
+			  getContacts: async () => {
+				const response = await fetch(
+				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/contacts`,
+				  {
+					method: "GET",
+				  }
+				);
+			   
+				const data = await response.json();
+		
+				setStore({ contacts: data.results });
+	
 			},
 		}
 	};

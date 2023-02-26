@@ -12,30 +12,70 @@ export const Singleevent = props => {
 	const { store, actions } = useContext(Context);
 
 	const params = useParams();
-  console.log(params);
-  console.log(params.theid)
-  console.log(store.events);
-  let eveResult = store.events;
-  let xx = eveResult.filter(el => el.id == params.theid);
-  console.log(xx);
+
+  let eveResult = store.events.filter(el => el.id == params.theid);
+
+  let eventGuestByEvent =store.eventguests.filter(el => el.event_id == params.theid);
+  console.log(eventGuestByEvent)
+
+  let allContacts = store.contacts;
+  console.log(allContacts)
+
+  let namesByEvent = [];
+    for (let i = 0; i < eventGuestByEvent.length; i++) {
+      for (let j = 0; j < allContacts.length; j++) {
+        if (eventGuestByEvent[i].contact_id === allContacts[j].id) {
+          namesByEvent.push(allContacts[i]);
+        }
+      }
+    }
+    console.log(namesByEvent);
 
     return (
-        <div className = "row single-div">
-            <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title></Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+      <div className='event-detail container text-center'>
+      {eveResult.map((el, index) => {
+      return (
+      <div key={index} >
+        <div  className='row'>
+          <h1 id= "h1-singlee">Detalles del Evento</h1>
+          <h1></h1>
+          <h1></h1>
+          <div className="col-sm-4">
+            <img className="image-singlee" src={el.image}/>
+          </div>
+          <div className="col-sm-4">
+          <h6 className="p-contacts">Evento</h6>
+            <p className="p-singlee"><strong>{el.title}</strong></p>
+            <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
+            <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
+            <div className="p-singlee">
+             <br></br>
+             <br></br>
+              <h6>Asistentes</h6>
+              {namesByEvent.map((el, index) => {
+                return (
+                  <div key={index}>
+                <p key={index}>{el.name}</p>
+                </div>)})}
+            </div>
+          </div>
+          <div className="col-sm-4">
+            <h6 className="p-singlee">Descripción</h6>
+            <p className="p-contacts" >{el.description}</p>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Link to={"/events/"}> 
+            <h6 className="p-contacts" >VOLVER AL LISTADO</h6>
+            </Link>
+            </div>
         </div>
-    )
-};
-
+      </div>
+      )})}
+    </div>)
+  };
+      
+    
 Singleevent.propTypes = {
 	match: PropTypes.object
 };

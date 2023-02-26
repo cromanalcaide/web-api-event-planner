@@ -1,6 +1,7 @@
 import { array } from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react'
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
 
@@ -33,7 +34,11 @@ export const Printeventslist = ()=>{
                   <h1>Lista Eventos</h1>
                   {futureDate.map((el, index) => {
                   return (
-                  <p className='p-event' key={index}> Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location}</p>
+                    <div key={index}>
+                    <Link to={"/singleevent/" + el.id}>
+                  <p className='p-event' > Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location} &nbsp;&nbsp;&nbsp; Ver detalles</p>
+                  </Link>
+                  </div>
                   )})}
             </div>
             );
