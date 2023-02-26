@@ -2,6 +2,16 @@
 
 .left-side-container{
     background-color: white;
+    width: 20%;
+}
+
+.sidebar-column{
+    width: 20% !important
+    ; 
+}
+
+.sidebar-column-2{
+    width: 100%;
 }
 
 .sidebar-logo{

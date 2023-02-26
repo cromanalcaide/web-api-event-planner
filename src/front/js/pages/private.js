@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import {LeftSideBar} from "../component/sidebarleft"
+import { ViewTitle } from "../component/viewTitle";
 
 export const Private = () => {
     const { store, actions } = useContext(Context);
@@ -18,10 +19,16 @@ export const Private = () => {
 
     
     return (
+      
         <div> {store.token && store.token != "" && store.token != undefined ? (
-            <div>
-                <LeftSideBar/>
+          <div className="dash-container">
+            <div className="col-3">
+                <LeftSideBar className="side-bar"/>
             </div>
+            <div className="col">
+              <ViewTitle title="Dashboard"/>
+            </div>
+          </div> 
         ) : (
         <div> You need to login to enter this page </div> 
         )}

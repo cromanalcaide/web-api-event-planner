@@ -46,9 +46,9 @@ export const LeftSideBar = () => {
 
     return (
         <div className="container-fluid w-100 left-side-container">
-            <div className="row ">
-                <div className="col-auto col-md-3 col-xl-10 px-sm-2 px-0 ">
-                    <div className="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <div className="row">
+                <div className="col sidebar-column">
+                    <div className="sidebar-column-2 d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <h3 className="sidebar-logo">ComMeet</h3>
                         <div className="d-flex align-items-center text-decoration-none">
                             <img src={user?.avatar_url} alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
@@ -63,8 +63,8 @@ export const LeftSideBar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard" className="nav-link align-middle">
-                                        <i className="fa-icon fa-solid fa-calendar-week"></i><span className="ms-1 d-none d-sm-inline">Dashboard</span>
+                                    <Link to="/private" className="nav-link align-middle">
+                                        <i className="fa-icon fa-solid fa-calendar-week me-1"></i><span className="ms-1 d-none d-sm-inline">Dashboard</span>
                                     </Link>
                                 </li>
                                 <li>
