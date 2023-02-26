@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://3001-cromanalcai-webapievent-3y1qfjenjxn.ws-eu88.gitpod.io/"
+const BACKEND_URL = "https://3001-cromanalcai-webapievent-8evfm2s59z0.ws-eu88.gitpod.io/"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -105,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout: () => {
 				const token = localStorage.removeItem("token");
-				const userInfo = localStorage.removeItem("userInfo")
+				const userId = localStorage.removeItem("userId")
 
 				setStore({ token: null });
 			},
@@ -262,6 +262,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			deleteUser : async () => {
+				const userId = JSON.parse(localStorage.getItem("userId"));
+				const requestOptions = {
+					method: "DELETE",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+				try {
+					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, requestOptions);
+					const data = await response.json();
+					console.log(data);
+					const token = localStorage.removeItem("token");
+					const userId = localStorage.removeItem("userId")
+
+				setStore({ token: null });
+
+					
+				} catch (error) {
+					console.log(error);
+				}
+			}
 		}
 	}
 }

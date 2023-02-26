@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { LeftSideBar } from "./sidebarleft";
+import { useNavigate } from "react-router-dom";
 import "../../styles/profile.css"
 
 export const Profile = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
     const [fieldStatus, setFieldStatus] = useState({
         name: false,
         email: false,
@@ -24,10 +27,13 @@ export const Profile = () => {
     const [newValue, setNewValue] = useState("");
     const [password, setNewPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [showModal, setShowModal] = useState(false)
 
-    const handleTogglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const handleDeleteAccount = () => {
+        actions.deleteUser()
+        navigate("/");
+
+    }
 
     const user = store.user.result
 
@@ -49,11 +55,11 @@ export const Profile = () => {
     return (
         <div className="view">
             <div className="col-3">
-                    <LeftSideBar/>
+                <LeftSideBar />
             </div>
             <div className="col-6">
                 <div className="profile-container">
-                    <div className="row line-data align-items-center mx-3 mb-5">
+                    <div className="row line-data align-items-center mx-3 my-3 ">
                         <div className="col-1">
                             <img src={user?.avatar_url} alt="hugenerd" width="80" height="80" className="user-avatar rounded-circle" />
                         </div>
@@ -172,7 +178,26 @@ export const Profile = () => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-end">
-                        <button className="del-account btn mt-5 justify-content-end px-3">Eliminar Cuenta</button>
+                        <button className="del-account btn mt-5 justify-content-end px-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar Cuenta</button>
+                        {showModal == true ? (
+                            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h1 className="modal-title fs-5" id="exampleModalLabel">¿Estás seguro?</h1>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            Si eliminas tu cuenta los eventos que creaste y los invitados a los mismos seguirán siendo visibles para los otros participantes. 
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" className="btn btn-primary" onClick={handleDeleteAccount}>Eliminar Cuenta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>)
+                            : null}
                     </div>
                 </div>
             </div>
