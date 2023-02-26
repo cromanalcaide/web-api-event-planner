@@ -11,16 +11,19 @@ export const Nextevent = ()=>{
 
     const { store, actions } = useContext(Context);
 
-    const [eventDates, setEventDates] = useState([]);  
-    const [eventGuests, setEventGhests] = useState([]);  
+    const eventos = store.events;
+    console.log(eventos);
 
-    let getGuestsEmail = eventGuests.filter(item => item.email === "juanmism@gmail.com");
+    const evguest = store.eventguests;
+    console.log(evguest);
+
+    let getGuestsEmail = evguest.filter(item => item.email === "juanmism@gmail.com");
 
     let eventsByGuests = [];
-    for (let i = 0; i < eventDates.length; i++) {
+    for (let i = 0; i < eventos.length; i++) {
       for (let j = 0; j < getGuestsEmail.length; j++) {
-        if (eventDates[i].id === getGuestsEmail[j].event_id) {
-          eventsByGuests.push(eventDates[i]);
+        if (eventos[i].id === getGuestsEmail[j].event_id) {
+          eventsByGuests.push(eventos[i]);
         }
       }
     }
@@ -35,36 +38,6 @@ export const Nextevent = ()=>{
     
     let minDate = Math.min(...arrayData);
     let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
- 
-    const getEventsGuests = () =>{
-      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setEventGhests(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-  
-    const getAllEvents = () =>{
-      fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events', {method:"GET"})
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setEventDates(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-    useEffect( () => {
-      getAllEvents();
-      getEventsGuests();
-    }, []);
 
     return (
      
