@@ -12,10 +12,7 @@ export const Nextevent = ()=>{
     const { store, actions } = useContext(Context);
 
     const eventos = store.events;
-    console.log(eventos);
-
     const evguest = store.eventguests;
-    console.log(evguest);
 
     let getGuestsEmail = evguest.filter(item => item.email === "juanmism@gmail.com");
 
@@ -60,7 +57,7 @@ export const Nextevent = ()=>{
                 <p className="p-nextdate" ><strong>Descripcion: </strong>{el.description}</p>
                 </div>
               <div className="col-sm-2">
-              <Link to={"/singleevent/" + index}>
+              <Link to={"/singleevent/" + el.id}>
               <p className="p-nexdate" >Ir a Evento</p>
               </Link>
               </div>

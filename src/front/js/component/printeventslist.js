@@ -11,10 +11,7 @@ export const Printeventslist = ()=>{
     const { store, actions } = useContext(Context);
 
     const eventos = store.events;
-    console.log(eventos);
-
     const evguest = store.eventguests;
-    console.log(evguest);
 
     let getGuestsEmail = evguest.filter(item => item.email === "juanmism@gmail.com");
 
