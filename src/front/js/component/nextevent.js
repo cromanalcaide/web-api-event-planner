@@ -1,11 +1,12 @@
 import { array } from 'prop-types';
 import React, {useState, useEffect} from 'react'
+import { Link } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
 
-import "../../styles/nextdate.css"
+import "../../styles/nextevents.css"
 
-export const Nextdate = ()=>{
+export const Nextevent = ()=>{
 
     const [eventDates, setEventDates] = useState([]);  
     const [eventGuests, setEventGhests] = useState([]);  
@@ -23,15 +24,14 @@ export const Nextdate = ()=>{
 
     let actualTime = new Date().getTime(); 
     let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
-    //futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
    
     let arrayData = [];
     for (let j = 0; j< futureDate.length; j++) {
     arrayData.push(new Date (futureDate[j].date).getTime());
     }
+    
     let minDate = Math.min(...arrayData);
     let resFin = futureDate.filter(item => new Date (item.date).getTime()  === minDate);
-    //let restFin = [futureDate[0]];
  
     const getEventsGuests = () =>{
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
@@ -84,7 +84,9 @@ export const Nextdate = ()=>{
                 <p className="p-nextdate" ><strong>Descripcion: </strong>{el.description}</p>
                 </div>
               <div className="col-sm-2">
-              <a className="p-nexdate" href="">Ir a Evento</a>
+              <Link to={"/singleevent/" + index}>
+              <p className="p-nexdate" >Ir a Evento</p>
+              </Link>
               </div>
             </div>
           </div>

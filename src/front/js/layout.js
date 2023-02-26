@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Home } from "./pages/home";
 import injectContext from "./store/appContext";
+import { Home } from "./pages/home";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Login } from "./pages/login";
@@ -14,7 +14,8 @@ import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
 import { LeftSideBar } from "./component/sidebarleft";
-import { Dashboard } from "./pages/dashboard";
+import { Events } from "./pages/events";
+import { Singleevent } from "./pages/singleevent";
 
 
 //create your first component
@@ -32,7 +33,8 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
-                        <Route element={<Dashboard />} path="/dashboard" />
+                        <Route element={<Events />} path="/events" />
+                        <Route element={<Singleevent />} path="/singleevent/:theid" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>

@@ -24,8 +24,6 @@ export const Printeventslist = ()=>{
     let actualTime = new Date().getTime(); 
     let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
     futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
-    console.log(futureDate);
-    
 
     const getEventsGuests = () =>{
       fetch('https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests', {method:"GET"})
@@ -51,6 +49,7 @@ export const Printeventslist = ()=>{
       .catch((err) => {
         console.log(err);
       })
+      
     }
     useEffect( () => {
       getAllEvents();
@@ -58,13 +57,12 @@ export const Printeventslist = ()=>{
     }, []);
 
     return (
-        <div className='next-events'  >
-            <h1>Lista Eventos</h1>
-          {futureDate.map((el, index) => {
-				return (
-                    <p className='p-event' key={index}> Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location}</p>
-                )})}
-        </div>
-
-          );
-        };
+            <div className='next-events'  >
+                  <h1>Lista Eventos</h1>
+                  {futureDate.map((el, index) => {
+                  return (
+                  <p className='p-event' key={index}> Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location}</p>
+                  )})}
+            </div>
+            );
+      };

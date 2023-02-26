@@ -1,13 +1,13 @@
 import React from "react";
-import { Nextdate } from "../component/nextdate";
+import { Nextevent } from "../component/nextevent";
 import { Printeventslist } from "../component/printeventslist"
-import "../../styles/dashboard.css"
+import "../../styles/events.css"
 
 
-export const Dashboard = () => {
+export const Events = () => {
     return(
             <div className = "row dash-div">
-                <Nextdate/> 
+                <Nextevent/> 
                 <Printeventslist/>
             </div>)
 };
