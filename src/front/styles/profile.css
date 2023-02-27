@@ -1,0 +1,49 @@
+.view{
+    display: flex; 
+    flex-direction: row;
+    background-color: #F1EEEE;
+}
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 16px;
+    width: 50em;
+    height: 30em;
+    margin: 0 3em 0 3em;
+     
+}
+
+.del-account{
+    background-color: #667DD2;
+    border-color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-size: small;
+    padding: 4px ;
+    color: white;
+    margin: 5em 2em 0 0 ;
+}
+
+.del-account:hover{
+    font-weight: 700;
+    color: white;
+}
+
+.user-avatar{
+    margin-right: 3em;
+}
+
+.user-edit-form{
+    width: 16em;
+    border-radius: 5px;
+}
+
+.fa-check, .fa-eye, .fa-eye-slash{
+    opacity: 0.30;
+    margin: 0.2em;
+}
+
+.name-form{
+    border-radius: 10px;
+}

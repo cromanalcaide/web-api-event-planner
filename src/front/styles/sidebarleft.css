@@ -1,10 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
+.left-side-container{
+    background-color: white;
+    width: 20%;
+}
+
+.sidebar-column{
+    width: 19.8% !important; 
+}
+
+.sidebar-column-2{
+    width: 100%;
+} */
+
 .sidebar-logo{
     font-family: 'Merienda One', cursive ;
     font-size: x-large;
     color: black;
     margin-bottom: 2em;
+   
+}
+
+@media (max-width:800px) {
+    .sidebar-logo{
+        font-size: smaller;
+    }
+    
 }
 
 .fa-icon, .bi-box-arrow {
@@ -20,6 +41,7 @@
 .user-img, .user-name{
     font-size: medium;
     margin-left: 0.5em;
+   
 }
 
 .contact-title{
@@ -28,8 +50,73 @@
 
 }
 
-.fa-pen-to-square{
+.fa-pen-to-square, .trash-icon{
     opacity: 0.30;
     font-size: smaller;
     justify-content: flex-end;
+    margin: 0.5em;
+    cursor: pointer;
 }
+
+
+.add-contact-btn{
+    padding: 0px;
+    font-size: smaller;
+
+}
+
+
+.add-contact{
+    background-color: #F1EEEE;
+    border-radius: 20px;
+    
+}
+
+.add-contact-header{
+    font-size: medium;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    background-color: #667DD2;
+
+}
+
+.add-btn, .save-edit-btn{
+    background-color:#667DD2 ;
+    color: white;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: 600;
+    border: none;
+}
+
+
+.add-btn:hover, .save-edit-btn:hover{
+    color:white;
+    background-color: #8494ca;
+}
+
+.close-btn{
+    cursor: pointer;
+}
+
+.close-btn:hover{
+    color: rgb(241, 230, 230);
+}
+
+.edit-contact{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-contact-info{
+    border-radius: 5px;
+    box-shadow: -7px 7px 11px 1px rgba(77, 77, 77, 0.25);
+    border-radius: 5px;
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: #8b9cda;
+    border-bottom-width: 3px;
+    margin-right: 0px;
+}
+

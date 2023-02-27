@@ -62,17 +62,19 @@ def user_login():
     email = request.json.get("email", None)
     # password = request.json.get("password", None)
     user = User.query.filter(User.email == body['email']).first()
-    
+    print(user)
+    id = user.id
+
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 404
-    
+
     compare = compare_pass(body['password'], user.password )
     if compare == False :
         return jsonify({"msg": "Nombre de usuario o contraseña incorrectos"}), 401
 
     else:    
         access_token = create_access_token(identity=email)
-        response_body = {"email": email,
+        response_body = { "id": id, 
                      "access_token": access_token}    
     return jsonify(response_body), 200
 
@@ -197,6 +199,17 @@ def get_all_contacts():
     return jsonify(response_body), 200
 
 
+@api.route('/contacts/<user_id>', methods=['GET'])
+def get_contacts_by_user_id(user_id):
+    print(int(user_id))
+    contacts = Contacts.query.filter(Contacts.user_id == int(user_id))
+    results = [contact.serialize() for contact in contacts]
+    response_body = {'message': 'OK',
+                     'total_records': len(results),
+                     'results': results}
+    return jsonify(response_body), 200
+
+
 @api.route('/contact/<contact_id>', methods=['GET'])
 def get_contacts_by_id(contact_id):
     print(contact_id)
@@ -208,8 +221,9 @@ def get_contacts_by_id(contact_id):
 @api.route('/contact/register', methods=['POST'])
 def create_contact():
     body = request.get_json()
-    new_contact = Contacts(email=body["email"], name=body["name"], user_id=body["user_id"])
     print(body)
+    new_contact = Contacts(email=body["email"], name=body["name"], user_id=body["user_id"])
+   
     print(new_contact)
     db.session.add(new_contact)
     db.session.commit()
@@ -253,10 +267,11 @@ def delete_contact(contact_id):
 def get_all_events_guests():
     events_guests = Event_Guests.query.all()
     results = [events_guest.serialize() for events_guest in events_guests]
+
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return jsonify(response_body), 200
+    return response_body, 200
 
 
 @api.route('/events_guest/<events_guest_id>', methods=['GET'])
@@ -279,7 +294,7 @@ def modify_events_guests(events_guest_id):
     events_guests = Event_Guests.query.get(events_guest_id)
     if events_guests is None:
         raise APIException('Event_Guest not found', status_code=404)
-
+    print(events_guests)
     events_guests.contact_id = request.json.get('contact_id', events_guests.contact_id)
     events_guests.event_id = request.json.get('event_id', events_guests.event_id)
     events_guests.user_id = request.json.get('user_id', events_guests.user_id)

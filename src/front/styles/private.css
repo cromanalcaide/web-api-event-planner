@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.view-title-container{
+    width: 50em;
+    height: 4em;
+    background-color: white;
+    border-radius: 0 0 16px 16px;
+    margin-left: 3.6em;
+    display: flex;
+}
+
+.view-title {
+    color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-weight: 700;
+    font-size: large;
+    text-align: center;
+    padding: 1em 1em 1em 1em;
+}
+
+.dash-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #F1EEEE;
+}
+
+.column{
+    width: 19.5%;
+}
+
+.add-event{
+    background-color: #667DD2;
+    border-color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-size: large;
+    padding: 3px 10px 3px 10px ;
+    color: white;
+    margin: 2em 0 0 60%;
+}
+
+.plus-btn{
+    font-size: small;
+    padding-right: 0.5em;
+}

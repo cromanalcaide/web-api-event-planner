@@ -19,19 +19,19 @@
     text-decoration: none;
 }
 
-ul {
+.nav-ul {
     list-style-type: none;
     display: flex;
     justify-content: end;
     border-radius: 10px;
   
   }
-  ul li {
+  #nav-li-1, #nav-li-2, #nav-li-3, #nav-li-4 {
     cursor: pointer;
     position: relative;
     text-align: center;
   }
-  li.active::after {
+  li.active:hover::before, li.active:hover::after  {
     position: absolute;
     content: "";
     height: 2px;

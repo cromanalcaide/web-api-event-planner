@@ -13,7 +13,7 @@ class User(db.Model):
     phone = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
-    avatar_url = db.Column(db.String(300), nullable=True)
+    avatar_url = db.Column(db.String(300), nullable=True, default="https://res.cloudinary.com/dkcoownwg/image/upload/v1677503257/avatar_knpmj6.png" ) 
     accept_news = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
@@ -27,9 +27,9 @@ class User(db.Model):
             'phone': self.phone,
             'city': self.city,
             'country': self.country,
-            'avatar_url' : self.avatar_url,
-            'accept_news' : self.accept_news
-    }
+            'avatar_url': self.avatar_url,
+            'accept_news': self.accept_news
+       }
 
 
 class Events(db.Model):
@@ -98,27 +98,8 @@ class Event_Guests(db.Model):
         "contact_id": self.contact_id,
         "email" : self.email,
         "event_id": self.event_id,
-        "user_id": self.user_id,
-
-    }
+        "user_id": self.user_id,}
 
 
-class Contact_Forms(db.Model):
-    __tablename__='contact_forms'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    
 
-    def __repr__(self):
-        return f'<Contact_Forms {self.id}>'  
-
-    def serialize(self):
-        return {
-        "id": self.id,
-        "name": self.name,
-        "email": self.email,
-        "message": self.message,
-    }
 
