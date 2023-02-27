@@ -77,16 +77,16 @@ export const Profile = () => {
                 <LeftSideBar />
             </div>
             <div className="row">
-                <ViewTitle title="Mi perfil" />
+                <ViewTitle title="Mi perfil"/>
 
                 <div className="col-6">
                     <div className="profile-container">
-                        <div className="row line-data align-items-center mx-3 my-3 ">
+                        <div className="row line-data align-items-center mx-3 my-4 ">
                             <div className="col-1">
-                                <img src={user?.avatar_url} alt="hugenerd" width="80" height="80" className="user-avatar rounded-circle" />
+                                <img src={user?.avatar_url} alt="hugenerd" width="70" height="70" className="user-avatar rounded-circle" />
                             </div>
                             <div className="col-7">
-                                <input className="form-control-sm fs-5 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
+                                <input className="form-control-sm fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
                                     onChange={(e) => setNewValue(e.target.value)} ></input>
                                 <i className={`fa-icon fa-solid ${fieldStatus["name"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["name"] ? "" : "disabled"}`}
                                     onClick={() => {

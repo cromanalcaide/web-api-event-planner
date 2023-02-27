@@ -13,7 +13,7 @@ class User(db.Model):
     phone = db.Column(db.Integer, unique=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
-    avatar_url = db.Column(db.String(300), nullable=True, default="https://res.cloudinary.com/dkcoownwg/image/upload/v1676742580/avatar_sxohxx.png" ) 
+    avatar_url = db.Column(db.String(300), nullable=True, default="https://res.cloudinary.com/dkcoownwg/image/upload/v1677503257/avatar_knpmj6.png" ) 
     accept_news = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):

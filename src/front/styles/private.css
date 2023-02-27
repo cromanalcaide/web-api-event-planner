@@ -16,7 +16,6 @@
     font-size: large;
     text-align: center;
     padding: 1em 1em 1em 1em;
-
 }
 
 .dash-container{
@@ -25,6 +24,21 @@
     background-color: #F1EEEE;
 }
 
-.side-bar{
-    width: 20% !important;
+.column{
+    width: 19.5%;
+}
+
+.add-event{
+    background-color: #667DD2;
+    border-color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-size: large;
+    padding: 3px 10px 3px 10px ;
+    color: white;
+    margin: 2em 0 0 60%;
+}
+
+.plus-btn{
+    font-size: small;
+    padding-right: 0.5em;
 }

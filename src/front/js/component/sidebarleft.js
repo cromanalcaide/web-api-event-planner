@@ -91,8 +91,8 @@ export const LeftSideBar = () => {
                                                 );
                                             } else {
                                                 return (
-                                                    <li key={contact.id}>
-                                                        <img src="https://res.cloudinary.com/dkcoownwg/image/upload/v1676742580/avatar_sxohxx.png" alt="hugenerd" width="25" height="25" className="rounded-circle" />
+                                                    <li key={contact.id} className="py-1">
+                                                        <img src="https://res.cloudinary.com/dkcoownwg/image/upload/v1677503257/avatar_knpmj6.png" alt="hugenerd" width="25" height="25" className="rounded-circle" />
                                                         <span className="contact-name d-none d-sm-inline px-2 ">{contact.name} </span>
                                                         <i className="fa-icon fa-solid fa-pen-to-square" onClick={() => handleEditContact(contact.id)}></i>
                                                         <i className="trash-icon fa-regular fa-trash-can" onClick={() => handleDelete(contact.id)}></i>

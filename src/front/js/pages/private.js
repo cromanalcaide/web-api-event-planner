@@ -4,6 +4,7 @@ import {LeftSideBar} from "../component/sidebarleft"
 import { ViewTitle } from "../component/viewTitle";
 import { useNavigate } from "react-router-dom";
 
+
 export const Private = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState("")
@@ -14,25 +15,30 @@ export const Private = () => {
       setUserData(user);
     };
       
+    const token = localStorage.getItem("token")
     useEffect(() => {
-      if (!store.token) { 
+      if (!token) { 
         navigate("/login");
       } else {
         getUser();
       }
-    }, [store.token, navigate]);
+    }, [token, navigate]);
 
     
     return (
       
-        <div> {store.token && store.token != "" && store.token != undefined ? (
+        <div> {token && token != "" && token != undefined ? (
           <div className="dash-container">
-            <div className="col-3">
-                <LeftSideBar className="side-bar"/>
+            <div className="column">
+                <LeftSideBar />
             </div>
             <div className="col">
-              <ViewTitle title="Dashboard"/>
+              <ViewTitle title="Dashboard" className="dash-title"/>
+              <button className="btn add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
             </div>
+            {/* <div className="col">
+              sidebar de la derecha
+            </div> */}
           </div> 
         ) : (
         <div> You need to login to enter this page </div> 
