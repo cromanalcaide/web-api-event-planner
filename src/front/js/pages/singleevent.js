@@ -29,7 +29,6 @@ export const Singleevent = props => {
         }
       }
     }
-    console.log(namesByEvent);
 
     return (
       <div className='event-detail container text-center'>
@@ -40,23 +39,23 @@ export const Singleevent = props => {
           <h1 id= "h1-singlee">Detalles del Evento</h1>
           <h1></h1>
           <h1></h1>
+            <div className="col-sm-4">
+              <img className="image-singlee" src={el.image}/>
+            </div>
           <div className="col-sm-4">
-            <img className="image-singlee" src={el.image}/>
-          </div>
-          <div className="col-sm-4">
-          <h6 className="p-contacts">Evento</h6>
-            <p className="p-singlee"><strong>{el.title}</strong></p>
-            <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
-            <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
+            <h6 className="p-contacts">Evento</h6>
+              <p className="p-singlee"><strong>{el.title}</strong></p>
+              <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
+              <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
             <div className="p-singlee">
-             <br></br>
-             <br></br>
-              <h6>Asistentes</h6>
-              {namesByEvent.map((el, index) => {
-                return (
-                  <div key={index}>
-                <p key={index}>{el.name}</p>
-                </div>)})}
+                <br></br>
+                <br></br>
+                  <h6>Asistentes</h6>
+                  {namesByEvent.map((el, index) => {
+                    return (
+                      <div key={index}>     
+                        <p key={index}>{el.name}</p>
+                      </div>)})}
             </div>
           </div>
           <div className="col-sm-4">

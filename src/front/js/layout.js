@@ -16,6 +16,7 @@ import { CookiePolicy } from "./pages/cookiepolicy";
 import { LeftSideBar } from "./component/sidebarleft";
 import { Events } from "./pages/events";
 import { Singleevent } from "./pages/singleevent";
+import { Eventsform } from "./pages/eventsform"
 
 
 //create your first component
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<Events />} path="/events" />
                         <Route element={<Singleevent />} path="/singleevent/:theid" />
                         <Route element={<ContactForm />} path="/contact" />
+                        <Route element={<Eventsform />} path="/eventsform" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>
