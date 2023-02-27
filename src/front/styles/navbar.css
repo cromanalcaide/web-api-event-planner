@@ -31,7 +31,7 @@
     position: relative;
     text-align: center;
   }
-  li.active::after {
+  li.active:hover::before, li.active:hover::after  {
     position: absolute;
     content: "";
     height: 2px;

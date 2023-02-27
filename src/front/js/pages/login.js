@@ -15,15 +15,19 @@ export const Login = () => {
   const navigate = useNavigate();
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
    
-    const loginSuccesful = actions.login(email, password); 
-    if (loginSuccesful) {
-      navigate("/private");
-     
-    } else {
-      setError("Correo electrónico o contraseña incorrectos");
+    try {
+      const loginSuccesful = await actions.login(email, password);
+      if (loginSuccesful) {
+        navigate("/private");
+      } else {
+        setError("Correo electrónico o contraseña incorrectos");
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.");
     }
   };
 

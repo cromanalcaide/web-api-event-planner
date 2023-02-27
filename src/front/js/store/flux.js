@@ -233,14 +233,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			editUserInfo: async (field, value) => {
 				const userId = JSON.parse(localStorage.getItem("userId"));
 				const user = getStore().user;
-			
+
+				let updatedValue = value;
+
+				if (field === "password") {
+					
+				}
+
 				const updatedUser = {
 					...user,
-					[field]: value
+					[field]: updatedValue
 				};
-			
+
 				try {
-				
+
 					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, {
 						method: "PUT",
 						headers: {
@@ -248,21 +254,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(updatedUser)
 					});
-			
-				
+
 					const updatedUserInfo = await fetch(`${BACKEND_URL}api/users/${userId.id}`);
 					const updatedUserObject = await updatedUserInfo.json();
-			
+
 					const prevStore = getStore();
 					setStore({
 						...prevStore,
-						user: updatedUserObject 
+						user: updatedUserObject
 					});
 				} catch (error) {
 					console.log(error);
 				}
 			},
-			deleteUser : async () => {
+			deleteUser: async () => {
 				const userId = JSON.parse(localStorage.getItem("userId"));
 				const requestOptions = {
 					method: "DELETE",
@@ -277,9 +282,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const token = localStorage.removeItem("token");
 					const userId = localStorage.removeItem("userId")
 
-				setStore({ token: null });
+					setStore({ token: null });
 
-					
+
 				} catch (error) {
 					console.log(error);
 				}

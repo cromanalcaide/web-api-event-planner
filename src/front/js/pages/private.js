@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import {LeftSideBar} from "../component/sidebarleft"
 import { ViewTitle } from "../component/viewTitle";
+import { useNavigate } from "react-router-dom";
 
 export const Private = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState("")
-    // const token = localStorage.getItem("token");
+    const navigate = useNavigate();
 
     const getUser = async () => {
       const user = await actions.getUserData();
@@ -14,8 +15,12 @@ export const Private = () => {
     };
       
     useEffect(() => {
-      store.token && store.token != "" && store.token != undefined && getUser();
-    }, [store.token]);
+      if (!store.token) { 
+        navigate("/login");
+      } else {
+        getUser();
+      }
+    }, [store.token, navigate]);
 
     
     return (

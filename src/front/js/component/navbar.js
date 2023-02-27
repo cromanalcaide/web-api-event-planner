@@ -5,7 +5,7 @@ import "../../styles/navbar.css"
 
 export const Navbar = () => {
 
-	const [activeButton, setActiveButton] = useState(1)
+	const [activeButton, setActiveButton] = useState("")
 
 	const handleClick = (id) => {
 		setActiveButton(id)
@@ -23,22 +23,22 @@ export const Navbar = () => {
 			<div className="collapse navbar-collapse justify-content-end" id="navbarNav">
 				<div className="navbar-nav">
 					<ul className="nav-ul navbar-nav ">
-						<li id="nav-li-1" className={activeButton === 1 ? 'active' : ''} onClick={() => handleClick(1)}>
+						<li id="nav-li-1" className="active">
 							<Link to="/" className="nav-link">
 								<span className="nav-item">INICIO</span>
 							</Link>
 						</li>
-						<li id="nav-li-2" className={activeButton === 2 ? 'active' : ''} onClick={() => handleClick(2)}>
+						<li id="nav-li-2" className='active'>
 							<Link to="/about" className="nav-link">
 								<span className="nav-item">¿QUÉ ES COMMEET?</span>
 							</Link>
 						</li>
-						<li id="nav-li-3" className={activeButton === 3 ? 'active' : ''} onClick={() => handleClick(3)}>
+						<li id="nav-li-3" className='active'>
 							<Link to="/contact" className="nav-link">
 								<span className="nav-item">CONTACTO</span>
 							</Link>
 						</li>
-						<li id="nav-li-4" className={activeButton === 4 ? 'active' : ''} onClick={() => handleClick(4)}>
+						<li id="nav-li-4" className='active'>
 							<Link to="/login" className="nav-link">
 								<span className="nav-item">INGRESO/REGISTRO</span>
 							</Link>

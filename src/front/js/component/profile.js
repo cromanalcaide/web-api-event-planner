@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import { LeftSideBar } from "./sidebarleft";
 import { useNavigate } from "react-router-dom";
 import { ViewTitle } from "./viewTitle";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import "../../styles/profile.css"
 
 export const Profile = () => {
@@ -26,14 +28,12 @@ export const Profile = () => {
     });
 
     const [newValue, setNewValue] = useState("");
-    const [password, setNewPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showModal, setShowModal] = useState(false)
 
     const handleDeleteAccount = () => {
         actions.deleteUser()
         navigate("/");
-
     }
 
     const user = store.user.result
@@ -53,13 +53,31 @@ export const Profile = () => {
         await actions.editUserInfo(fieldName, newValue)
         setFieldStatus({ ...fieldStatus, [fieldName]: false });
     }
+
+    const formik = useFormik({
+        initialValues: {
+            typePasswordX: '',
+
+        },
+        validationSchema: Yup.object({
+            typePasswordX: Yup.string()
+                .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/, 'La contraseña deber tener 6 a 15 caracteres, 1 mayúscula, 1 minúscula y 1 número. No puede tener caracteres especiales'),
+        }),
+        onSubmit: (values) => {
+            const fieldName = "password" 
+            actions.editUserInfo(fieldName, values.typePasswordX);
+            alert("Contraseña modificada correctamente")
+            console.log(fieldName, values.typePasswordX)
+        },
+    });
+
     return (
         <div className="view">
             <div className="col-3 sidebar-column">
                 <LeftSideBar />
             </div>
             <div className="row">
-                <ViewTitle title="Mi perfil"/>
+                <ViewTitle title="Mi perfil" />
 
                 <div className="col-6">
                     <div className="profile-container">
@@ -87,7 +105,7 @@ export const Profile = () => {
                                     <label>Correo Electrónico :</label>
                                 </div>
                                 <div className="col-5">
-                                    <input className="user-edit-form" type="text" defaultValue={user?.email} disabled={!fieldStatus.email}
+                                    <input className="user-edit-form" type="email" defaultValue={user?.email} disabled={!fieldStatus.email}
                                         onChange={(e) => setNewValue(e.target.value)}></input>
                                     <i className={`fa-icon fa-solid ${fieldStatus["email"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["email"] ? "" : "disabled"}`}
                                         onClick={() => {
@@ -106,17 +124,25 @@ export const Profile = () => {
                                         <label>Nueva Contraseña : </label>
                                     </div>
                                     <div className="col-5">
-                                        <input
-                                            className="user-edit-form"
-                                            type={showPassword ? "text" : "password"}
-                                            disabled={fieldStatus.password === "password" ? !showPassword : false}
-                                            value={password}
-                                            onChange={(e) => setNewPassword(e.target.value)}
-                                        />
-                                        <i
-                                            className={`fa-icon fa-solid ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
-                                            onClick={() => setShowPassword(!showPassword)}
-                                        ></i>
+                                        <form onSubmit={formik.handleSubmit}>
+                                            <input
+                                                id="typePasswordX"
+                                                name="typePasswordX"
+                                                className="user-edit-form"
+                                                type={showPassword ? "text" : "password"}
+                                                disabled={fieldStatus.password === "password" ? !showPassword : false}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.typePasswordX}
+                                            />
+                                            <i className={`fa-icon fa-solid ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+                                                onClick={() => setShowPassword(!showPassword)}
+                                            ></i>
+                                            <button className="btn px-0" type="submit"><i className="fa-solid fa-check"></i></button>
+                                            {formik.touched.typePasswordX && formik.errors.typePasswordX ? (
+                                                <div className="text-danger">{formik.errors.typePasswordX}</div>
+                                            ) : null}
+                                        </form>
                                     </div>
                                 </div>
                             </div>
