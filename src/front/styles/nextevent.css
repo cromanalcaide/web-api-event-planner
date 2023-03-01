@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
+
+.nexdate-main {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    width: 50em;
+    height: 11em;
+    margin: 1em 0 0 3.6em;
+    padding: 1em;
+
+}
+
+#title-nextdate {
+    text-align: left;
+    font-family: 'Puritan', sans-serif;
+    font-weight: 700;
+    font-display: swap;
+    font-size: large;
+    margin: 0%;
+    color: #667DD2;
+}
+
+.p-nextdate {
+    text-align: left;
+    font-family: 'Puritan', sans-serif;
+    font-weight: 400;
+    font-size: small;  
+   
+  }
+    
+.see-event-btn{
+  margin-top: 0.5em;
+  font-size: small;
+  color: grey;
+}
+
+.see-event-btn:hover{
+  color: #667DD2;
+  font-weight: 700;
+}

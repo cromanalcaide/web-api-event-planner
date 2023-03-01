@@ -39,7 +39,7 @@ export const Jumbotron = () => {
                     <div className="col-lg-6 hero-content">
                         <div className="lc-block mb-3">
                             <div editable="rich">
-                                <h1 className="hero-text fw-bold display-5">Con <span>ComMeet</span> ya no tienes más excusas!</h1>
+                                <h1 className="hero-text fw-bold display-5">Con <span className='logo-brand'>ComMeet</span> ya no tienes más excusas!</h1>
                             </div>
                         </div>
                         <div className="lc-block mb-3">

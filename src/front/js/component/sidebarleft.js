@@ -49,7 +49,7 @@ export const LeftSideBar = () => {
             <div className="row">
                 <div className="col sidebar-column">
                     <div className="sidebar-column-2 d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <h3 className="sidebar-logo">ComMeet</h3>
+                        <h4 className="sidebar-logo-com text-black mb-5">ComMeet</h4>
                         <div className="d-flex align-items-center text-decoration-none">
                             <img src={user?.avatar_url} alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
                             <span className="user-name d-none d-sm-inline">{user?.name}</span>
@@ -58,17 +58,17 @@ export const LeftSideBar = () => {
                         <div className="pt-3">
                             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start align-items-sm-start" id="menu">
                                 <li className="nav-item">
-                                    <Link to="/profile" className="nav-link align-middle">
+                                    <Link to="/profile" className="nav-link-side btn align-middle">
                                         <i className="fa-icon fa-solid fa-user"></i> <span className="ms-1 d-none d-sm-inline">Mi perfil</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/private" className="nav-link align-middle">
+                                    <Link to="/private" className="nav-link-side btn align-middle">
                                         <i className="fa-icon fa-solid fa-calendar-week me-1"></i><span className="ms-1 d-none d-sm-inline">Dashboard</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <button className="nav-link align-middle" onClick={handleClick}>
+                                    <button className="nav-link-side btn align-middle" onClick={handleClick}>
                                         <i className="fa-icon fa-solid fa-arrow-right-from-bracket"></i><span className="ms-1 d-none d-sm-inline">Cerrar Sesión</span></button>
                                 </li>
                             </ul>
@@ -77,7 +77,7 @@ export const LeftSideBar = () => {
                         <div className="contacts-div pt-5 d-flex align-items-start">
                             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start align-items-sm-start">
                                 <li>
-                                    <a href="#submenu1" data-bs-toggle="collapse" className="nav-link">
+                                    <a href="#submenu1" data-bs-toggle="collapse" className="nav-link-side btn">
                                         <i className="fa-icon fa-solid fa-address-book"></i><span className="contact-title d-none d-sm-inline px-2 ">Contactos</span> </a>
                                     <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                         {userContacts.map((contact) => {

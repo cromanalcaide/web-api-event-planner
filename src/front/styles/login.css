@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
-*, h2, .form-control{
+.title-login, .form-control{
     font-family: 'Puritan', sans-serif;
 }
 
@@ -21,7 +21,7 @@
     
 }
 
-.title{
+.title-login{
     font-family: 'Merienda', cursive;
     font-size: 40px;
     color: #667dd2;

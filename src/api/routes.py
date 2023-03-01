@@ -137,7 +137,7 @@ def get_event_by_id(event_id):
 @api.route('/event/register', methods=['POST'])
 def create_event():
     body = request.get_json()
-    new_event = Events(title=body["title"], date=body["date"], time=body["time"], description=body["description"], location=body["location"], image=body["image"], user_id=body["user_id"] )
+    new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"], image=body["image"], user_id=body["user_id"] )
     print(body)
     print(new_event)
     db.session.add(new_event)
@@ -153,7 +153,6 @@ def modify_event(event_id):
 
     event.title = request.json.get('title', event.title)
     event.date = request.json.get('date', event.date)
-    event.time = request.json.get('time', event.time)
     event.description = request.json.get('description', event.description)
     event.location = request.json.get('location', event.location)
     event.image = request.json.get('image', event.image)
@@ -162,7 +161,6 @@ def modify_event(event_id):
 
     response_body = {'title': event.title,
                      'date': event.date,
-                     'time': event.time,
                      'description': event.description,
                      'location': event.location,
                      'image': event.image,

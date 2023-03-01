@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap');
 
+
 .left-side-container{
     background-color: white;
     width: 20%;
@@ -7,29 +8,17 @@
 
 .sidebar-column{
     width: 19.8% !important; 
+    height: 100%;
 }
 
 .sidebar-column-2{
     width: 100%;
+    height: 100%;
 } */
 
-.sidebar-logo{
-    font-family: 'Merienda One', cursive ;
-    font-size: x-large;
-    color: black;
-    margin-bottom: 2em;
-   
-}
-
-@media (max-width:800px) {
-    .sidebar-logo{
-        font-size: smaller;
-    }
-    
-}
 
 .fa-icon, .bi-box-arrow {
-    color: black;
+    color: black !important;
 }
 
 .ms-1, .user-name, .contact-name, .contact-title{
@@ -120,3 +109,9 @@
     margin-right: 0px;
 }
 
+.sidebar-logo-com{
+    font-size: x-large;
+    color: black;
+    margin-bottom: 2em;
+    font-family: 'Merienda One', cursive;
+}

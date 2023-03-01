@@ -11,6 +11,7 @@ import { Private } from "./pages/private";
 import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
 import { Profile } from "./component/profile";
+import { SingleEvent } from "./component/singleEvent";
 
 
 
@@ -33,6 +34,7 @@ const Layout = () => {
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>
                         <Route element={<CookiePolicy />} path="/cookies-policy"/>
                         <Route element={<Profile />} path="/profile"/>
+                        <Route element={<SingleEvent />} path="/singleevent/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

@@ -41,7 +41,7 @@ export const Login = () => {
               <div className="card ">
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 ">
-                    <h2 className="title mb-2 pb-5">Ingreso</h2>
+                    <h2 className="title-login mb-2 pb-5">Ingreso</h2>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-2 ml-2 d-flex justify-content-center">
                         <input

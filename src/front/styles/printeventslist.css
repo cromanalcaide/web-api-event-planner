@@ -1,0 +1,47 @@
+.events-list{
+   background-color: white;
+   border-radius: 10px;
+   width: 23em;
+   height:fit-content;
+   margin: 1em 0 0 3.6em;
+   padding-bottom: 1em;
+}
+
+.event-title {
+    margin-left: 1em;
+    font-weight: 700;
+    font-size: small;
+}
+
+.div-title{
+    font-size: large;
+    font-weight: 700;
+    padding: 1.2em;
+    color: #667DD2;
+}
+
+.event-date{
+    font-weight: 400;
+}
+
+.each-event{
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
+}
+
+.see-more-btn{
+    margin-top: 0.5em;
+    font-size: small;
+    color: grey;
+    margin: 0;
+    padding-top: 3px;
+    display: flex;
+    justify-content: end;
+}
+
+.see-more-btn:hover{
+color: #667DD2;
+font-weight: 700;
+}
+

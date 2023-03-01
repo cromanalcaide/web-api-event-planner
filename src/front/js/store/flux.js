@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			userContacts: [],
-			user: []
+			user: [],
+			eventguests: [],
+			events: [],
 
 		},
 		actions: {
@@ -170,7 +172,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, requestOptions)
 					const user = await response.json();
-					console.log(user)
 					setStore({ ...getStore(), user })
 				} catch (error) {
 					console.log(error);
@@ -288,7 +289,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
-			}
+			},
+			getEventsGuests: async () => {
+				const response = await fetch(`${BACKEND_URL}api/events_guests`,
+				  {
+					method: "GET",
+				  }
+				);
+			   
+				const data = await response.json();
+		
+				setStore({ eventguests: data.results });
+	
+			},
+			getAllEvents: async () => {
+				const response = await fetch(
+				  `${BACKEND_URL}api/events`,
+				  {
+					method: "GET",
+				  }
+				);
+			   
+				const data = await response.json();
+		
+				setStore({ events: data.results });
+			  },
+			  deleteEvent: async (eventId) => {
+				const requestOptions = {
+					method: "DELETE",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+				try {
+					const response = await fetch(`${BACKEND_URL}api/events/${eventId}`, requestOptions);
+					const data = await response.json();
+					console.log(data);
+
+					setStore({
+						...getStore(),
+						events: getStore().events.filter((event) => event.id !== eventId),
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			},  
+
 		}
 	}
 }
