@@ -49,7 +49,9 @@ export const LeftSideBar = () => {
             <div className="row">
                 <div className="col sidebar-column">
                     <div className="sidebar-column-2 d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <h4 className="sidebar-logo-com text-black mb-5">ComMeet</h4>
+                        <Link to="/">
+                        <button className="btn"><h4 className="sidebar-logo-com text-black mb-5">ComMeet</h4></button>
+                        </Link>                       
                         <div className="d-flex align-items-center text-decoration-none">
                             <img src={user?.avatar_url} alt="hugenerd" width="30" height="30" className="user-img rounded-circle" />
                             <span className="user-name d-none d-sm-inline">{user?.name}</span>
