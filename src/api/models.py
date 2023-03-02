@@ -102,21 +102,23 @@ class Event_Guests(db.Model):
         "user_id": self.user_id,}
 
 
-class Contact_Forms(db.Model):
-    __tablename__='contact_forms'
+class Comments(db.Model):
+    __tablename__='comments'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    message = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship(User)
+    event_id =  db.Column(db.Integer, db.ForeignKey('events.id'))
+    event = db.relationship(Events)
+    content = db.Column(db.String(255), nullable=False)
     
 
     def __repr__(self):
-        return f'<Contact_Forms {self.id}>'  
+        return f'<Comments {self.id}>'  
 
     def serialize(self):
         return {
         "id": self.id,
-        "name": self.name,
-        "email": self.email,
-        "message": self.message }
+        "user_id": self.user_id,
+        "event_id": self.event_id,
+        "content": self.content }
 

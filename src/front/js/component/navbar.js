@@ -10,6 +10,8 @@ export const Navbar = () => {
 	const [activeButton, setActiveButton] = useState("")
 	const { store } = useContext(Context);
 
+	const user = JSON.parse(localStorage.getItem('userId'))
+
 	const handleClick = (id) => {
 		setActiveButton(id)
 	};
@@ -41,7 +43,7 @@ export const Navbar = () => {
 									<span className="nav-item">CONTACTO</span>
 								</Link>
 							</li>
-							{!store.user ? (
+							{!user ? (
 								<li id="nav-li-4" className='active'>
 									<Link to="/login" className="nav-link">
 										<span className="nav-item">INGRESO/REGISTRO</span>

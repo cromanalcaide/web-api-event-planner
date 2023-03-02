@@ -11,6 +11,8 @@ export const Nextevent = () => {
 
     const eventos = store.events;
     const evguest = store.eventguests;
+    console.log(evguest)
+
 
     const userInfo = store.user?.result
     const userEmail = userInfo?.email

@@ -1,0 +1,47 @@
+
+.comments-div{
+    background-color: white;
+    border-radius: 10px;
+    width: 23em;
+    height:fit-content;
+    margin: 1em 0 0 3.6em;
+    padding-bottom: 1em;
+}
+
+.comments-title{
+    font-size: medium;
+    font-weight: 700;
+    color: #667DD2;
+    padding: 1em 2em;
+}
+
+.comment-form{
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.content-form{
+    border-radius: 10px;
+    border-color: grey;
+    font-size: small;
+}
+
+.submit-btn{
+    background-color: #667DD2;
+    border-color: #667DD2;
+    font-family: 'Puritan', sans-serif;
+    font-size: large;
+    padding: 3px ;
+    margin-top: 0.5em;
+    border-radius: 5px;
+    color: white;
+}
+
+.submit-btn:hover{
+    color: white;
+}
+
+.comment-li{
+    list-style: none;
+}

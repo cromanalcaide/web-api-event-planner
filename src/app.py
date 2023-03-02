@@ -12,6 +12,17 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+import cloudinary
+
+cloudinary.config(
+cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"),
+api_key = os.getenv("CLOUDINARY_API_KEY"),
+api_secret = os.getenv("CLOUDINARY_API_SECRET"),
+)
+
+import cloudinary.uploader
+import cloudinary.api
+
 
 #from models import Person
 
@@ -33,6 +44,8 @@ db.init_app(app)
 
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET")  
 jwt = JWTManager(app)
+
+
 
 # Allow CORS requests to this API
 CORS(app)

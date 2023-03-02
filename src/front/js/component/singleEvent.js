@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { LeftSideBar } from "./sidebarleft";
 import { ViewTitle } from "./viewTitle";
+import { Comments } from "./comments";
 
 import "../../styles/singleevent.css"
 
@@ -113,6 +114,7 @@ export const SingleEvent = props => {
             )
           })}
         </div>
+        <Comments />
       </div>
     </div>
   )

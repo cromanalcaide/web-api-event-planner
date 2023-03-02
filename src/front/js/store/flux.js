@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: [],
 			eventguests: [],
 			events: [],
+			comments: [],
 
 		},
 		actions: {
@@ -33,7 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 					const resp = await fetch((`${BACKEND_URL}api/login/`), requestOptions)
-					
+
 					if (resp.status != 200) {
 						console.log("An error has occurred");
 						return false;
@@ -86,22 +87,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getUserData: async () => {
-					const store = getStore();
-					const requestOptions = {
-						method: "GET",
-						headers: {
-							Authorization: `Bearer ${store.token}`,
-						},
-						
-					};
-					try {
-						const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
-						const data = await res.json();
-						return data;
-					} catch (error) {
-						console.log(error);
-					}
-				},
+				const store = getStore();
+				const requestOptions = {
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${store.token}`,
+					},
+
+				};
+				try {
+					const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
+					const data = await res.json();
+					return data;
+				} catch (error) {
+					console.log(error);
+				}
+			},
 
 			logout: () => {
 				const token = localStorage.removeItem("token");
@@ -148,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${BACKEND_URL}api/contacts/${userId.id}`, requestOptions)
 					const contacts = await response.json();
-					
+
 					const userContacts = contacts.results.map(contact => ({
 						name: contact.name,
 						email: contact.email,
@@ -190,7 +191,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions)
 					const updatedContact = await response.json();
-					
+
 
 					const prevStore = getStore();
 					const updatedContacts = prevStore.userContacts.map((contact) => {
@@ -236,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let updatedValue = value;
 
 				if (field === "password") {
-					
+
 				}
 
 				const updatedUser = {
@@ -288,35 +289,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			getEventsGuests: async () => {			
+			getEventsGuests: async () => {
 				const requestOptions = {
 					method: "GET",
 				};
 				try {
 					const res = await fetch(`${BACKEND_URL}api/events_guests`, requestOptions);
 					const data = await res.json();
-					
-				setStore({...getStore(), eventguests: data.results });
+
+					setStore({ ...getStore(), eventguests: data.results });
 
 				} catch (error) {
 					console.log(error);
 				}
 			},
 			getAllEvents: async () => {
-					const requestOptions = {
-						method: "GET",
-					};
-					try {
-						const res = await fetch(`${BACKEND_URL}api/events`, requestOptions);
-						const data = await res.json();
-						
-					setStore({...getStore(), events: data.results });
+				const requestOptions = {
+					method: "GET",
+				};
+				try {
+					const res = await fetch(`${BACKEND_URL}api/events`, requestOptions);
+					const data = await res.json();
 
-					} catch (error) {
-						console.log(error);
-					}
-			  },
-			  deleteEvent: async (eventId) => {
+					setStore({ ...getStore(), events: data.results });
+
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			deleteEvent: async (eventId) => {
 				const requestOptions = {
 					method: "DELETE",
 					headers: {
@@ -326,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${BACKEND_URL}api/events/${eventId}`, requestOptions);
 					const data = await response.json();
-				
+
 
 					setStore({
 						...getStore(),
@@ -335,7 +336,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
-			},  
+			},
+			postComment : async (userId, content, eventId) => {
+				const requestOptions = {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						"user_id": userId,
+						"content": content,
+						"event_id": eventId,
+					})
+				}
+				try {
+					const res = await fetch(`${BACKEND_URL}api/comment/${userId}`, requestOptions);
+					console.log("this is res", res);
+					if (res.status !== 200) {
+						alert("An error has occurred while adding the new comment");
+						return false;
+					}
+					const newComment = await res.json();
+					const currentComments = getStore().comments;
+					const updatedComments = currentComments.concat(newComment);
+					setStore({ ...getStore(), comments: updatedComments });
+					return true;
+				}
+				catch (error) {
+					console.log(error);
+				}
+			},
+			getComments : async (eventId) => {
+				console.log(eventId)
+				const requestOptions = {
+					method: "GET",
+				};
+				try {
+					const res = await fetch(`${BACKEND_URL}api/comments/${eventId}`, requestOptions);
+					const data = await res.json();
+					console.log("this data comes frome the Flux",data)
+					setStore({ ...getStore(), comments: data });
+				} catch (error) {
+					console.log(error);
+				}
+			}
+
+
+
 			// editEventInfo: async (eventId, field, value) => {
 			// 	const userId = JSON.parse(localStorage.getItem("userId"));
 			// 	const events = getStore().events;

@@ -2,13 +2,16 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Events, Contacts, Event_Guests
+from api.models import db, User, Events, Contacts, Event_Guests, Comments
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from api.encripted import compare_pass, encripted_pass
 import json
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 api = Blueprint('api', __name__)
@@ -321,5 +324,32 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+#CLOUDINARY
+
+@api.route('/upload', methods=['POST'])
+def upload():
+    file = request.files['file']
+    result = cloudinary.uploader.upload(file)
+    return result['secure_url']
+
+#COMMENTS 
+
+@api.route('/comments/<int:event_id>', methods=['GET'])
+def getComments(event_id):
+    comments = Comments.query.filter(Comments.event_id == int(event_id))
+    return jsonify([{'id': comment.id, 'user_id': comment.user_id, 'content': comment.content} for comment in comments])
+    
+@api.route('/comment/<int:event_id>', methods=['POST']) 
+def postComment(event_id):
+    body = request.get_json()
+    new_comment = Comments(user_id=body["user_id"], content=body["content"], event_id=body["event_id"] )
+    db.session.add(new_comment)
+    db.session.commit()
+    return jsonify(new_comment.serialize()), 200
+
+
 if __name__ == "__main__":
     app.run()
+
+
+
