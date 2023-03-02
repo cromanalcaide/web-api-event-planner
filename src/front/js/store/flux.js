@@ -337,7 +337,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			postComment : async (userId, content, eventId) => {
+			postComment: async (userId, content, eventId) => {
 				const requestOptions = {
 					method: "POST",
 					headers: {
@@ -366,7 +366,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			getComments : async (eventId) => {
+			getComments: async (eventId) => {
 				console.log(eventId)
 				const requestOptions = {
 					method: "GET",
@@ -374,49 +374,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const res = await fetch(`${BACKEND_URL}api/comments/${eventId}`, requestOptions);
 					const data = await res.json();
-					console.log("this data comes frome the Flux",data)
+					console.log("this data comes frome the Flux", data)
 					setStore({ ...getStore(), comments: data });
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			uploadImage: async (imageFile) => {
+				const formData = new FormData();
+				formData.append('file', imageFile);
+				formData.append('upload_preset', 'your_upload_preset_here');
+
+				const cloudName = process.env.CLOUD_NAME 
+
+				const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+					method: 'POST',
+					body: formData
+				});
+
+				const data = await response.json();
+				onUpload(data.secure_url);
 			}
 
-
-
-			// editEventInfo: async (eventId, field, value) => {
-			// 	const userId = JSON.parse(localStorage.getItem("userId"));
-			// 	const events = getStore().events;
-
-			// 	let updatedValue = value;
-
-			// 	const event = eventos.filter(event => event.id === eventId)
-
-			// 	const updatedField = {
-			// 		...event,
-			// 		[field]: updatedValue
-			// 	};
-
-			// 	try {
-			// 		const response = await fetch(`${BACKEND_URL}api/event/${eventId}`, {
-			// 			method: "PUT",
-			// 			headers: {
-			// 				"Content-type": "application/json"
-			// 			},
-			// 			body: JSON.stringify(updatedField)
-			// 		});
-
-			// 		const updatedEventInfo = await fetch(`${BACKEND_URL}api/users/${userId.id}`);
-			// 		const updatedEventObject = await event.updatedEventInfo.json();
-
-			// 		const prevStore = getStore();
-			// 		setStore({
-			// 			...prevStore,
-			// 			events: updatedEventObject
-			// 		});
-			// 	} catch (error) {
-			// 		console.log(error);
-			// 	}
-			// },
 
 		}
 	}

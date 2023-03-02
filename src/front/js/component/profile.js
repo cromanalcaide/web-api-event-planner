@@ -5,11 +5,50 @@ import { useNavigate } from "react-router-dom";
 import { ViewTitle } from "./viewTitle";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Image } from 'cloudinary-react';
 import "../../styles/profile.css"
 
 export const Profile = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const [imageUrl, setImageUrl] = useState(null);
+    const [imageSrc, setImageSrc] = useState("")
+    const [imageFile, setImageFile] = useState(null);
+    const [newValue, setNewValue] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showModal, setShowModal] = useState(false)
+    
+    const user = store.user.result
+
+    function handleFileInputChange(event) {
+        const file = event.target.files[0];
+        setImageFile(file);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImageUrl(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+
+    const handleUploadClick = async () => {
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        formData.append('upload_preset', 'ml_default');
+
+        const cloudName = process.env.CLOUD_NAME
+
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        console.log("this is data img", data)
+        setImageSrc(data.secure_url);;
+    }
+
 
     const [fieldStatus, setFieldStatus] = useState({
         name: false,
@@ -27,16 +66,13 @@ export const Profile = () => {
         phone: user?.phone || ""
     });
 
-    const [newValue, setNewValue] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [showModal, setShowModal] = useState(false)
+
 
     const handleDeleteAccount = () => {
         actions.deleteUser()
         navigate("/");
     }
 
-    const user = store.user.result
 
     const handleEditField = (fieldName) => {
         setFieldValues({
@@ -64,26 +100,26 @@ export const Profile = () => {
                 .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/, 'La contraseña deber tener 6 a 15 caracteres, 1 mayúscula, 1 minúscula y 1 número. No puede tener caracteres especiales'),
         }),
         onSubmit: (values) => {
-            const fieldName = "password" 
+            const fieldName = "password"
             actions.editUserInfo(fieldName, values.typePasswordX);
             alert("Contraseña modificada correctamente")
             console.log(fieldName, values.typePasswordX)
         },
     });
 
+    console.log(imageSrc)
     return (
         <div className="view">
             <div className="col-3 sidebar-column">
                 <LeftSideBar />
             </div>
             <div className="row">
-                <ViewTitle title="Mi perfil"/>
-
+                <ViewTitle title="Mi perfil" />
                 <div className="col-6">
                     <div className="profile-container">
                         <div className="row line-data align-items-center mx-3 my-4 ">
                             <div className="col-1">
-                                <img src={user?.avatar_url} alt="hugenerd" width="70" height="70" className="user-avatar rounded-circle" />
+                                <img src={imageSrc || user?.avatar_url} alt="hugenerd" width="70" height="70" className="user-avatar rounded-circle" />
                             </div>
                             <div className="col-7">
                                 <input className="form-control-sm fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
@@ -100,6 +136,18 @@ export const Profile = () => {
                             </div>
                         </div>
                         <div className="edit-info">
+                            <div className="line-data my-3">
+                                <div className="row line-data">
+                                    <div className="col-3 ms-5">
+                                        <label>Imagen : </label>
+                                    </div>
+                                    <div className="col-5">
+                                        <input className="user-edit-form" type="file"
+                                            accept="image/*" onChange={handleFileInputChange}></input>
+                                        <button className="btn" onClick={handleUploadClick}><i className="fa-icon fa-solid fa-check"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="row line-data my-3">
                                 <div className="col-3 ms-5">
                                     <label>Correo Electrónico :</label>

@@ -140,9 +140,18 @@ def get_event_by_id(event_id):
 @api.route('/event/register', methods=['POST'])
 def create_event():
     body = request.get_json()
-    new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"], image=body["image"], user_id=body["user_id"] )
-    print(body)
-    print(new_event)
+    image = None
+    if 'image' in request.files:
+        image_file = request.files['image']
+        if image_file.filename != '':
+            upload_result = cloudinary.uploader.upload(image_file)
+            image = Images(cloud_id=upload_result['public_id'], url=upload_result['url'])
+            db.session.add(image)
+            db.session.commit()
+
+    new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"], user_id=body["user_id"])
+    if image is not None:
+        new_event.image = image.url
     db.session.add(new_event)
     db.session.commit()
     return jsonify(new_event.serialize()), 200
@@ -326,11 +335,24 @@ def protected():
 
 #CLOUDINARY
 
-@api.route('/upload', methods=['POST'])
-def upload():
-    file = request.files['file']
-    result = cloudinary.uploader.upload(file)
-    return result['secure_url']
+@api.route('/users/<int:user_id>/avatar', methods=['GET', 'POST'])
+def user_avatar(user_id):
+    if request.method == 'GET':
+        user = User.query.get(user_id)
+        return user.avatar_url
+    elif request.method == 'POST':
+        user = User.query.get(user_id)
+        file = request.files['file']
+        if file is None:
+            return {"error": "Ha ocurrido un error"}, 400
+        upload_result = cloudinary.uploader.upload(file)
+        user.avatar_url = upload_result['url']
+        db.session.commit()
+        return user.avatar_url, 200
+
+
+
+
 
 #COMMENTS 
 
