@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Geocoding} from "../component/geocoding";
 
 import "../../styles/eventsform.css"
 
@@ -25,7 +26,7 @@ export const Eventsform = () => {
 	const handelClick= (e) => {
 		e.preventDefault();
     sendNewEvent();
-    sendNewContact();
+    //sendNewContact();
 		e.target.reset();
 	}
 
@@ -57,7 +58,7 @@ export const Eventsform = () => {
 };
 
 
-const sendNewContact = async () => {
+/*const sendNewContact = async () => {
   try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -79,7 +80,7 @@ const sendNewContact = async () => {
       } catch (error) {
           console.log(error);
   }
-};
+};*/
  
     return (
       <div className="eventsform-form">
@@ -125,6 +126,9 @@ const sendNewContact = async () => {
                 <label htmlFor="exampleInputEmail1">Contact Email</label>
                 <input type="text" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter image"/>
                 
+              </div>
+              <div>
+                <Geocoding/>
               </div>
               <button type="submit" >Save</button>
           </form>
