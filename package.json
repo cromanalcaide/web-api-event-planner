@@ -85,6 +85,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0",
 		"reactstrap": "^9.1.6",
+		"weather-js": "^2.0.0",
 		"yup": "^1.0.0"
 	}
 }

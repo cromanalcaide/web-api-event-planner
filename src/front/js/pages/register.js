@@ -14,7 +14,7 @@ const countries = getCountries();
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
-
+  const [error, setError] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [cities, setCities] = useState([]);
@@ -49,9 +49,18 @@ export const Register = () => {
         .max(15, 'Debe tener máximo 15 caracteres')
         .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}$/, 'La contraseña deber tener 6 a 15 caracteres, 1 mayúscula, 1 minúscula y 1 número. No puede tener caracteres especiales').required('Este campo es requerido'),
     }),
-    onSubmit: values => {
-      actions.register(values.typeName, values.typeEmailX, values.typePasswordX, selectedCity, selectedCountry, values.typePhone);
-      navigate("/login");
+    onSubmit: async (values) => {
+      try { 
+        const registerSuccesful = await actions.register(values.typeName, values.typeEmailX, values.typePasswordX, selectedCity, selectedCountry, values.typePhone);
+        if (registerSuccesful) {
+          navigate("/login");
+        } else {
+          setError("Ha ocurrido un error con los datos ingresados")
+        }
+      } catch (error) {
+        console.log(error);
+        setError("Ha ocurrido un error con el registro. Por favor revisa la información ingresada e inténtalo nuevamente")
+      }   
     },
   });
 
@@ -180,6 +189,7 @@ export const Register = () => {
                         type="submit">
                         Registrarme
                       </button>
+                      {error && <div className="text-danger mt-3">{error}</div>}
                     </form>
                   </div>
                   <div className="pb-2">

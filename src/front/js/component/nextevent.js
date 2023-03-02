@@ -41,7 +41,8 @@ export const Nextevent = () => {
     return (
 
         <div className='nexdate-main container text-center'>
-            {resFin.map((el, index) => {
+            { resFin.length > 0 ? (
+            resFin.map((el, index) => {
                 return (
                     <div key={index} >
                         <div className='row'>
@@ -66,7 +67,9 @@ export const Nextevent = () => {
                         </div>
                     </div>
                 )
-            })}
+            })
+        ):
+        ( <div> No hay eventos programados aún </div> )}
         </div>
     );
 };

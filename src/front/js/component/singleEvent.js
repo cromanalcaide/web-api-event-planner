@@ -41,7 +41,7 @@ export const SingleEvent = props => {
         <LeftSideBar />
       </div>
       <div className="col">
-        <ViewTitle title="Dashboard" className="dash-title" />
+        <ViewTitle title= "Dashboard / Detalles del evento" className="dash-title" />
         <button className="btn add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
         <div className='event-detail container'>
           {eveResult.map((el, index) => {
@@ -58,9 +58,9 @@ export const SingleEvent = props => {
                       </button>
                       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li className="dropdown-item">Editar evento</li>
-                        <li className="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar evento</li>
+                        <li className="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => { setShowModal(true) }}>Eliminar evento</li>
                         {showModal == true ? (
-                                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">
                                         <div className="modal-content">
                                             <div className="modal-header">

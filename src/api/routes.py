@@ -97,7 +97,7 @@ def modify_user(user_id):
 
     user.name = request.json.get('name', user.name)
     user.email = request.json.get('email', user.email)
-    user.password = request.json.get('password', user.password)
+    user.password = encripted_pass(request.json.get('password', user.password))
     user.phone = request.json.get('phone', user.phone)
     user.city = request.json.get('city', user.city)
     user.country = request.json.get('country', user.country)

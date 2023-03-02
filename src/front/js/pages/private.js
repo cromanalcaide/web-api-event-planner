@@ -4,7 +4,7 @@ import {LeftSideBar} from "../component/sidebarleft"
 import { ViewTitle } from "../component/viewTitle";
 import { useNavigate } from "react-router-dom";
 import { Nextevent } from "../component/nextevent";
-import { SingleEvent } from "../component/singleEvent";
+
 import { PrintEventsList } from "../component/printEventsList";
 
 
