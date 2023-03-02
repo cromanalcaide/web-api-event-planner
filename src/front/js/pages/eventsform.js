@@ -6,12 +6,6 @@ import "../../styles/eventsform.css"
 
 
 export const Eventsform = () => {
-	const { store, actions } = useContext(Context);
-
-  const [newEvent, setNewEvent] = useState([]) 
-  
-  console.log(newEvent)
- 
 
   const objNewEvent = {
     title: "",
@@ -23,7 +17,6 @@ export const Eventsform = () => {
     name: "",
     email: "",
   };
-  //let title = objNewEvent.title;
 
 	const handelChange= (e) => {
 		objNewEvent[e.target.name] = e.target.value;
@@ -31,60 +24,58 @@ export const Eventsform = () => {
 
 	const handelClick= (e) => {
 		e.preventDefault();
-		setNewEvent([objNewEvent]);
     sendNewEvent();
     sendNewContact();
 		e.target.reset();
 	}
 
-  const sendNewEvent = async (title, date, description, location, image, user_id) => {
+  const sendNewEvent = async () => {
     try {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         const url =
-            "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/event/register" 
+            "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/event/register" 
         const request = {
             method: "POST",
             body: JSON.stringify({
-            "title": title, 
-            "date": date, 
-            "description": description, 
-            "location": location, 
-            "image": image,
-            "user_id": user_id}),
+            "title": objNewEvent.title, 
+            "date": objNewEvent.date, 
+            "description": objNewEvent.description, 
+            "location": objNewEvent.location, 
+            "image": objNewEvent.image,
+            "user_id": objNewEvent.user_id}),
           
-            headers:  { "Content-Type":"application/json"
-},
+            headers:  { "Content-Type":"application/json"},
         };
+        console.log(request);
         const response = await fetch(url, request);
         const result = await response.json();
         console.log(result);
-        getTasksAPI();
         } catch (error) {
             console.log(error);
     }
 };
 
-const sendNewContact = async (title, email, user_id) => {
-  console.log(title)
+
+const sendNewContact = async () => {
   try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      console.log(objNewEvent.name, objNewEvent.email, objNewEvent.user_id);
       const url =
-          "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/contacts/register" 
+          "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/contact/register" 
       const request = {
           method: "POST",
           body: JSON.stringify({
-            "name": name, 
-            "email": email, 
-            "user_id": user_id}),
+            "name": objNewEvent.name, 
+            "email": objNewEvent.email, 
+            "user_id": objNewEvent.user_id}),
           headers:  { "Content-Type":"application/json"
 },
       };
       const response = await fetch(url, request);
       const result = await response.json();
       console.log(result);
-      getTasksAPI();
       } catch (error) {
           console.log(error);
   }
@@ -104,6 +95,7 @@ const sendNewContact = async (title, email, user_id) => {
                 <input type="text" name="date" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Date"/>
                 
               </div>
+
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Description</label>
                 <input type="text" name="description" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Descripton Event"/>

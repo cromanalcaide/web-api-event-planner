@@ -107,7 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getEventsGuests: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events_guests`,
+				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events_guests`,
 				  {
 					method: "GET",
 				  }
@@ -120,7 +120,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getAllEvents: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/events`,
+				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events`,
 				  {
 					method: "GET",
 				  }
@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			  getContacts: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu88.gitpod.io/api/contacts`,
+				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/contacts`,
 				  {
 					method: "GET",
 				  }

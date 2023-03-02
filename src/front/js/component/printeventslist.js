@@ -28,6 +28,7 @@ export const Printeventslist = ()=>{
     let actualTime = new Date().getTime(); 
     let futureDate = eventsByGuests.filter(item => new Date (item.date).getTime() > actualTime );
     futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
+    console.log(futureDate);
 
     return (
             <div className='next-events'  >

@@ -140,7 +140,6 @@ def get_event_by_id(event_id):
 def create_event():
     body = request.get_json()
     new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"], image=body["image"], user_id=body["user_id"] )
-    print(body)
     print(new_event)
     db.session.add(new_event)
     db.session.commit()
