@@ -104,6 +104,7 @@ def modify_user(user_id):
     user.phone = request.json.get('phone', user.phone)
     user.city = request.json.get('city', user.city)
     user.country = request.json.get('country', user.country)
+    user.avatar_url = request.json['avatar_url']
     db.session.commit()
 
     response_body = {'name': user.name,
