@@ -17,6 +17,7 @@ import { LeftSideBar } from "./component/sidebarleft";
 import { Events } from "./pages/events";
 import { Singleevent } from "./pages/singleevent";
 import { Eventsform } from "./pages/eventsform"
+import { Evcontactform } from "./pages/evcontactform";
 
 
 //create your first component
@@ -38,6 +39,7 @@ const Layout = () => {
                         <Route element={<Singleevent />} path="/singleevent/:theid" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<Eventsform />} path="/eventsform" />
+                        <Route element={<Evcontactform />} path="/evcontactform" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>

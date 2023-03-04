@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 export const Geocoding = () => {
     const [address, setAddress] = useState('');
+    console.log(address)
     const inputRef = useRef(null);
     const apiKey = process.env.REACT_APP_GOOGLEPLACES_API_KEY;
     useEffect(() => {
@@ -18,28 +19,34 @@ export const Geocoding = () => {
             const selectedAddress = 
             place.formatted_address;
             setAddress(selectedAddress);
+            
             const geocoder = new 
             window.google.maps.Geocoder();
             geocoder.geocode({ address: selectedAddress }, 
             (results, status) => {
-                    if (status === "OK") {
+
+                    if (status === "OK") { 
+                        
                         console.log(`Latitud: ${results[0].geometry.location.lat()}, Longitud: ${results[0].geometry.location.lng()}`);
                     } else {
                         console.error("No se pudo obtener la ubicación para la dirección especificada");
                     }
                 });
             });
+           
         };
 
         return () => {
             document.body.removeChild(script);
         }}, [apiKey]);
         return (
-            <div className="addressAutocomp-div mx-1 col-xs-5 col-sm-5 col-md-4 col-lg-4 col-xl-4">
+            <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Location</label>
                 <input
-                    className="form-control form-control-lg"
+                    className="form-control"
                     type="text"
-                    placeholder="Dirección"
+                    name="location"
+                    placeholder="Enter Location"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     ref={inputRef}

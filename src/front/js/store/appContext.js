@@ -25,7 +25,7 @@ const injectContext = PassedComponent => {
 			state.actions.getEventsGuests();
 			state.actions.getAllEvents();
 			state.actions.getContacts();
-			 state.actions.synctoken();// sincroniza el token con el local storage
+			state.actions.synctoken();// sincroniza el token con el local storage
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
