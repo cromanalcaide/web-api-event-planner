@@ -5,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			userContacts: [],
+			contactsAvatars: [],
+			allUsers: [],
 			user: [],
 			eventguests: [],
 			events: [],
@@ -210,6 +212,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			contactsAvatar: async (contacts, avatars) => {
+				try {
+					contacts.forEach((contact) => {
+						if (avatars[contact.email]) {
+							contact.avatar = `${BACKEND_URL}${avatars[contact.email]}`;
+						}
+					setStore({ ...getStore(), contactsAvatars: contacts });
+					console.log("CA",contactsAvatars)
+					});
+
+
+					return contacts;
+
+				} catch (error) {
+					console.error(error);
+				}
+			},
+
 			deleteContact: async (contactId) => {
 				const requestOptions = {
 					method: "DELETE",
@@ -385,7 +405,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formData.append('file', imageFile);
 				formData.append('upload_preset', 'your_upload_preset_here');
 
-				const cloudName = process.env.CLOUD_NAME 
+				const cloudName = process.env.CLOUD_NAME
 
 				const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
 					method: 'POST',
@@ -394,7 +414,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await response.json();
 				onUpload(data.secure_url);
-			}
+			},
+			getAllUsers: async () => {
+				const requestOptions = {
+					method: "GET",
+				};
+				try {
+					const res = await fetch(`${BACKEND_URL}api/users`, requestOptions);
+					const data = await res.json();
+
+					setStore({ ...getStore(), allUsers: data.results });
+
+				} catch (error) {
+					console.log(error);
+				}
+			},
 
 
 		}

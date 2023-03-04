@@ -4,6 +4,11 @@
     background-color: #F1EEEE;
 }
 
+.row-profile{
+    margin-left: -2px;
+    padding-left: -1px;
+}
+
 .profile-container{
     display: flex;
     flex-direction: column;
@@ -11,9 +16,10 @@
     border-radius: 16px;
     width: 50em;
     height: 30em;
-    margin: 0 3em 0 3em;
+    margin: 3.6em 3em 0 3em;
      
 }
+
 
 .del-account{
     background-color: #667DD2;
@@ -22,7 +28,7 @@
     font-size: small;
     padding: 4px ;
     color: white;
-    margin: 5em 2em 0 0 ;
+    margin: 1em 2em 0 0 ;
 }
 
 .del-account:hover{

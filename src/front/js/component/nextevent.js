@@ -11,7 +11,7 @@ export const Nextevent = () => {
 
     const eventos = store.events;
     const evguest = store.eventguests;
-    
+   
 
 
     const userInfo = store.user?.result
@@ -19,6 +19,7 @@ export const Nextevent = () => {
     
 
     let getGuestsEmail = evguest.filter(item => item.email === userEmail);
+    
 
     let eventsByGuests = [];
     for (let i = 0; i < eventos.length; i++) {

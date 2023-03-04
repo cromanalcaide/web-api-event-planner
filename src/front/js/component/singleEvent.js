@@ -45,6 +45,7 @@ export const SingleEvent = props => {
         <ViewTitle title= "Dashboard / Detalles del evento" className="dash-title" />
         <button className="btn add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
         <div className='event-detail container'>
+          <div className="event-content">
           {eveResult.map((el, index) => {
             return (
               <div key={index} >
@@ -105,14 +106,15 @@ export const SingleEvent = props => {
                     </div>
                   </div>
                   <div className="col d-md-flex justify-content-md-end">
-                    <Link to={"/private/"}>
+                    {/* <Link to={"/private/"}>
                       <button className="back-btn btn text-end">Regresar al Dashboard</button>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>
             )
           })}
+          </div>
         </div>
         <Comments />
       </div>

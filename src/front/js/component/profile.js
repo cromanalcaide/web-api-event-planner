@@ -17,7 +17,7 @@ export const Profile = () => {
     const [newValue, setNewValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showModal, setShowModal] = useState(false)
-    
+
     const user = store.user.result
 
     function handleFileInputChange(event) {
@@ -108,19 +108,23 @@ export const Profile = () => {
         },
     });
 
-    console.log(imageSrc)
     return (
         <div className="view">
             <div className="col-3 sidebar-column">
                 <LeftSideBar />
             </div>
-            <div className="row">
-                <ViewTitle title="Mi perfil" />
+            <div className="row row-profile">
+                <ViewTitle title="Mi perfil" className="view-title-profile" />
                 <div className="col-6">
                     <div className="profile-container">
                         <div className="row line-data align-items-center mx-3 my-4 ">
                             <div className="col-1">
-                                <img src={imageSrc || user?.avatar_url} alt="hugenerd" width="70" height="70" className="user-avatar rounded-circle" />
+                                <img src={imageSrc || user?.avatar_url} alt="hugenerd" className="user-avatar rounded-circle" style={{
+                                     maxWidth: '70px', 
+                                     maxHeight: '70px', 
+                                     width: '70px', 
+                                     height: '70px', 
+                                }}  />
                             </div>
                             <div className="col-7">
                                 <input className="form-control-sm fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
@@ -257,7 +261,7 @@ export const Profile = () => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button className="del-account btn mt-5 justify-content-end px-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar Cuenta</button>
+                            <button className="del-account btn justify-content-end px-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar Cuenta</button>
                             {showModal == true ? (
                                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">

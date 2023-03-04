@@ -20,21 +20,24 @@ api = Blueprint('api', __name__)
 
 @api.route('/users', methods=['GET'])
 def get_users():
-    users = User.query.all()
-    results = [user.serialize() for user in users]
+    active_users = User.query.filter_by(is_active=True).all()
+    results = [user.serialize() for user in active_users]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return jsonify(response_body), 200
+    return jsonify(response_body), 200   # Modificado y funciona, me trae solo los usuarios que estan activos 
 
 
 @api.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
-    user = User.query.get(user_id)
-    result = user.serialize()
-    response_body = {'message': 'OK',
+    user = User.query.filter_by(id=user_id, is_active=True).first()
+    if user:
+        result = user.serialize()
+        response_body = {'message': 'OK',
                      'result': result}
-    return jsonify(response_body), 200
+        return jsonify(response_body), 200  
+    else:
+        return jsonify({'message': 'User not found or not active'}), 404     # Modificado y probado, trae correctamente el usuario solo si es is_active : true
 
 
 @api.route('/register', methods=['POST'])
@@ -54,30 +57,29 @@ def create_user():
         "msg": " The new user has been created correctly "
     }
 
-    return jsonify(response_body), 200
+    return jsonify(response_body), 200             # Probado registra los usuarios sin errores 
 
 
 @api.route("/login", methods=["POST"])
 def user_login():
-    body = request.get_json()
+    body = request.get_json(force=True)
     email = request.json.get("email", None)
-    # password = request.json.get("password", None)
+    print(body['password'])
+    print(request.json.get("password", None))
     user = User.query.filter(User.email == body['email']).first()
-    print(user)
-    id = user.id
-
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 404
-
+    if not user.is_active:
+        return jsonify({"msg": "El usuario no está activo"}), 401
+    id = user.id
     compare = compare_pass(body['password'], user.password )
     if compare == False :
         return jsonify({"msg": "Nombre de usuario o contraseña incorrectos"}), 401
-
     else:    
         access_token = create_access_token(identity=email)
         response_body = { "id": id, 
                      "access_token": access_token}    
-    return jsonify(response_body), 200
+    return jsonify(response_body), 200                          # Modificado y comprobado me deja ingresar solo si el usuario esta activo 
 
 
 @api.route('/users/<int:user_id>', methods=['DELETE'])
@@ -85,11 +87,12 @@ def delete_user(user_id):
     user = User.query.get(user_id)
     if user is None:
         raise APIException('User not found', status_code=404)
-    db.session.delete(user)
+    user.is_active = False
     db.session.commit()
     response_body = {
-        "message": "User deleted correctly"}    
+        "message": "User deactivated correctly"}          # Modificado y comprobado me deja desactivar el usuario  
     return jsonify(response_body), 200
+
 
 
 @api.route('/users/<int:user_id>', methods=['PUT'])
@@ -101,10 +104,11 @@ def modify_user(user_id):
     user.name = request.json.get('name', user.name)
     user.email = request.json.get('email', user.email)
     user.password = encripted_pass(request.json.get('password', user.password))
+    print(request.json.get('password', user.password))
     user.phone = request.json.get('phone', user.phone)
     user.city = request.json.get('city', user.city)
     user.country = request.json.get('country', user.country)
-    user.avatar_url = request.json['avatar_url']
+    user.avatar_url = request.json.get('avatar_url', user.avatar_url)
     db.session.commit()
 
     response_body = {'name': user.name,
@@ -122,20 +126,24 @@ def modify_user(user_id):
 
 @api.route('/events', methods=['GET'])
 def get_all_events():
-    events = Events.query.all()
-    results = [event.serialize() for event in events]
+    active_events = Events.query.filter_by(is_active=True).all()
+    results = [event.serialize() for event in active_events]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return jsonify(response_body), 200
-
+    return jsonify(response_body), 200    # Modificado y comprobado solo trae los eventos activos 
+ 
 
 @api.route('/event/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
-    print(event_id)
-    event = Events.query.get(event_id)
-    print(event)
-    return jsonify(event.serialize()), 200
+    event = Events.query.filter_by(id=event_id, is_active=True).first()
+    if event:
+        result = event.serialize()
+        response_body = {'message': 'OK',
+                     'result': result}
+        return jsonify(response_body), 200  
+    else:
+        return jsonify({'message': 'Event not found or not active'}), 404    # Modificado y comprobado solo trae los eventos activos por su id 
 
 
 @api.route('/event/register', methods=['POST'])
@@ -188,11 +196,11 @@ def delete_event(event_id):
     event = Events.query.get(event_id)
     if event is None:
         raise APIException('Event not found', status_code=404)
-    db.session.delete(event)
+    event.is_active = False
     db.session.commit()
     response_body = {
-        "message": "Event deleted correctly"}    
-    return jsonify(response_body), 200
+        "message": "Event deactivated correctly"}    
+    return jsonify(response_body), 200                     # Modificado y correcto, desactiva el evento por su id 
 
 
 # CONTACTS
@@ -200,31 +208,35 @@ def delete_event(event_id):
 
 @api.route('/contacts', methods=['GET'])
 def get_all_contacts():
-    contacts = Contacts.query.all()
-    results = [contact.serialize() for contact in contacts]
+    active_contacts = Contacts.query.filter_by(is_active=True).all()
+    results = [contact.serialize() for contact in active_contacts]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return jsonify(response_body), 200
+    return jsonify(response_body), 200            # Modificado y probado trae todos los contactos activos 
 
 
 @api.route('/contacts/<user_id>', methods=['GET'])
 def get_contacts_by_user_id(user_id):
-    print(int(user_id))
-    contacts = Contacts.query.filter(Contacts.user_id == int(user_id))
-    results = [contact.serialize() for contact in contacts]
-    response_body = {'message': 'OK',
-                     'total_records': len(results),
-                     'results': results}
-    return jsonify(response_body), 200
+    contacts = Contacts.query.filter(Contacts.user_id == int(user_id)).filter(Contacts.is_active == True).all()
+    if contacts:
+        results = [contact.serialize() for contact in contacts]
+        response_body = {'message': 'OK',
+                         'total_records': len(results),
+                         'results': results}
+        return jsonify(response_body), 200
+    else:
+        response_body = {'message': 'No active contacts found for that ID'}
+        return jsonify(response_body), 404                          # Modificado y probado solo trae los contactos por id de usuario que esten activos 
 
 
 @api.route('/contact/<contact_id>', methods=['GET'])
 def get_contacts_by_id(contact_id):
-    print(contact_id)
-    contact = Contacts.query.get(contact_id)
-    print(contact)
-    return jsonify(contact.serialize()), 200
+    contact = Contacts.query.filter_by(id=contact_id, is_active=True).first()
+    if contact:
+        return jsonify(contact.serialize()), 200
+    else:
+        return jsonify({'message': 'Contact not found or not active'}), 404   # Modificado y probado, trae correctamente solo si el is_active es True
 
 
 @api.route('/contact/register', methods=['POST'])
@@ -262,11 +274,11 @@ def delete_contact(contact_id):
     contact = Contacts.query.get(contact_id)
     if contact is None:
         raise APIException('Contact not found', status_code=404)
-    db.session.delete(contact)
+    contact.is_active = False
     db.session.commit()
     response_body = {
-        "message": "Contact deleted correctly"}    
-    return jsonify(response_body), 200
+        "message": "Contact deactivated correctly"}    
+    return jsonify(response_body), 200                   # Modificado y probado, desactiva correctamente el contacto  
 
 
 # EVENTS_GUESTS
@@ -274,18 +286,21 @@ def delete_contact(contact_id):
 
 @api.route('/events_guests', methods=['GET'])
 def get_all_events_guests():
-    events_guests = Event_Guests.query.all()
-    results = [guests.serialize() for guests in events_guests]
+    active_events_guests = Event_Guests.query.filter_by(is_active=True).all()
+    results = [guests.serialize() for guests in active_events_guests]
     response_body = {'message': 'OK',
                      'total_records': len(results),
                      'results': results}
-    return response_body, 200
+    return response_body, 200                   # Modificado y probado, trae todos los event_guest activos     
 
 
 @api.route('/events_guest/<events_guest_id>', methods=['GET'])
 def get_events_guests_by_id(events_guest_id):
-    events_guest = Event_Guests.query.get(events_guest_id)
-    return jsonify(events_guest.serialize()), 200
+    events_guest = Event_Guests.query.filter_by(id=events_guest_id, is_active=True).first()
+    if events_guest:
+        return jsonify(events_guest.serialize()), 200
+    else:
+        return jsonify({'message': 'Event guest not found or not active'}), 404   # Modificado y probado, trae correctamente solo si el is_active es True
 
 
 @api.route('/events_guest/register', methods=['POST'])
@@ -322,11 +337,12 @@ def delete_events_guests(events_guest_id):
     events_guest = Event_Guests.query.get(events_guest_id)
     if events_guest is None:
         raise APIException('Events_guest not found', status_code=404)
-    db.session.delete(events_guest)
+    events_guest.is_active = False 
     db.session.commit()
     response_body = {
-        "message": "Events_guest deleted correctly"}    
-    return jsonify(response_body), 200
+        "message": "Events_guest deactivated correctly"}    
+    return jsonify(response_body), 200                       # Modificado y correcto desactiva el event_guest correctamente
+
 
 @api.route("/private", methods=["GET"])
 @jwt_required()
