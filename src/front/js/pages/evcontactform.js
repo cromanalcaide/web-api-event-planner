@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 
 
 import "../../styles/eventsform.css"
+import { array } from "prop-types";
 
 
 
@@ -14,52 +15,63 @@ export const Evcontactform = () => {
   let eventsList = store.events;
   let evListById = eventsList.filter(item => item.user_id === 11);//Usar datos local.Storage.
   let evListOrd = evListById.sort(function(a, b){return a.id - b.id});
-  let lastEvent = evListOrd[evListOrd.length - 1]
+  let lastEvent = evListOrd[evListOrd.length - 1];
+  let lastEvId = {...lastEvent}.id;
+  console.log(lastEvent);
+  console.log(lastEvId);
   
   let contactsList = store.contacts;
   let contactUser = contactsList.filter(el => el.user_id === 11); //Usar datos local.Storage.
- 
-  console.log(contactUser);
-  console.log(lastEvent);
+
 
   const [contactCheck, setContactCheck] = useState([]) 
   console.log(contactCheck)
 
+  const copyCheck = [];
+  for (let i = 0; i < contactCheck.length; i++) {
+   copyCheck.push({email: contactCheck[i].email, user_id: contactCheck[i].user_id, event_id: lastEvId, contact_id: contactCheck[i].id})
+    };
+    console.log(copyCheck);
 
-
-  const handelClick = (e) => {
-    e.preventDefault();
-  }
-
-  const handleChexbox = (e) => {
-    setContactCheck([...contactCheck, contactUser[(e.target.value)]]);
-  }
- 
-  /*/const sendContactUser = async () => {
+    
+  const sendNewEventGuess = async (objGuessEvent) => {
+    for (let i = 0; i < objGuessEvent.length; i++) {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      console.log(objNewEvent.name, objNewEvent.email, objNewEvent.user_id);
       const url =
-        "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/contact/register"
+        "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events_guest/register"
       const request = {
+
         method: "POST",
-        body: JSON.stringify({
-          "name": objNewEvent.name,
-          "email": objNewEvent.email,
-          "user_id": objNewEvent.user_id
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        },
+        body: JSON.stringify(objGuessEvent[i]),
+
+        headers: { "Content-Type": "application/json" },
       };
+      console.log(request);
       const response = await fetch(url, request);
       const result = await response.json();
       console.log(result);
     } catch (error) {
       console.log(error);
     }
-  };*/
+  };
+  };
+
+  
+
+  const handleChexbox = (e) => {
+    if (e.target.checked === true){
+      setContactCheck([...contactCheck, contactUser[(e.target.id)]]);
+    }
+  }
+  
+  const handelClick = (e) => {
+    e.preventDefault();
+    sendNewEventGuess(copyCheck);
+  }
+
+
   useEffect(() => {
     actions.getAllEvents();
   }, []);
@@ -74,7 +86,7 @@ export const Evcontactform = () => {
           {contactUser.map((el, index) => {
 					return (
             <div key={index}>
-            <input onChange={handleChexbox}  type="checkbox" id={index} value={index}></input> 
+            <input onChange={handleChexbox}  type="checkbox" id={index} defaultValue></input> 
             <label htmlFor="cbox2">{el.name}</label>
           </div> 
           )})}

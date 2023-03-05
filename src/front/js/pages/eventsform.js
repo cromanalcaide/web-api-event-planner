@@ -28,12 +28,12 @@ export const Eventsform = () => {
 
   const handelClick = (e) => {
     e.preventDefault();
-    sendNewEvent([objNewEvent]);
+    sendNewEvent(objNewEvent);
     e.target.reset();
   }
 
 
-  const sendNewEvent = async () => {
+  const sendNewEvent = async (newEvent) => {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -41,14 +41,7 @@ export const Eventsform = () => {
         "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/event/register"
       const request = {
         method: "POST",
-        body: JSON.stringify({
-          "title": objNewEvent.title,
-          "date": objNewEvent.date,
-          "description": objNewEvent.description,
-          "location": objNewEvent.location,
-          "image": objNewEvent.image,
-          "user_id": objNewEvent.user_id
-        }),
+        body: JSON.stringify(newEvent),
 
         headers: { "Content-Type": "application/json" },
       };
