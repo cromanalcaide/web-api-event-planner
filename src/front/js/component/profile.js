@@ -31,7 +31,6 @@ export const Profile = () => {
         reader.readAsDataURL(file);
     }
 
-
     const handleUploadClick = async () => {
         const formData = new FormData();
         formData.append('file', imageFile);
@@ -50,7 +49,6 @@ export const Profile = () => {
         actions.editUserInfo("avatar_url", data.secure_url)
     }
 
-
     const [fieldStatus, setFieldStatus] = useState({
         name: false,
         email: false,
@@ -67,13 +65,10 @@ export const Profile = () => {
         phone: user?.phone || ""
     });
 
-
-
     const handleDeleteAccount = () => {
         actions.deleteUser()
         navigate("/");
     }
-
 
     const handleEditField = (fieldName) => {
         setFieldValues({

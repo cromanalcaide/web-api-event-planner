@@ -13,7 +13,6 @@ export const Nextevent = () => {
     const evguest = store.eventguests;
    
 
-
     const userInfo = store.user?.result
     const userEmail = userInfo?.email
     

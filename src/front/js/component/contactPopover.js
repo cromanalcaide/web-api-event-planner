@@ -13,9 +13,9 @@ export const AddContactPopover = (props) => {
 
     const handleClick = () =>{
         actions.addNewContact(name, email, user_id)
+        actions.getUserContacts()
         setName("")
         setEmail("")
-        actions.getUserContacts()
     }
 
        

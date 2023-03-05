@@ -14,11 +14,11 @@ export const LeftSideBar = () => {
     const [avatars, setAvatars] = useState({});
 
 
-    function handleEditContact(contactId) {
+    const handleEditContact = (contactId) => {
         setEditingContactId(contactId);
     }
 
-    function handleSaveContact(contactId, updatedName, updatedEmail) {
+    const handleSaveContact = (contactId, updatedName, updatedEmail) => {
         actions.editContact(contactId, updatedName, updatedEmail)
         setEditingContactId(null);
     }
