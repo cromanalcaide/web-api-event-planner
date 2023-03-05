@@ -39,10 +39,15 @@ export const PrintEventsList = () => {
             <p className='div-title'>Listado de eventos</p>
             {futureDate.map((el, index) => {
                 return (
-                    <div key={index} className="each-event">
+                    <div key={index} className="events">
+                        <div className='each-event'>
                             <img  width="30" height="30" className='event-img rounded-circle' src={el.image}/>
-                            <p className='event-title pt-1' > {el.title} <br/><span className='event-date'>{el.date}</span></p>
-                            <div className="col ">
+                            <p className='event-title' >{el.title}</p>
+                        </div>
+                        <div className='col each-date'>
+                            <span className='event-date'>{el.date}</span>
+                        </div>
+                            <div className="col event-btn ">
                                 <Link to={"/singleevent/" + el.id} className="text-decoration-none">
                                     <p className="see-more-btn btn" >Ver evento</p>
                                 </Link>
