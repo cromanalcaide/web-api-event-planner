@@ -58,35 +58,7 @@ export const Eventsform = () => {
 
   return (
     <div className="eventsform-form">
-      <section className="section-eventsf vh-100 bg">
-        <form  onChange={handelChange} onSubmit={handelClick}>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Title</label>
-            <input  type="text" name="title" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Event" />
-
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Date</label>
-            <input  type="text" name="date" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Date" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Description</label>
-            <input  type="text" name="description" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Descripton Event" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Image</label>
-            <input  type="text" name="image" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter image" />
-          </div>
-          <div>
-            <Geocoding />
-          </div>
-          <button type="submit" >Create Event</button>
-          <Link to={"/evcontactform/"}>
-          <button >Add Contacts</button>
-          </Link>
-        </form>
-      </section>
-      
+      <Geocoding/>
     </div>
   );
 };

@@ -14,6 +14,7 @@ export const Singleevent = props => {
 	const params = useParams();
 
   let eveResult = store.events.filter(el => el.id == params.theid);
+  console.log(eveResult)
 
   let eventGuestByEvent =store.eventguests.filter(el => el.event_id == params.theid);
   console.log(eventGuestByEvent)
@@ -22,14 +23,15 @@ export const Singleevent = props => {
   console.log(allContacts)
 
   let namesByEvent = [];
+  console.log(namesByEvent)
     for (let i = 0; i < eventGuestByEvent.length; i++) {
       for (let j = 0; j < allContacts.length; j++) {
         if (eventGuestByEvent[i].contact_id === allContacts[j].id) {
-          namesByEvent.push(allContacts[i]);
+          namesByEvent.push(allContacts[j]);
         }
       }
     }
-
+ 
     return (
       <div className='event-detail container text-center'>
       {eveResult.map((el, index) => {
