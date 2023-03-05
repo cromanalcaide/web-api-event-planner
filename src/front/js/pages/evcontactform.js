@@ -33,7 +33,7 @@ export const Evcontactform = () => {
     };
     console.log(copyCheck);
 
-    
+
   const sendNewEventGuess = async (objGuessEvent) => {
     for (let i = 0; i < objGuessEvent.length; i++) {
     try {
@@ -63,6 +63,11 @@ export const Evcontactform = () => {
   const handleChexbox = (e) => {
     if (e.target.checked === true){
       setContactCheck([...contactCheck, contactUser[(e.target.id)]]);
+    }
+    if (e.target.checked === false){
+      let cheqOff = [...contactCheck];
+		  cheqOff.splice(e.target.id, 1);
+      setContactCheck(cheqOff);
     }
   }
   
