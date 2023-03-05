@@ -11,9 +11,8 @@ import { Register } from "./component/register";
 import { ContactForm } from "./pages/contactForm";
 import { About } from "./pages/about";
 import { Geocoding } from "./component/geocoding.js";
-import { AddressAutocomp } from "./component/addressAutocomp.js";
-import { MapComponent2 } from "./component/map2.jsx";
-import { MapComponent3 } from "./component/map3.js";
+import { MapComponent2 } from "./component/map2.js";
+import { NextEventsMap } from "./component/nexteventsmap.js";
 
 
 //create your first component
@@ -33,10 +32,9 @@ const Layout = () => {
                         <Route element={<Register />} path="/register" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<About />} path="/about" />
-                        <Route element={<MapComponent2 />} path="/map2" />
-                        <Route element={<MapComponent3 />} path="/map3" />
                         <Route element={<Geocoding />} path="/geocoding" />
-                        <Route element={<AddressAutocomp />} path="/addressautocomp" />
+                        <Route element={<MapComponent2 />} path="/map2" />
+                        <Route element={<NextEventsMap />} path="/nexteventsmap" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

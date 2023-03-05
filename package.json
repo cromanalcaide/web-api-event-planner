@@ -81,6 +81,7 @@
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
 		"react-google-autocomplete": "^2.7.3",
+		"react-google-maps": "^9.4.5",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0"
 	}
