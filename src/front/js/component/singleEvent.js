@@ -26,7 +26,7 @@ export const SingleEvent = props => {
   for (let i = 0; i < eventGuestByEvent.length; i++) {
     for (let j = 0; j < allContacts.length; j++) {
       if (eventGuestByEvent[i].contact_id === allContacts[j].id) {
-        namesByEvent.push(allContacts[i]);
+        namesByEvent.push(allContacts[j]);
       }
     }
   }
@@ -43,7 +43,7 @@ export const SingleEvent = props => {
       </div>
       <div className="col">
         <ViewTitle title= "Dashboard / Detalles del evento" className="dash-title" />
-        <button className="btn add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
+        <button className="add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
         <div className='event-detail container'>
           <div className="event-content">
           {eveResult.map((el, index) => {

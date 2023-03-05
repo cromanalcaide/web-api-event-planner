@@ -55,7 +55,7 @@ export const Comments = () => {
             </ul>
             <form className='comment-form' onSubmit={handleNewComment}>
                 <textarea className='content-form' value={newComment} onChange={(e) => setNewComment(e.target.value)} />
-                <button className='btn submit-btn' type="submit">Enviar</button>
+                <button className='submit-btn' type="submit">Enviar</button>
             </form>
         </div>)
 

@@ -400,21 +400,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			uploadImage: async (imageFile) => {
-				const formData = new FormData();
-				formData.append('file', imageFile);
-				formData.append('upload_preset', 'your_upload_preset_here');
+			// uploadImage: async (imageFile) => {
+			// 	const formData = new FormData();
+			// 	formData.append('file', imageFile);
+			// 	formData.append('upload_preset', 'your_upload_preset_here');
 
-				const cloudName = process.env.CLOUD_NAME
+			// 	const cloudName = process.env.CLOUD_NAME
 
-				const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-					method: 'POST',
-					body: formData
-				});
+			// 	const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+			// 		method: 'POST',
+			// 		body: formData
+			// 	});
 
-				const data = await response.json();
-				onUpload(data.secure_url);
-			},
+			// 	const data = await response.json();
+			// 	onUpload(data.secure_url);
+			// },
 			getAllUsers: async () => {
 				const requestOptions = {
 					method: "GET",

@@ -367,10 +367,6 @@ def user_avatar(user_id):
         db.session.commit()
         return user.avatar_url, 200
 
-
-
-
-
 #COMMENTS 
 
 @api.route('/comments/<int:event_id>', methods=['GET'])

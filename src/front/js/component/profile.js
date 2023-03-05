@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ViewTitle } from "./viewTitle";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Image } from 'cloudinary-react';
+
 import "../../styles/profile.css"
 
 export const Profile = () => {
@@ -256,7 +256,7 @@ export const Profile = () => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button className="del-account btn justify-content-end px-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar Cuenta</button>
+                            <button className="del-account justify-content-end px-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => { setShowModal(true) }}>Eliminar Cuenta</button>
                             {showModal == true ? (
                                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">

@@ -46,7 +46,7 @@ export const Private = () => {
             </div>
             <div className="col">
               <ViewTitle title="Dashboard" className="dash-title" />
-              <button className="btn add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
+              <button className="add-event"><i className="fa-solid fa-plus plus-btn"></i>Crear Evento</button>
               <Nextevent />
               <PrintEventsList />
             </div>

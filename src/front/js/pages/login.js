@@ -69,7 +69,7 @@ export const Login = () => {
                       </a>
                     </p> */}
                       <button
-                        className="lg-btn btn-primary btn-lg px-5 "
+                        className="lg-btn btn-lg px-5 "
                         type="submit"
                       >
                         Ingresar

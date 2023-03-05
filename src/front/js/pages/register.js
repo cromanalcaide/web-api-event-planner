@@ -185,7 +185,7 @@ export const Register = () => {
                         </label>
                       </div>
                       <button
-                        className="lg-btn btn-primary btn-lg px-5 "
+                        className="rg-btn btn-lg px-5 "
                         type="submit">
                         Registrarme
                       </button>

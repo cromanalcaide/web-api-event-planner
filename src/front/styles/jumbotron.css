@@ -4,13 +4,28 @@
     background-color: #F1EEEE;
 }
 
-.start-btn {
-    background-color: #667DD2;
-    border-color: #667DD2;
-    font-family: 'Puritan', sans-serif;
-    font-size: large;
-    padding: 3px ;
-    
+
+.start-btn{
+  font-family: 'Puritan', sans-serif;
+  font-size: large;
+  padding: 3px;
+  color: white;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  transition:all 0.16s;
+  position:relative;
+  top:0;
+  background:#667DD2;
+  box-shadow:0px 7px 0px 0px #586db9,
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+.start-btn:focus{
+  outline:none;
+}
+.start-btn:active{
+  top:5px;
+  box-shadow: 0px 3px 0px 0px #586db9;
 }
 
 .arrow {

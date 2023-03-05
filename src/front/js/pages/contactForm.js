@@ -79,7 +79,7 @@ export const ContactForm = () => {
                                                     onChange={(e) => setMessage(e.target.value)}
                                                     required
                                                 />
-                                                <button className="d-grid gap-2 lg-btn btn-primary btn-lg px-5" type="submit">
+                                                <button className="d-grid gap-2 form-btn btn-lg px-5" type="submit">
                                                     Enviar
                                                 </button>
 

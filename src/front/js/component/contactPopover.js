@@ -25,7 +25,7 @@ export const AddContactPopover = (props) => {
             <PopoverBody>
                 <Input name="name" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
                 <Input className="mt-2" name="email" placeholder="Correo Electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button className="add-btn btn mt-3" onClick={handleClick}><i className="fa-solid fa-plus "></i>Agregar</button>
+                <button className="add-btn mt-3" onClick={handleClick}>Agregar</button>
             </PopoverBody>
         </Popover>
     );
