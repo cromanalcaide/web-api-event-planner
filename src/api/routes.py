@@ -158,7 +158,7 @@ def create_event():
             db.session.add(image)
             db.session.commit()
 
-    new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"],  image=body["image"], coord=body["coord"], user_id=body["user_id"])
+    new_event = Events(title=body["title"], date=body["date"], description=body["description"], location=body["location"],  image=body["image"], lati=body["lati"], longi=body["longi"], user_id=body["user_id"])
     if image is not None:
         new_event.image = image.url
     db.session.add(new_event)
@@ -177,7 +177,8 @@ def modify_event(event_id):
     event.description = request.json.get('description', event.description)
     event.location = request.json.get('location', event.location)
     event.image = request.json.get('image', event.image)
-    event.coord = request.json.get('coord', event.coord)
+    event.lati = request.json.get('lati', event.lati)
+    event.longi = request.json.get('longi', event.longi)
     event.user_id = request.json.get('user_id', event.user_id)
     db.session.commit()
 
@@ -185,7 +186,8 @@ def modify_event(event_id):
                      'date': event.date,
                      'description': event.description,
                      'location': event.location,
-                     'coord': event.coord,
+                     'lati': event.lati,
+                     'longi': event.longi,
                      'image': event.image,
                      'user_id': event.user_id
                      }

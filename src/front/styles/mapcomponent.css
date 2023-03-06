@@ -1,0 +1,28 @@
+#map {
+  height: 200px;
+  width: 100%;
+  /* margin-left: 10px;
+    margin-right: 10px; */
+}
+
+.mapContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.map-div {
+  background-color: white;
+  border-radius: 10px;
+  width: 23.5em;
+  height: fit-content;
+  margin: 1em 0 0 3.6em;
+  padding-bottom: 1em;
+}
+
+.map-title{
+    color: #667DD2;
+    margin: 0px;
+    font-size: medium;
+    font-weight: 700;
+    padding: 0.5em;
+}

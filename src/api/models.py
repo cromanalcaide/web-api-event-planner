@@ -43,7 +43,8 @@ class Events(db.Model):
     description = db.Column(db.String(360), nullable=False)
     location = db.Column(db.String(240), nullable=False)
     image = db.Column(db.String(560), nullable=True)
-    coord = db.Column(db.String(360), nullable=True)
+    lati = db.Column(db.Float, nullable=True)
+    longi = db.Column(db.Float, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
     is_active = db.Column(db.Boolean, default=True)
@@ -59,7 +60,8 @@ class Events(db.Model):
         "description": self.description,
         "location": self.location,
         "image": self.image,
-        "coord": self.coord,
+        "lati": self.lati,
+        "longi": self.longi,
         "user_id": self.user_id,
         "is_active": self.is_active
     }

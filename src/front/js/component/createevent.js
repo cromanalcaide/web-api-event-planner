@@ -10,14 +10,19 @@ import "../../styles/createevent.css"
 export const CreateEventForm = () => {
   const { store, actions } = useContext(Context);
   const [address, setAddress] = useState('');
-  const [listCoorden, setCoorden] = useState('');
+  const [listLati, setLati] = useState('');
+  const [listLongi, setLongi] = useState('');
   const [listTitle, setTitle] = useState('');
   const [listDate, setDate] = useState('');
+  const [listTime, setTime] = useState('');
   const [listDescription, setDescription] = useState('');
-  // const [listImage, setImage] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
   const [imageSrc, setImageSrc] = useState("")
   const [imageFile, setImageFile] = useState(null);
+
+  let dateTime = listDate+" "+listTime+":00"
+
+  console.log(listLati, typeof(listLongi))
 
   const navigate = useNavigate();
 
@@ -53,12 +58,13 @@ export const CreateEventForm = () => {
 
     const objNewEvent = {
       title: listTitle,
-      date: listDate,
+      date: dateTime,
       description: listDescription,
       location: address,
       image: data.secure_url,
       user_id: userId.id,
-      coord: listCoorden
+      lati : listLati,
+      longi : listLongi,
     };
   
     sendNewEvent(objNewEvent);
@@ -117,7 +123,8 @@ export const CreateEventForm = () => {
           (results, status) => {
 
             if (status === "OK") {
-              setCoorden([results[0].geometry.location.lat(), results[0].geometry.location.lng()])
+              setLongi(results[0].geometry.location.lat()) 
+              setLati(results[0].geometry.location.lng())
 
               console.log(`Latitud: ${results[0].geometry.location.lat()}, Longitud: ${results[0].geometry.location.lng()}`);
             } else {
@@ -142,19 +149,24 @@ export const CreateEventForm = () => {
           <label className='create-label' htmlFor="exampleInputEmail1">Título</label>
           <input className="create-input form-control" onChange={(e) => {
             setTitle(e.target.value)
-          }} type="text" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de tu evento..." />
+          }} type="text" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de tu evento..." required/>
         </div>
         <div className="form-group">
           <label className='create-label' htmlFor="exampleInputEmail1">Fecha</label>
           <input className="create-input form-control" onChange={(e) => {
             setDate(e.target.value)
-          }} type="text" name="date" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fecha del evento" />
+          }} type="date" name="date" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fecha del evento" required />
         </div>
+        <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Time</label>
+                <input  onChange={(e) => {
+                setTime(e.target.value)}} type="time" name="time" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Time" />
+              </div>
         <div className="form-group">
           <label className='create-label' htmlFor="exampleInputEmail1">Descripción</label>
           <input className="create-input form-control" onChange={(e) => {
             setDescription(e.target.value)
-          }} type="text-area" name="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Descripción del evento..." />
+          }} type="text-area" name="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Descripción del evento..." required/>
         </div>
         <div className="form-group">
           <label className='create-label' htmlFor="exampleInputEmail1">Imagen</label>
@@ -171,6 +183,7 @@ export const CreateEventForm = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             ref={inputRef}
+            required
           />
         </div>
         <button className='create-ev-btn' type="submit" >Crear Evento</button>

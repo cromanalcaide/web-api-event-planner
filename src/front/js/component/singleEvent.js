@@ -6,6 +6,7 @@ import { LeftSideBar } from "./sidebarleft";
 import { ViewTitle } from "./viewTitle";
 import { Comments } from "./comments";
 import { CreateEventForm } from "../component/createevent";
+import { MapComponent } from "./mapcomponent";
 
 import "../../styles/singleevent.css"
 
@@ -122,7 +123,10 @@ export const SingleEvent = props => {
                 })}
               </div>
             </div>
+            <div className="row com-map-row">
             <Comments />
+            <MapComponent/>
+            </div>
           </>
         ) : (
           <CreateEventForm className="create-event-container" />
