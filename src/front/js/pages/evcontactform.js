@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
-import "../../styles/eventsform.css"
+import "../../styles/evcontactsform.css"
 import { array } from "prop-types";
 
 
@@ -17,21 +17,22 @@ export const Evcontactform = () => {
   let evListOrd = evListById.sort(function(a, b){return a.id - b.id});
   let lastEvent = evListOrd[evListOrd.length - 1];
   let lastEvId = {...lastEvent}.id;
-  console.log(lastEvent);
-  console.log(lastEvId);
+  let arr = [];
+  for (let i = 0; i <eventsList.length; i++) {
+    if (eventsList[i].id === lastEvId) {
+      arr.push(eventsList[i]);
+    }
+  }
   
   let contactsList = store.contacts;
   let contactUser = contactsList.filter(el => el.user_id === 11); //Usar datos local.Storage.
 
-
   const [contactCheck, setContactCheck] = useState([]) 
   console.log(contactCheck)
-
   const copyCheck = [];
   for (let i = 0; i < contactCheck.length; i++) {
    copyCheck.push({email: contactCheck[i].email, user_id: contactCheck[i].user_id, event_id: lastEvId, contact_id: contactCheck[i].id})
     };
-    console.log(copyCheck);
 
 
   const sendNewEventGuess = async (objGuessEvent) => {
@@ -75,7 +76,7 @@ export const Evcontactform = () => {
     e.preventDefault();
     sendNewEventGuess(copyCheck);
   }
-
+  
 
   useEffect(() => {
     actions.getAllEvents();
@@ -83,21 +84,46 @@ export const Evcontactform = () => {
 
 
   return (
-    <div className="eventsform-form">
-      <section className="section-eventsf vh-100 bg">
-        <form  onSubmit={handelClick}>
-          
-          <h5>Choose a contact</h5>
-          {contactUser.map((el, index) => {
-					return (
-            <div key={index}>
-            <input onChange={handleChexbox}  type="checkbox" id={index} defaultValue></input> 
-            <label htmlFor="cbox2">{el.name}</label>
-          </div> 
-          )})}
-          <button type="submit" >Create Event</button>
-        </form>
-      </section>
+    <div className=' container row'>
+      {arr.map((el, index) => {
+      return (
+      <div key={index} >
+        <div  className='row main-evc '>
+          <h1 id= "h1-singlee">Evento Creado</h1>
+          <h1></h1>
+          <h1></h1>
+            <div className="col-sm-6">
+              <img className="image-singlee" src={el.image}/>
+              <h6 className="p-contacts">Evento</h6>
+              <p className="p-singlee"><strong>{el.title}</strong></p>
+              <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
+              <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
+            <h6 className="p-singlee">Descripción</h6>
+            <p className="p-contacts" >{el.description}</p>
+            </div>
+          <div className="col-sm-6 ">
+            <section className=" section-eventsf">
+              <form   onSubmit={handelClick}>
+                <h5>Choose a contact</h5>
+                {contactUser.map((el, index) => {
+                return (
+                  <div key={index}>
+                  <input onChange={handleChexbox}  type="checkbox" id={index} defaultValue></input> 
+                  <label htmlFor="cbox2">{el.name}</label>
+                </div> 
+                )})}
+                <button type="submit" >Add Contacts</button>
+                    <Link to={"/eventsform/"}>
+                      <button >Add More Events</button>
+                    </Link>
+              </form>
+            </section>
+            </div>
+        </div>
+      </div>
+      )})}
+    
+    
     </div>
   );
 };

@@ -1,18 +1,22 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { date } from 'yup';
 
 export const Geocoding = () => {
     const [address, setAddress] = useState('');
     const [listCoorden, setCoorden] = useState('');
     const [listTitle, setTitle] = useState('');
     const [listDate, setDate] = useState('');
+    const [listTime, setTime] = useState('');
     const [listDescription, setDescription] = useState('');
     const [listImage, setImage] = useState('');
-    
+  
+    let dateTime = listDate+" "+listTime+":00"
+   
     const objNewEvent = {
       title: listTitle,
-      date: listDate,
+      date: dateTime,
       description: listDescription,
       location: address,
       image: listImage,
@@ -20,11 +24,13 @@ export const Geocoding = () => {
       coord: listCoorden
     };
     console.log(objNewEvent)
+    const navigate = useNavigate();
 
     const handelClick = (e) => {
       e.preventDefault();
       sendNewEvent(objNewEvent);
       e.target.reset();
+      navigate('/evcontactform')
     }
   
     const sendNewEvent = async (newEvent) => {
@@ -98,7 +104,12 @@ export const Geocoding = () => {
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Date</label>
                 <input  onChange={(e) => {
-                setDate(e.target.value)}} type="text" name="date" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Date" />
+                setDate(e.target.value)}} type="date" name="date" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Date" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Time</label>
+                <input  onChange={(e) => {
+                setTime(e.target.value)}} type="time" name="time" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Time" />
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Description</label>
@@ -123,9 +134,6 @@ export const Geocoding = () => {
                 />
               </div>
                 <button type="submit" >Create Event</button>
-              <Link to={"/evcontactform/"}>
-                <button >Add Contacts</button>
-              </Link>
             </form>
           </section>
         );
