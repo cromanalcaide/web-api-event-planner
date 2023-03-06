@@ -12,10 +12,12 @@ export const AddContactPopover = (props) => {
     const user_id = parseInt(userId.id);
 
     const handleClick = () =>{
-        actions.addNewContact(name, email, user_id)
-        actions.getUserContacts()
-        setName("")
-        setEmail("")
+        if (name !== "" && email !== "") {
+            actions.addNewContact(name, email, user_id)
+            actions.getUserContacts()
+            setName("")
+            setEmail("")
+          }
     }
 
        

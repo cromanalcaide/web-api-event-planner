@@ -28,12 +28,14 @@ export const Comments = () => {
     }, []);
 
     const handleNewComment = async (e) => {
+        if (newComment !== "") {
         e.preventDefault();
         const userId = JSON.parse(localStorage.getItem("userId"))
         await actions.postComment(userId.id, newComment, eventId.theid);
         setNewComment('');
         const newComments = await fetchComments();
         setComments(newComments);
+        }
     };
 
     const userInfo = store.user.result
