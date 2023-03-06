@@ -42,7 +42,7 @@ class Events(db.Model):
     date = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(360), nullable=False)
     location = db.Column(db.String(240), nullable=False)
-    image = db.Column(db.String(360), nullable=True)
+    image = db.Column(db.String(560), nullable=True)
     coord = db.Column(db.String(360), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)

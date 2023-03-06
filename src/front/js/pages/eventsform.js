@@ -8,16 +8,16 @@ export const Eventsform = () => {
 
   const { store, actions } = useContext(Context);
 
-
+  const userID = JSON.parse(localStorage.getItem('userId'))
   const objNewEvent = {
     title: "",
     date: "",
     description: "",
     location: "",
     image: "",
-    user_id: 11 // Modificar con datos de Local Storage
+    user_id: userID,
   };
-  console.log(objNewEvent)
+  
 
   const handelChange = (e) => {
     objNewEvent[e.target.name] = e.target.value;

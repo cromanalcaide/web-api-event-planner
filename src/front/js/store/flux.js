@@ -429,6 +429,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			editEventInfo: async (eventId, field, value) => {
+				const updatedEvent = { [field]: value };
+				console.log("updatedevent",updatedEvent, eventId)
+			
+				try {
+				  const response = await fetch(`${BACKEND_URL}api/events/${eventId}`, {
+					method: "PUT",
+					headers: {
+					  "Content-type": "application/json"
+					},
+					body: JSON.stringify(updatedEvent)
+				  });
+				 
+				  const updatedEventInfo = await response.json();
+			  
+				  const prevStore = getStore();
+				  const updatedEvents = prevStore.events.map((event) =>
+					event.id === eventId ? updatedEventInfo : event
+				  );
+			  
+				  setStore({
+					...prevStore,
+					events: updatedEvents
+				  });
+				} catch (error) {
+				  console.log(error);
+				}
+			  },
+			  
 
 
 		}

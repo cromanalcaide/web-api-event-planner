@@ -308,7 +308,7 @@ def get_events_guests_by_id(events_guest_id):
 @api.route('/events_guest/register', methods=['POST'])
 def create_events_guests():
     body = request.get_json()
-    new_events_guest = Event_Guests(contact_id=body["contact_id"], event_id=body["event_id"], user_id=body["user_id"])
+    new_events_guest = Event_Guests(contact_id=body["contact_id"], email=body["email"], event_id=body["event_id"], user_id=body["user_id"])
     db.session.add(new_events_guest)
     db.session.commit()
     return jsonify(new_events_guest.serialize()), 200

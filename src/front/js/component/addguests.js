@@ -12,9 +12,10 @@ export const AddGuestsToEvent = () => {
   const userId = JSON.parse(localStorage.getItem('userId'))
 
   let eventsList = store.events;
-  let evListById = eventsList.filter(item => item.user_id === userId);
+  // let evListById = eventsList.filter(item => item.user_id === userId);
   console.log(eventsList)
-  let evListOrd = evListById.sort(function(a, b){return a.id - b.id});
+
+  let evListOrd = eventsList.sort(function(a, b){return a.id - b.id});
   console.log(evListOrd)
   let lastEvent = evListOrd[evListOrd.length - 1];
   let lastEvId = {...lastEvent}.id;
@@ -24,7 +25,7 @@ export const AddGuestsToEvent = () => {
   
 
   let contactsList = store.userContacts;
-  let contactUser = contactsList.filter(el => el.user_id === userId); 
+  // let contactUser = contactsList.filter(el => el.user_id === userId); 
 
 
   const [contactCheck, setContactCheck] = useState([]) 
@@ -32,7 +33,7 @@ export const AddGuestsToEvent = () => {
 
   const copyCheck = [];
   for (let i = 0; i < contactCheck.length; i++) {
-   copyCheck.push({email: contactCheck[i].email, user_id: contactCheck[i].user_id, event_id: lastEvId, contact_id: contactCheck[i].id})
+   copyCheck.push({email: contactCheck[i].email, user_id: userId.id, event_id: lastEvId, contact_id: contactCheck[i].id})
     };
     console.log(copyCheck);
 
@@ -40,10 +41,10 @@ export const AddGuestsToEvent = () => {
   const sendNewEventGuess = async (objGuessEvent) => {
     for (let i = 0; i < objGuessEvent.length; i++) {
     try {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      // const myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
       const url =
-        "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events_guest/register"
+        "https://3001-cromanalcai-webapievent-8evfm2s59z0.ws-eu89.gitpod.io/api/events_guest/register"
       const request = {
 
         method: "POST",
@@ -65,7 +66,7 @@ export const AddGuestsToEvent = () => {
 
   const handleChexbox = (e) => {
     if (e.target.checked === true){
-      setContactCheck([...contactCheck, contactUser[(e.target.id)]]);
+      setContactCheck([...contactCheck, contactsList[(e.target.id)]]);
     }
     if (e.target.checked === false){
       let cheqOff = [...contactCheck];
@@ -91,7 +92,7 @@ export const AddGuestsToEvent = () => {
         <form  onSubmit={handelClick}>
 
           <h5>Choose a contact</h5>
-          {contactUser.map((el, index) => {
+          {contactsList.map((el, index) => {
 					return (
             <div key={index}>
             <input onChange={handleChexbox}  type="checkbox" id={index} defaultValue></input> 
