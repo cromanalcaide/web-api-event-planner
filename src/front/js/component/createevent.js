@@ -135,6 +135,7 @@ const handleUploadClick = async () => {
   return (
 
     <div className='create-event'>
+        <p className='create-title'>Ingresa aquí la información del nuevo evento</p>
         <form onSubmit={handelClick}>
           <div className="form-group">
             <label className='create-label' htmlFor="exampleInputEmail1">Título</label>

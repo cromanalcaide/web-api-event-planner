@@ -7,6 +7,7 @@
   border-radius: 16px;
   width: 50em;
   padding: 0.5em 2em 2em 2em;
+  margin: 1em 0em 0em 3.6em;
 }
 
 .create-ev-btn,
@@ -45,4 +46,9 @@
     padding: 0.5em;
 }
 
-
+.create-title{
+    font-family: 'Puritan', sans-serif;
+    font-size: large;
+    font-weight: 700;
+    color: #667dd2;
+}
