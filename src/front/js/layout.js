@@ -12,6 +12,8 @@ import { TermsAndConditions } from "./pages/termsandconditions";
 import { CookiePolicy } from "./pages/cookiepolicy";
 import { Profile } from "./component/profile";
 import { SingleEvent } from "./component/singleEvent";
+import { Eventsform } from "./pages/eventsform";
+import { AddGuestsToEvent } from "./component/addguests";
 
 
 
@@ -29,6 +31,8 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<ContactForm />} path="/contact" />
+                        <Route element={<Eventsform />} path="/create-event" />
+                        <Route element={<AddGuestsToEvent />} path="/add-guest-event" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Private />} path="/private"/>
                         <Route element={<TermsAndConditions />} path="/termsandconditions"/>

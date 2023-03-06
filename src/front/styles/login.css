@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap");
 
 .title-login,
-.form-control {
+.lg-input {
   font-family: "Puritan", sans-serif;
 }
 
@@ -42,10 +42,10 @@
 }
 
 ::placeholder {
-  color: #667dd2;
+  color: #65666a;
 }
 
-.form-control {
+.lg-input {
   box-shadow: -7px 7px 11px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border-style: none;

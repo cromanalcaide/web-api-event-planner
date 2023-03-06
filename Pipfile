@@ -20,6 +20,7 @@ typing-extensions = "*"
 flask-jwt-extended = "*"
 sqlalchemy = "==1.4.42"
 bcrypt = "*"
+geopy = "*"
 
 [requires]
 python_version = "3.10"

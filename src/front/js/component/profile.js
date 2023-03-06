@@ -121,8 +121,8 @@ export const Profile = () => {
                                      height: '70px', 
                                 }}  />
                             </div>
-                            <div className="col-7">
-                                <input className="form-control-sm fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
+                            <div className="data-div col-7">
+                                <input className="form-control fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
                                     onChange={(e) => setNewValue(e.target.value)} ></input>
                                 <i className={`fa-icon fa-solid ${fieldStatus["name"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["name"] ? "" : "disabled"}`}
                                     onClick={() => {
@@ -141,10 +141,10 @@ export const Profile = () => {
                                     <div className="col-3 ms-5">
                                         <label>Imagen : </label>
                                     </div>
-                                    <div className="col-5">
-                                        <input className="user-edit-form" type="file"
+                                    <div className="data-div col-5">
+                                        <input className="form-control user-edit-form" type="file"
                                             accept="image/*" onChange={handleFileInputChange}></input>
-                                        <button className="btn" onClick={handleUploadClick}><i className="fa-icon fa-solid fa-check"></i></button>
+                                        <button className="check-btn btn" onClick={handleUploadClick}><i className="fa-icon fa-solid fa-check"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -152,8 +152,8 @@ export const Profile = () => {
                                 <div className="col-3 ms-5">
                                     <label>Correo Electrónico :</label>
                                 </div>
-                                <div className="col-5">
-                                    <input className="user-edit-form" type="email" defaultValue={user?.email} disabled={!fieldStatus.email}
+                                <div className="data-div col-6">
+                                    <input className="form-control user-edit-form" type="email" defaultValue={user?.email} disabled={!fieldStatus.email}
                                         onChange={(e) => setNewValue(e.target.value)}></input>
                                     <i className={`fa-icon fa-solid ${fieldStatus["email"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["email"] ? "" : "disabled"}`}
                                         onClick={() => {
@@ -171,22 +171,26 @@ export const Profile = () => {
                                     <div className="col-3 ms-5">
                                         <label>Nueva Contraseña : </label>
                                     </div>
-                                    <div className="col-5">
-                                        <form onSubmit={formik.handleSubmit}>
+                                    <div className="pass-data-div col-7">
+                                        <form className="pass-form" onSubmit={formik.handleSubmit}>
+                                            <div>
                                             <input
                                                 id="typePasswordX"
                                                 name="typePasswordX"
-                                                className="user-edit-form"
+                                                className="form-control user-edit-form"
                                                 type={showPassword ? "text" : "password"}
                                                 disabled={fieldStatus.password === "password" ? !showPassword : false}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.typePasswordX}
                                             />
+                                            </div>
+                                            <div className="icon-div">
                                             <i className={`fa-icon fa-solid ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
                                                 onClick={() => setShowPassword(!showPassword)}
                                             ></i>
                                             <button className="btn px-0" type="submit"><i className="fa-solid fa-check"></i></button>
+                                            </div>
                                             {formik.touched.typePasswordX && formik.errors.typePasswordX ? (
                                                 <div className="text-danger">{formik.errors.typePasswordX}</div>
                                             ) : null}
@@ -199,8 +203,8 @@ export const Profile = () => {
                                     <div className="col-3 ms-5">
                                         <label>País : </label>
                                     </div>
-                                    <div className="col-5">
-                                        <input className="user-edit-form" type="text" defaultValue={user?.country} disabled={!fieldStatus.country}
+                                    <div className="data-div col-5">
+                                        <input className="form-control user-edit-form" type="text" defaultValue={user?.country} disabled={!fieldStatus.country}
                                             onChange={(e) => setNewValue(e.target.value)}></input>
                                         <i className={`fa-icon fa-solid ${fieldStatus["country"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["country"] ? "" : "disabled"}`}
                                             onClick={() => {
@@ -219,8 +223,8 @@ export const Profile = () => {
                                     <div className="col-3 ms-5">
                                         <label>Ciudad : </label>
                                     </div>
-                                    <div className="col-5">
-                                        <input className="user-edit-form" type="text" defaultValue={user?.city} disabled={!fieldStatus.city}
+                                    <div className="data-div col-6">
+                                        <input className="form-control user-edit-form" type="text" defaultValue={user?.city} disabled={!fieldStatus.city}
                                             onChange={(e) => setNewValue(e.target.value)}></input>
                                         <i className={`fa-icon fa-solid ${fieldStatus["city"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["city"] ? "" : "disabled"}`}
                                             onClick={() => {
@@ -239,8 +243,8 @@ export const Profile = () => {
                                     <div className="col-3 ms-5">
                                         <label>Teléfono : </label>
                                     </div>
-                                    <div className="col-5">
-                                        <input className="user-edit-form" type="text" defaultValue={user?.phone} disabled={!fieldStatus.phone}
+                                    <div className="data-div col-5">
+                                        <input className="form-control user-edit-form" type="text" defaultValue={user?.phone} disabled={!fieldStatus.phone}
                                             onChange={(e) => setNewValue(e.target.value)}></input>
                                         <i className={`fa-icon fa-solid ${fieldStatus["phone"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["phone"] ? "" : "disabled"}`}
                                             onClick={() => {

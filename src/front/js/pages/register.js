@@ -82,7 +82,7 @@ export const Register = () => {
                             type="text"
                             id="typeName"
                             name="typeName"
-                            className="form-control form-control-lg mb-4 mr-5"
+                            className="rg-input form-control-lg mb-4 mr-5"
                             placeholder="Nombre"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -97,7 +97,7 @@ export const Register = () => {
                             type="email"
                             id="typeEmailX"
                             name="typeEmailX"
-                            className="form-control form-control-lg mb-4 text-lowercase"
+                            className="rg-input form-control-lg mb-4 text-lowercase"
                             placeholder="Correo electrónico"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -111,7 +111,7 @@ export const Register = () => {
                           <select
                             id="typeCountry"
                             name="typeCountry"
-                            className="form-select form-control form-control-lg mb-4"
+                            className="form-select rg-input form-control-lg mb-4"
                             value={selectedCountry}
                             onChange={handleCountryChange}>
                             <option value="">Seleccione un país</option>
@@ -126,7 +126,7 @@ export const Register = () => {
                           <select
                             id="typeCity"
                             name="typeCity"
-                            className="form-select form-control form-control-lg mb-4"
+                            className="form-select rg-input form-control-lg mb-4"
                             value={selectedCity}
                             onChange={(e) => setSelectedCity(e.target.value)}
                           >
@@ -143,7 +143,7 @@ export const Register = () => {
                             type="phone"
                             name="typePhone"
                             id="typePhone"
-                            className="form-control form-control-lg mb-4 mr-5"
+                            className="rg-input form-control-lg mb-4 mr-5"
                             placeholder="Teléfono"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -158,7 +158,7 @@ export const Register = () => {
                             type="password"
                             id="typePasswordX"
                             name="typePasswordX"
-                            className="form-control form-control-lg mb-4"
+                            className="rg-input form-control-lg mb-4"
                             placeholder="Contraseña"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}

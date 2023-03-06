@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap");
 
 h2,
-.form-control {
+.rg-input {
   font-family: "Puritan", sans-serif;
 }
 
@@ -41,7 +41,7 @@ h2,
   color: #667dd2;
 }
 
-.form-control {
+.rg-input {
   box-shadow: -7px 7px 11px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border-style: none;

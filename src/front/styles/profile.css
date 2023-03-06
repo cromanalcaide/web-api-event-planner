@@ -15,7 +15,7 @@
     background-color: white;
     border-radius: 16px;
     width: 50em;
-    height: 30em;
+    height: 32em;
     margin: 3.6em 3em 0 3em;
      
 }
@@ -37,7 +37,7 @@
     top:0;
     background:#667DD2;
     box-shadow:0px 7px 0px 0px #586db9,
-      0px 0px 10px 0px rgba(120, 120, 120, 0.4);;
+      0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 
 .del-account:focus{
@@ -57,6 +57,7 @@
 .user-edit-form{
     width: 16em;
     border-radius: 5px;
+
 }
 
 .fa-check, .fa-eye, .fa-eye-slash{
@@ -66,4 +67,19 @@
 
 .name-form{
     border-radius: 10px;
+    width: 16em;
+}
+
+.data-div, .pass-form{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.icon-div{
+    width: fit-content;
+}
+
+.check-btn{
+    padding: 2px;
 }

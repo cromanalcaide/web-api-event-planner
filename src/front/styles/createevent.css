@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Puritan&display=swap');
+
+.create-event {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 16px;
+  width: 50em;
+  padding: 0.5em 2em 2em 2em;
+}
+
+.create-ev-btn,
+.add-guest-btn {
+  margin-right: 1em;
+  padding: 8px 16px 8px 16px;
+  font-family: "Puritan", sans-serif;
+  font-size: small;
+  font-weight: 600;
+  color: white;
+  margin-top: 0.5em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.16s;
+  position: relative;
+  top: 0;
+  background: #667dd2;
+  box-shadow: 0px 7px 0px 0px #586db9, 0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+
+.create-ev-btn:focus,
+.add-guest-btn:focus {
+  outline: none;
+}
+
+.create-ev-btn:active,
+.add-guest-btn:active {
+  top: 5px;
+  box-shadow: 0px 3px 0px 0px #586db9;
+}
+
+.create-label{
+    font-family: 'Puritan', sans-serif;
+    font-weight: 700;
+    padding: 0.5em;
+}
+
+
