@@ -17,6 +17,7 @@ export const AddContactPopover = (props) => {
             actions.getUserContacts()
             setName("")
             setEmail("")
+            actions.getUserContacts()
           }
     }
 

@@ -1,0 +1,11 @@
+
+.add-g-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 16px;
+    width: 50em;
+    padding: 0.5em 2em 2em 2em;
+    margin: 1em 0em 0em 3.6em;
+}
+

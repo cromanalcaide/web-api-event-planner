@@ -67,41 +67,12 @@ export const CreateEventForm = () => {
       longi : listLongi,
     };
   
-    sendNewEvent(objNewEvent);
+    actions.sendNewEvent(objNewEvent);
     navigate('/add-guest-event');
   }
 
   
-  const sendNewEvent = async (newEvent) => {
-    const URL = process.env.BACKEND_URL
-
-    console.log(newEvent)
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(newEvent),
-      }
-
-    try {
-      const resp = await fetch(`https://3001-cromanalcai-webapievent-8evfm2s59z0.ws-eu89.gitpod.io/api/event/register`, requestOptions)
-      if (resp.status != 200) {
-        alert("An error has occurred while creating the event");
-        return false;
-      }
-      const data = await resp.json();
-      console.log(data)
-      return true;
-    } catch (error) {
-      console.log("There has been an error creating a event",error);
-    }
-
-  }
-  
-
-
-  const inputRef = useRef(null);
+    const inputRef = useRef(null);
   const apiKey = process.env.REACT_APP_GOOGLEPLACES_API_KEY;
   
   useEffect(() => {

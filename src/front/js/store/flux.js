@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://3001-cromanalcai-webapievent-8evfm2s59z0.ws-eu89.gitpod.io/"
+const BACKEND_URL = process.env.BACKEND_URL
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				};
 				try {
-					const resp = await fetch((`${BACKEND_URL}api/login/`), requestOptions)
+					const resp = await fetch((`${BACKEND_URL}/api/login/`), requestOptions)
 
 					if (resp.status != 200) {
 						console.log("An error has occurred");
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch(`${BACKEND_URL}api/register`, requestOptions)
+					const resp = await fetch(`${BACKEND_URL}/api/register`, requestOptions)
 					if (resp.status != 200) {
 						alert("An error has occurred while creating the user");
 						return false;
@@ -98,7 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				};
 				try {
-					const res = await fetch(`${BACKEND_URL}api/private`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/private`, requestOptions);
 					const data = await res.json();
 					return data;
 				} catch (error) {
@@ -125,7 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 				try {
-					const res = await fetch(`${BACKEND_URL}api/contact/register`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/contact/register`, requestOptions);
 					if (res.status !== 200) {
 						alert("An error has occurred while adding the new contact");
 						return false;
@@ -149,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const userId = JSON.parse(localStorage.getItem("userId"))
 				try {
-					const response = await fetch(`${BACKEND_URL}api/contacts/${userId.id}`, requestOptions)
+					const response = await fetch(`${BACKEND_URL}/api/contacts/${userId.id}`, requestOptions)
 					const contacts = await response.json();
 
 					const userContacts = contacts.results.map(contact => ({
@@ -158,6 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						id: contact.id
 					}));
 					setStore({ ...getStore(), userContacts })
+				
 				} catch (error) {
 					console.log(error);
 				};
@@ -171,7 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const userId = JSON.parse(localStorage.getItem("userId"))
 				try {
-					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, requestOptions)
+					const response = await fetch(`${BACKEND_URL}/api/users/${userId.id}`, requestOptions)
 					const user = await response.json();
 					setStore({ ...getStore(), user })
 				} catch (error) {
@@ -191,7 +192,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				try {
-					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions)
+					const response = await fetch(`${BACKEND_URL}/api/contacts/${contactId}`, requestOptions)
 					const updatedContact = await response.json();
 
 
@@ -238,7 +239,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 				}
 				try {
-					const response = await fetch(`${BACKEND_URL}api/contacts/${contactId}`, requestOptions);
+					const response = await fetch(`${BACKEND_URL}/api/contacts/${contactId}`, requestOptions);
 					const data = await response.json();
 					console.log(data);
 
@@ -267,7 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 
-					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, {
+					const response = await fetch(`${BACKEND_URL}/api/users/${userId.id}`, {
 						method: "PUT",
 						headers: {
 							"Content-type": "application/json"
@@ -275,7 +276,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(updatedUser)
 					});
 
-					const updatedUserInfo = await fetch(`${BACKEND_URL}api/users/${userId.id}`);
+					const updatedUserInfo = await fetch(`${BACKEND_URL}/api/users/${userId.id}`);
 					const updatedUserObject = await updatedUserInfo.json();
 
 					const prevStore = getStore();
@@ -296,7 +297,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 				}
 				try {
-					const response = await fetch(`${BACKEND_URL}api/users/${userId.id}`, requestOptions);
+					const response = await fetch(`${BACKEND_URL}/api/users/${userId.id}`, requestOptions);
 					const data = await response.json();
 					console.log(data);
 					const token = localStorage.removeItem("token");
@@ -314,7 +315,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				};
 				try {
-					const res = await fetch(`${BACKEND_URL}api/events_guests`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/events_guests`, requestOptions);
 					const data = await res.json();
 
 					setStore({ ...getStore(), eventguests: data.results });
@@ -328,7 +329,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				};
 				try {
-					const res = await fetch(`${BACKEND_URL}api/events`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/events`, requestOptions);
 					const data = await res.json();
 
 					setStore({ ...getStore(), events: data.results });
@@ -345,7 +346,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 				}
 				try {
-					const response = await fetch(`${BACKEND_URL}api/events/${eventId}`, requestOptions);
+					const response = await fetch(`${BACKEND_URL}/api/events/${eventId}`, requestOptions);
 					const data = await response.json();
 
 
@@ -370,7 +371,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 				try {
-					const res = await fetch(`${BACKEND_URL}api/comment/${userId}`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/comment/${userId}`, requestOptions);
 					console.log("this is res", res);
 					if (res.status !== 200) {
 						alert("An error has occurred while adding the new comment");
@@ -392,7 +393,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				};
 				try {
-					const res = await fetch(`${BACKEND_URL}api/comments/${eventId}`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/comments/${eventId}`, requestOptions);
 					const data = await res.json();
 					console.log("this data comes frome the Flux", data)
 					setStore({ ...getStore(), comments: data });
@@ -420,7 +421,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				};
 				try {
-					const res = await fetch(`${BACKEND_URL}api/users`, requestOptions);
+					const res = await fetch(`${BACKEND_URL}/api/users`, requestOptions);
 					const data = await res.json();
 
 					setStore({ ...getStore(), allUsers: data.results });
@@ -434,7 +435,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("updatedevent",updatedEvent, eventId)
 			
 				try {
-				  const response = await fetch(`${BACKEND_URL}api/events/${eventId}`, {
+				  const response = await fetch(`${BACKEND_URL}/api/events/${eventId}`, {
 					method: "PUT",
 					headers: {
 					  "Content-type": "application/json"
@@ -457,6 +458,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.log(error);
 				}
 			  },
+			  sendNewEvent : async (newEvent) => {			
+				console.log(newEvent)
+				const requestOptions = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json"
+				  },
+				  body: JSON.stringify(newEvent),
+				  }
+			
+				try {
+				  const resp = await fetch(`${BACKEND_URL}/api/event/register`, requestOptions)
+				  if (resp.status != 200) {
+					alert("An error has occurred while creating the event");
+					return false;
+				  }
+				  const newEvent = await resp.json();
+			 	  const currentEvents = getStore().events;
+				  const updatedEvents = currentEvents.concat(newEvent);
+					setStore({ ...getStore(), events: updatedEvents });
+					
+				return true;
+				  
+				} catch (error) {
+				  console.log("There has been an error creating a event",error);
+				}
+			
+			  }
 			  
 
 
