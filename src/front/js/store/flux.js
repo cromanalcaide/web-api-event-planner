@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			eventguests: [],
 			events: [],
 			comments: [],
+			allContacts: [],
 
 		},
 		actions: {
@@ -158,6 +159,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						id: contact.id
 					}));
 					setStore({ ...getStore(), userContacts })
+				
+				} catch (error) {
+					console.log(error);
+				};
+			},
+			getAllContacts: async () => {
+				const requestOptions = {
+					method: "GET",
+					headers: {
+						"Content-type": "application/json"
+					},
+				}
+			
+				try {
+					const response = await fetch(`${BACKEND_URL}/api/contacts/`, requestOptions)
+					const contacts = await response.json();
+					
+					setStore({ ...getStore(), allContacts : contacts })
 				
 				} catch (error) {
 					console.log(error);
@@ -401,21 +420,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			// uploadImage: async (imageFile) => {
-			// 	const formData = new FormData();
-			// 	formData.append('file', imageFile);
-			// 	formData.append('upload_preset', 'your_upload_preset_here');
-
-			// 	const cloudName = process.env.CLOUD_NAME
-
-			// 	const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-			// 		method: 'POST',
-			// 		body: formData
-			// 	});
-
-			// 	const data = await response.json();
-			// 	onUpload(data.secure_url);
-			// },
 			getAllUsers: async () => {
 				const requestOptions = {
 					method: "GET",

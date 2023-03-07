@@ -25,7 +25,9 @@ export const SingleEvent = props => {
 
   let eventGuestByEvent = store.eventguests.filter(el => el.event_id == params.theid);
 
+
   let allContacts = store.userContacts;
+  
 
   let namesByEvent = [];
   for (let i = 0; i < eventGuestByEvent.length; i++) {

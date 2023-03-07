@@ -35,11 +35,11 @@ export const Description = () => {
                     <img src={image3} className="card-img-top" alt="..." style={{width: 8.5 + "rem"}}/>
                     <div className="card-body">
                         <h5 className="card-title">Deja mensajes a tus invitados</h5>
-                        <p className="card-text">Dentro de tu evento podrás dejar mensajes a tus invitados y ellos podrán responderte!</p>
+                        <p className="card-text">Dentro de tu evento podrás dejar mensajes a tus invitados y ellos podrán responderte.</p>
                     </div>
                 </div>
             </div>
-            <div className="col-sm-2 each-card">
+            {/* <div className="col-sm-2 each-card">
                 <div className="text-center mb-3 descr-card" style={{width: 14 + "rem"}}>
                     <img src={image4} className="card-img-top" alt="..." style={{width: 7 + "rem"}}/>
                     <div className="card-body">
@@ -47,7 +47,7 @@ export const Description = () => {
                         <p className="card-text">Tus invitados recibirán un correo de invitación al evento y podrán confirmar su asistencia.</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="lc-block d-grid gap-2 d-md-flex justify-content-md-center button-div">
                  <Link to="/register">
                     <button type="button" className="start-btn btn-lg px-4 mt-2 ">Comienza ahora <i className="fa-solid fa-arrow-right"></i></button>
