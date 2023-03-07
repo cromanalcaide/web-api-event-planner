@@ -478,8 +478,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			 	  const currentEvents = getStore().events;
 				  const updatedEvents = currentEvents.concat(newEvent);
 					setStore({ ...getStore(), events: updatedEvents });
-					
-				return true;
+				  return true;
 				  
 				} catch (error) {
 				  console.log("There has been an error creating a event",error);

@@ -90,33 +90,36 @@ export const AddGuestsToEvent = () => {
             <div className='row main-evc '>
               <div className="col-sm-6">
                 <p className="add-g-title">Evento Creado</p>
-                <img className="add-g-image image-nexdate  mt-2" width="120" height="120" src={el.image} />
-                <h6 className="p-contacts">Evento</h6>
-                <p className="p-singlee"><strong>{el.title}</strong></p>
-                <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
-                <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
-                <h6 className="p-singlee">Descripción</h6>
-                <p className="p-contacts" >{el.description}</p>
+                <img className="add-g-image  mt-2" width="120" height="120" src={el.image} />
+                <p className="add-g-info"><strong className="marked-p">Título: <br/></strong> {el.title} </p>
+                <p className="add-g-info"><strong className="marked-p">Horario: <br/></strong>{el.date}</p>
+                <p className="add-g-info"><strong className="marked-p">Lugar: <br/></strong>{el.location}</p>
+                
               </div>
-              <div className="col-sm-6 ">
-                  <form onSubmit={handelClick}>
-                    <h5>Choose a contact</h5>
-                    {contactsList.map((el, index) => {
-                      return (
-                        <div key={index}>
-                          <input onChange={handleChexbox} type="checkbox" id={index} defaultValue></input>
-                          <label htmlFor="cbox2">{el.name}</label>
-                        </div>
-                      )
-                    })}
-                    <button type="submit" >Add Contacts</button>
-                    <Link to={"/eventsform/"}>
-                      <button >Add More Events</button>
-                    </Link>
-                  </form>
+              <div className=" col">
+                <form onSubmit={handelClick} >
+                  <p className="add-g-title">Elige a los invitados</p>
+                  {contactsList.map((el, index) => {
+                    return (
+                      <div key={index} className="add-g-list">
+                        <input onChange={handleChexbox} type="checkbox" id={index} defaultValue></input>
+                        <label className="cont-name-label" htmlFor="cbox2">{el.name}</label>
+                      </div>
+                    )
+                  })}
+                </form>
               </div>
             </div>
+            <div className="row">
+                  <div className="col">
+                  <p className="add-g-info"><strong className="marked-p">Descripción:</strong> <br/> {el.description}</p>
+                  </div>
+                  <div className="col btn-div">
+                  <button className="add-g-btn" type="submit" >Agregar Invitados</button>
+                  </div>
+            </div>
           </div>
+
         )
       })}
 
