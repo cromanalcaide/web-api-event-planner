@@ -53,7 +53,7 @@ export const ContactForm = () => {
                                                     type="text"
                                                     id="typeName"
                                                     name="user_name"
-                                                    className="form-control form-control-lg mb-4 mr-5"
+                                                    className="cont-input form-control form-control-lg mb-4 mr-5"
                                                     placeholder="Nombre"
                                                     value={name}
                                                     onChange={(e) => setName(e.target.value)}
@@ -63,7 +63,7 @@ export const ContactForm = () => {
                                                     type="email"
                                                     id="typeEmailX"
                                                     name="user_email"
-                                                    className="form-control form-control-lg mb-4 text-lowercase"
+                                                    className="cont-input form-control form-control-lg mb-4 text-lowercase"
                                                     placeholder="Correo electrónico"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
@@ -73,7 +73,7 @@ export const ContactForm = () => {
                                                     type="text-area"
                                                     id="typeCountry"
                                                     name="message"
-                                                    className="text-area form-control form-control-lg mb-4 mr-5"
+                                                    className="text-area cont-input form-control form-control-lg mb-4 mr-5"
                                                     placeholder="Te leemos..."
                                                     value={message}
                                                     onChange={(e) => setMessage(e.target.value)}

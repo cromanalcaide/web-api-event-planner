@@ -124,7 +124,7 @@ export const Profile = () => {
                             <div className="data-div col-7">
                                 <input className="form-control fs-6 ms-5 name-form" type="text" defaultValue={user?.name} disabled={!fieldStatus.name}
                                     onChange={(e) => setNewValue(e.target.value)} ></input>
-                                <i className={`fa-icon fa-solid ${fieldStatus["name"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["name"] ? "" : "disabled"}`}
+                                <i className={`mt-2 fa-solid ${fieldStatus["name"] ? "fa-check" : "fa-pen-to-square"} ${fieldStatus["name"] ? "" : "disabled"}`}
                                     onClick={() => {
                                         if (fieldStatus["name"]) {
                                             handleSave("name");
