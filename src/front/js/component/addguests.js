@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/addguest.css"
 
@@ -9,7 +9,7 @@ import "../../styles/addguest.css"
 export const AddGuestsToEvent = () => {
 
   const { store, actions } = useContext(Context);
-
+  const Navigate = useNavigate()
   const userId = JSON.parse(localStorage.getItem('userId'))
 
   let eventsList = store.events;
@@ -74,6 +74,8 @@ export const AddGuestsToEvent = () => {
   const handelClick = (e) => {
     e.preventDefault();
     sendNewEventGuess(copyCheck);
+
+    Navigate( `/singleevent/${lastEvId} `)
   }
 
 
@@ -94,10 +96,11 @@ export const AddGuestsToEvent = () => {
                 <p className="add-g-info"><strong className="marked-p">Título: <br/></strong> {el.title} </p>
                 <p className="add-g-info"><strong className="marked-p">Horario: <br/></strong>{el.date}</p>
                 <p className="add-g-info"><strong className="marked-p">Lugar: <br/></strong>{el.location}</p>
+                <p className="add-g-info"><strong className="marked-p">Descripción:</strong> <br/> {el.description}</p>
                 
               </div>
               <div className=" col">
-                <form onSubmit={handelClick} >
+                <form  onSubmit={handelClick}>
                   <p className="add-g-title">Elige a los invitados</p>
                   {contactsList.map((el, index) => {
                     return (
@@ -107,16 +110,9 @@ export const AddGuestsToEvent = () => {
                       </div>
                     )
                   })}
+                  <button className="add-g-btn" type="submit"  >Agregar Invitados</button>
                 </form>
               </div>
-            </div>
-            <div className="row">
-                  <div className="col">
-                  <p className="add-g-info"><strong className="marked-p">Descripción:</strong> <br/> {el.description}</p>
-                  </div>
-                  <div className="col btn-div">
-                  <button className="add-g-btn" type="submit" >Agregar Invitados</button>
-                  </div>
             </div>
           </div>
 
