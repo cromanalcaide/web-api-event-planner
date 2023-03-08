@@ -159,7 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						id: contact.id
 					}));
 					setStore({ ...getStore(), userContacts })
-				
+
 				} catch (error) {
 					console.log(error);
 				};
@@ -171,13 +171,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-type": "application/json"
 					},
 				}
-			
+
 				try {
 					const response = await fetch(`${BACKEND_URL}/api/contacts/`, requestOptions)
 					const contacts = await response.json();
-					
-					setStore({ ...getStore(), allContacts : contacts })
-				
+
+					setStore({ ...getStore(), allContacts: contacts })
+
 				} catch (error) {
 					console.log(error);
 				};
@@ -238,8 +238,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (avatars[contact.email]) {
 							contact.avatar = `${BACKEND_URL}${avatars[contact.email]}`;
 						}
-					setStore({ ...getStore(), contactsAvatars: contacts });
-					console.log("CA",contactsAvatars)
+						setStore({ ...getStore(), contactsAvatars: contacts });
+						console.log("CA", contactsAvatars)
 					});
 
 
@@ -276,7 +276,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				let updatedValue = value;
 
-				
+
 
 				const updatedUser = {
 					...user,
@@ -434,60 +434,81 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			editEventInfo: async (eventId, field, value) => {
 				const updatedEvent = { [field]: value };
-				console.log("updatedevent",updatedEvent, eventId)
-			
+				console.log("updatedevent", updatedEvent, eventId)
+
 				try {
-				  const response = await fetch(`${BACKEND_URL}/api/events/${eventId}`, {
-					method: "PUT",
-					headers: {
-					  "Content-type": "application/json"
-					},
-					body: JSON.stringify(updatedEvent)
-				  });
-				 
-				  const updatedEventInfo = await response.json();
-			  
-				  const prevStore = getStore();
-				  const updatedEvents = prevStore.events.map((event) =>
-					event.id === eventId ? updatedEventInfo : event
-				  );
-			  
-				  setStore({
-					...prevStore,
-					events: updatedEvents
-				  });
+					const response = await fetch(`${BACKEND_URL}/api/events/${eventId}`, {
+						method: "PUT",
+						headers: {
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(updatedEvent)
+					});
+
+					const updatedEventInfo = await response.json();
+
+					const prevStore = getStore();
+					const updatedEvents = prevStore.events.map((event) =>
+						event.id === eventId ? updatedEventInfo : event
+					);
+
+					setStore({
+						...prevStore,
+						events: updatedEvents
+					});
 				} catch (error) {
-				  console.log(error);
+					console.log(error);
 				}
-			  },
-			  sendNewEvent : async (newEvent) => {			
+			},
+			sendNewEvent: async (newEvent) => {
 				console.log(newEvent)
 				const requestOptions = {
-				  method: "POST",
-				  headers: {
-					"Content-type": "application/json"
-				  },
-				  body: JSON.stringify(newEvent),
-				  }
-			
-				try {
-				  const resp = await fetch(`${BACKEND_URL}/api/event/register`, requestOptions)
-				  if (resp.status != 200) {
-					alert("An error has occurred while creating the event");
-					return false;
-				  }
-				  const newEvent = await resp.json();
-			 	  const currentEvents = getStore().events;
-				  const updatedEvents = currentEvents.concat(newEvent);
-					setStore({ ...getStore(), events: updatedEvents });
-				  return true;
-				  
-				} catch (error) {
-				  console.log("There has been an error creating a event",error);
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify(newEvent),
 				}
-			
-			  }
-			  
+
+				try {
+					const resp = await fetch(`${BACKEND_URL}/api/event/register`, requestOptions)
+					if (resp.status != 200) {
+						alert("An error has occurred while creating the event");
+						return false;
+					}
+					const newEvent = await resp.json();
+					const currentEvents = getStore().events;
+					const updatedEvents = currentEvents.concat(newEvent);
+					setStore({ ...getStore(), events: updatedEvents });
+					return true;
+
+				} catch (error) {
+					console.log("There has been an error creating a event", error);
+				}
+
+			},
+			sendNewEventGuess: async (objGuessEvent) => {
+				for (let i = 0; i < objGuessEvent.length; i++) {
+					try {
+
+						const url = `${BACKEND_URL}/api/events_guest/register`
+						const request = {
+
+							method: "POST",
+							body: JSON.stringify(objGuessEvent[i]),
+
+							headers: { "Content-Type": "application/json" },
+						};
+						console.log(request);
+						const response = await fetch(url, request);
+						const result = await response.json();
+						console.log(result);
+					} catch (error) {
+						console.log(error);
+					}
+				};
+			},
+
 
 
 		}

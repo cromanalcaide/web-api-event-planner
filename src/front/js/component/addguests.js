@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/addguest.css"
+import emailjs from 'emailjs-com';
 
 
 
 
 export const AddGuestsToEvent = () => {
-
   const { store, actions } = useContext(Context);
   const Navigate = useNavigate()
   const userId = JSON.parse(localStorage.getItem('userId'))
 
   let eventsList = store.events;
-  // let evListById = eventsList.filter(item => item.user_id === userId);
+
   let evListOrd = eventsList.sort(function (a, b) { return a.id - b.id });
   let lastEvent = evListOrd[evListOrd.length - 1];
   let lastEvId = { ...lastEvent }.id;
@@ -36,29 +36,6 @@ export const AddGuestsToEvent = () => {
   console.log(copyCheck);
 
 
-  const sendNewEventGuess = async (objGuessEvent) => {
-    for (let i = 0; i < objGuessEvent.length; i++) {
-      try {
-
-        const url =
-          "https://3001-cromanalcai-webapievent-8evfm2s59z0.ws-eu89.gitpod.io/api/events_guest/register"
-        const request = {
-
-          method: "POST",
-          body: JSON.stringify(objGuessEvent[i]),
-
-          headers: { "Content-Type": "application/json" },
-        };
-        console.log(request);
-        const response = await fetch(url, request);
-        const result = await response.json();
-        console.log(result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  };
-
   const handleChexbox = (e) => {
     if (e.target.checked === true) {
       setContactCheck([...contactCheck, contactsList[(e.target.id)]]);
@@ -71,10 +48,34 @@ export const AddGuestsToEvent = () => {
   }
 
 
-  const handelClick = (e) => {
-    e.preventDefault();
-    sendNewEventGuess(copyCheck);
+  const sendInvitationToGuests = (invitados) => {
 
+    const userInfo = store.user.result
+
+    const mensaje = {
+      from_name: 'El equipo de ComMeet',
+      to_emails: invitados.map((invitado) => invitado.email),
+      subject: `Invitación al evento ${lastEvent.title}`,
+      message: `Hola!, ${userInfo.name} te ha invitado al evento ${lastEvent.title} que se realizará el ${lastEvent.date} en ${lastEvent.location}. ¡Esperamos verte allí!`,
+    };
+  
+    const servicioID = 'service_yrjx7ri';
+    const plantillaID = 'template_7tphbsi';
+    const userID = 'DSeMYPcDEYnErZESa';
+  
+    emailjs.send(servicioID, plantillaID, mensaje, userID)
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+  }
+  
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    actions.sendNewEventGuess(copyCheck);
+    sendInvitationToGuests(contactCheck)
     Navigate( `/singleevent/${lastEvId} `)
   }
 
@@ -100,7 +101,7 @@ export const AddGuestsToEvent = () => {
                 
               </div>
               <div className=" col">
-                <form  onSubmit={handelClick}>
+                <form  onSubmit={handleClick}>
                   <p className="add-g-title">Elige a los invitados</p>
                   {contactsList.map((el, index) => {
                     return (
@@ -115,11 +116,8 @@ export const AddGuestsToEvent = () => {
               </div>
             </div>
           </div>
-
         )
       })}
-
-
     </div>
   );
 };

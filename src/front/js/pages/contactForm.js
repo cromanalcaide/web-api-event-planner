@@ -13,11 +13,13 @@ export const ContactForm = () => {
     const [message, setMessage] = useState("");
     const [showMessage, setShowMessage] = useState(false);
 
+
+
     const sendEmail = (e) => {
         e.preventDefault();
 
         if (name && email && message) {
-            emailjs.sendForm('service_yrjx7ri', 'template_4c8z3k2', form.current, 'DSeMYPcDEYnErZESa')
+            emailjs.sendForm('service_yrjx7ri', 'template_4c8z3k2', form.current,'DSeMYPcDEYnErZESa')
                 .then((result) => {
                     console.log('El mensaje ha sido enviado con éxito', result.text);
                     setShowMessage(true);
@@ -98,7 +100,7 @@ export const ContactForm = () => {
                     </div>
                 </form>
             </section>
-            <Footer/>
-        </>    
-            );
+            <Footer />
+        </>
+    );
 };
