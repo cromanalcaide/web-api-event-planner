@@ -276,15 +276,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				let updatedValue = value;
 
-				if (field === "password") {
-
-				}
+				
 
 				const updatedUser = {
 					...user,
 					[field]: updatedValue
 				};
-
+				console.log(updatedUser)
 				try {
 
 					const response = await fetch(`${BACKEND_URL}/api/users/${userId.id}`, {
