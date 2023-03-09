@@ -128,3 +128,24 @@
     flex-direction: row;
     align-items: center;
    }
+
+   .rsvp-sub-btn {
+    font-family: "Puritan", sans-serif;
+    font-size: large;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.16s;
+    display: flex;
+    background: #667dd2;
+    box-shadow: 0px 7px 0px 0px #586db9, 0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+    padding: 0.3em 1em 0.3em 1em;
+    margin-top: 0em;
+}
+  .rsvp-sub-btn:focus {
+    outline: none;
+  }
+  .rsvp-sub-btn:active {
+    top: 5px;
+    box-shadow: 0px 3px 0px 0px #586db9;
+  }

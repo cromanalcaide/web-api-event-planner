@@ -5,6 +5,7 @@ import "../../styles/rsvpform.css"
 export const RsvpForm = () => {
   const [email, setEmail] = useState('');
   const [rsvpResponse, setRsvpResponse] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const params = useParams();
 
@@ -51,6 +52,7 @@ export const RsvpForm = () => {
       }
       const data = await resp.json();
       console.log(data)
+      setShowConfirmation(true); 
       return true
 
     }catch (error) {
@@ -61,6 +63,9 @@ export const RsvpForm = () => {
   return (
   <div className='container-form-div'>  
     <div className="rsvp-div">
+    {showConfirmation ? ( 
+        <p>¡Gracias por responder! Le informaremos al organizador del evento de tu respuesta.</p>
+      ) : (
       <form className="rsvp-form" onSubmit={handleSubmit}>
         <p className='logo-form'>ComMeet</p>
         <label className='label-rsvp-form'>
@@ -87,7 +92,7 @@ export const RsvpForm = () => {
           </div>
         </div >
         <button type='submit' className='rsvp-sub-btn'>Enviar</button> 
-      </form >
+      </form > )}
     </div >
   </div>  
   );
