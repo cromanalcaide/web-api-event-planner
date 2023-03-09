@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/sidebarleft.css"
 import { AddContactPopover } from "./contactPopover";
-
+import { Toaster, toast } from 'sonner'
 
 export const LeftSideBar = () => {
     const { store, actions } = useContext(Context);
@@ -21,6 +21,7 @@ export const LeftSideBar = () => {
     const handleSaveContact = (contactId, updatedName, updatedEmail) => {
         actions.editContact(contactId, updatedName, updatedEmail)
         setEditingContactId(null);
+        toast.success('El contacto ha sido modificado con éxito')
     }
 
     const togglePopover = () => {
@@ -44,6 +45,7 @@ export const LeftSideBar = () => {
 
     const handleDelete = (contactId) => {
         actions.deleteContact(contactId)
+        toast.success('El contacto ha sido eliminado correctamente')
         console.log(contactId)
     }
 
@@ -92,6 +94,7 @@ export const LeftSideBar = () => {
 
     return (
         <div className="left-side-container">
+            <Toaster richColors position="top-right"/>
             <div className="row">
                 <div className="col sidebar-column">
                     <div className="sidebar-column-2 d-flex flex-column align-items-start align-items-sm-start px-3 pt-2 text-white min-vh-100">

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/addguest.css"
 import emailjs from 'emailjs-com';
-
+import { Toaster, toast } from 'sonner'
 
 
 
@@ -80,6 +80,7 @@ export const AddGuestsToEvent = () => {
     actions.sendNewEventGuess(copyCheck);
     sendInvitationToGuests(contactCheck)
     Navigate(`/singleevent/${lastEvId} `)
+    toast.success('El evento ha sido creado correctamente')
   }
 
 
@@ -90,6 +91,7 @@ export const AddGuestsToEvent = () => {
 
   return (
     <div className='add-g-container container'>
+       <Toaster richColors />
       {arr.map((el, index) => {
         return (
           <div key={index} >

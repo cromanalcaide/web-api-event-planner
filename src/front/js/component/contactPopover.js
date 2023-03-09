@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Popover, PopoverHeader, PopoverBody, Input } from "reactstrap";
+import { Toaster, toast } from 'sonner'
 import "../../styles/sidebarleft.css"
 
 export const AddContactPopover = (props) => {
@@ -18,12 +19,15 @@ export const AddContactPopover = (props) => {
             setName("")
             setEmail("")
             actions.getUserContacts()
+            
           }
+        // toast.success('El contacto ha sido creado con éxito')  // me aprecen 2 
     }
 
        
     return (
         <Popover className="add-contact" placement="right" isOpen={props.isOpen} target={props.target}>
+            <Toaster richColors position="top-right"/>
             <PopoverHeader className="add-contact-header">Agregar un nuevo contacto<i className="ms-2 fa-solid fa-xmark close-btn" onClick={props.onClose} ></i></PopoverHeader>
             <PopoverBody>
                 <Input name="name" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} />
