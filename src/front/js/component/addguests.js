@@ -56,13 +56,16 @@ export const AddGuestsToEvent = () => {
       from_name: 'El equipo de ComMeet',
       to_emails: invitados.map((invitado) => invitado.email),
       subject: `Invitación al evento ${lastEvent.title}`,
-      message: `Hola!, ${userInfo.name} te ha invitado al evento ${lastEvent.title} que se realizará el ${lastEvent.date} en ${lastEvent.location}. ¡Esperamos verte allí!`,
+      message: `Hola!, ${userInfo.name} te ha invitado al evento ${lastEvent.title} que se realizará el ${lastEvent.date} en ${lastEvent.location}.
+      \n¡Esperamos verte allí!
+      \n
+      \nPor favor confirma tu asistencia en el siguiente enlace: https://3000-cromanalcai-webapievent-8evfm2s59z0.ws-eu89b.gitpod.io/rsvp/${lastEvent.id}`,
     };
-  
+
     const servicioID = 'service_yrjx7ri';
     const plantillaID = 'template_7tphbsi';
     const userID = 'DSeMYPcDEYnErZESa';
-  
+
     emailjs.send(servicioID, plantillaID, mensaje, userID)
       .then((result) => {
         console.log(result.text);
@@ -70,13 +73,13 @@ export const AddGuestsToEvent = () => {
         console.log(error.text);
       });
   }
-  
+ 
 
   const handleClick = (e) => {
     e.preventDefault();
     actions.sendNewEventGuess(copyCheck);
     sendInvitationToGuests(contactCheck)
-    Navigate( `/singleevent/${lastEvId} `)
+    Navigate(`/singleevent/${lastEvId} `)
   }
 
 
@@ -94,14 +97,14 @@ export const AddGuestsToEvent = () => {
               <div className="col-sm-6">
                 <p className="add-g-title">Evento Creado</p>
                 <img className="add-g-image  mt-2" width="120" height="120" src={el.image} />
-                <p className="add-g-info"><strong className="marked-p">Título: <br/></strong> {el.title} </p>
-                <p className="add-g-info"><strong className="marked-p">Horario: <br/></strong>{el.date}</p>
-                <p className="add-g-info"><strong className="marked-p">Lugar: <br/></strong>{el.location}</p>
-                <p className="add-g-info"><strong className="marked-p">Descripción:</strong> <br/> {el.description}</p>
-                
+                <p className="add-g-info"><strong className="marked-p">Título: <br /></strong> {el.title} </p>
+                <p className="add-g-info"><strong className="marked-p">Horario: <br /></strong>{el.date}</p>
+                <p className="add-g-info"><strong className="marked-p">Lugar: <br /></strong>{el.location}</p>
+                <p className="add-g-info"><strong className="marked-p">Descripción:</strong> <br /> {el.description}</p>
+
               </div>
               <div className=" col">
-                <form  onSubmit={handleClick}>
+                <form onSubmit={handleClick}>
                   <p className="add-g-title">Elige a los invitados</p>
                   {contactsList.map((el, index) => {
                     return (

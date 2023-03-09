@@ -327,12 +327,15 @@ def modify_events_guests(events_guest_id):
     events_guests.event_id = request.json.get('event_id', events_guests.event_id)
     events_guests.user_id = request.json.get('user_id', events_guests.user_id)
     events_guests.email = request.json.get('email', events_guests.email)
+    events_guests.is_active = request.json.get('is_active', events_guests.is_active)
+
     db.session.commit()
 
     response_body = {'contact_id': events_guests.contact_id,
                      'event_id': events_guests.event_id,
                      'user_id': events_guests.user_id,
-                     'email': events_guests.email}
+                     'email': events_guests.email,
+                     'is_active': events_guests.is_active}
 
     return jsonify(response_body), 200
 
@@ -387,6 +390,23 @@ def postComment(event_id):
     db.session.commit()
     return jsonify(new_comment.serialize()), 200
 
+# RSVP
+
+@api.route('/actualizar-rsvp', methods=['POST'])
+def actualizar_rsvp():
+    body = request.get_json()
+    email = body["email"]
+    rsvp_status = body["rsvp_status"]
+    event_id = body["event_id"]
+    print(email, rsvp_status, event_id)
+    event_guest = Event_Guests.query.filter_by(event_id=event_id, email=email).first()
+    print(event_guest)
+    if event_guest:
+       event_guest.rsvp_status = rsvp_status
+       db.session.commit()
+       return 'OK', 200
+    else:
+        return 'Error: invitado no encontrado en el evento', 400
 
 if __name__ == "__main__":
     app.run()

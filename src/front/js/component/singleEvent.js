@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { LeftSideBar } from "./sidebarleft";
 import { ViewTitle } from "./viewTitle";

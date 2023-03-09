@@ -103,6 +103,7 @@ class Event_Guests(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
     user = db.relationship(User)
     is_active = db.Column(db.Boolean, default=True)
+    rsvp_status = db.Column(db.Boolean)
 
     def __repr__(self):
         return f'<Event_Guests {self.id}>'  
@@ -114,7 +115,8 @@ class Event_Guests(db.Model):
         "email": self.email,
         "event_id": self.event_id,
         "user_id": self.user_id,
-        "is_active": self.is_active
+        "is_active": self.is_active,
+        "rsvp_status": self.rsvp_status,
         }
 
 
