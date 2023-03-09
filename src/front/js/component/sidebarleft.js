@@ -47,47 +47,47 @@ export const LeftSideBar = () => {
         console.log(contactId)
     }
 
-    // const getAvatars = async () => {
-    //     await actions.getAllUsers();
-    //     const users = store.allUsers;
-    //     console.log("trae los usuarios", users)
-    //     const avatars = {};
-    //     users?.forEach(user => {
-    //         if (user.avatar_url) {
-    //             avatars[user.email] = user.avatar_url;
-    //         }
-    //     });
-    //     return avatars;
+    const getAvatars = async () => {
+        await actions.getAllUsers();
+        const users = store.allUsers;
+        console.log("trae los usuarios", users)
+        const avatars = {};
+        users?.forEach(user => {
+            if (user.avatar_url) {
+                avatars[user.email] = user.avatar_url;
+            }
+        });
+        return avatars;
+    };
 
-    // }; 
+    const contactIsUserWAvatar = async (userContacts, avatars) => {
+        const userAvatars = [];
+        await Promise.all(userContacts.map(async (contact) => {
+            if (avatars[contact.email]) {
+                const updatedAvatarUrl = avatars[contact.email];
+                userAvatars.push({
+                    email: contact.email,
+                    avatar_url: updatedAvatarUrl
+                });
+                await actions.editContact(contact.id, contact.name, contact.email, updatedAvatarUrl);
+            }
+        }));
+        return userAvatars;
+    };  
+    
 
-    // const contactIsUserWAvatar = async (userContacts, avatars) => {
-    //     console.log("uc",userContacts, "av", avatars)
-    //     const userAvatars = [];
-    //     userContacts.forEach((contact) => {
-    //       if (avatars[contact.email]) {
-    //         userAvatars.push({
-    //           email: contact.email,
-    //           avatar_url: avatars[contact.email],
-    //         });
-    //       }
-    //     });
-    //     return userAvatars;
-    // }
+    const fetchUserAvatars = async () => {
+        const avatars = await getAvatars();
+        const userContacts = store.userContacts;
+        console.log("userCont", userContacts)
+        const userAvatars = await contactIsUserWAvatar(userContacts, avatars);
+        console.log("contacts:", userContacts, "avatars", userAvatars)
+        setAvatars(userAvatars);
+    };
 
-    // const fetchUserAvatars = async () => {
-    //     const avatars = await getAvatars();
-    //     const userContacts = await store.userContacts // función que devuelve los contactos del usuario logueado
-    //     console.log("userCont",userContacts)
-    //     const userAvatars = await contactIsUserWAvatar(userContacts, avatars);
-    //     console.log("contacts:", userContacts,"avatars", userAvatars)
-    //     setAvatars(userAvatars);
-    // };
-
-
-    // useEffect(() => {
-    //     fetchUserAvatars();
-    //   }, []);
+    useEffect(() => {
+        fetchUserAvatars();
+    }, []);
 
 
     return (

@@ -14,7 +14,7 @@ export const MapComponent = () => {
     
     var latitud = presentEvent[0]?.lati
     var longitud = presentEvent[0]?.longi
-    console.log(latitud, longitud)
+   
 
 
     useEffect(() => {

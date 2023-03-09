@@ -13,9 +13,9 @@ export const Comments = () => {
 
     const fetchComments = async () => {
         const response = await actions.getComments(eventId.theid);
-        console.log(store.comments)
+        
         const data = store.comments;
-        console.log("this data", data)
+      
         return data;   
         
     };
@@ -39,7 +39,7 @@ export const Comments = () => {
     };
 
     const userInfo = store.user.result
-    console.log(userInfo)
+  
 
     return (
         <div className='comments-div'>

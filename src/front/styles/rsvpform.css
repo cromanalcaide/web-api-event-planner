@@ -149,3 +149,8 @@
     top: 5px;
     box-shadow: 0px 3px 0px 0px #586db9;
   }
+
+  .confirmation-msg{
+    font-size: large;
+    font-weight: 700;
+  }

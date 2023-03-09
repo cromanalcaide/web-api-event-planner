@@ -265,13 +265,21 @@ def modify_contact(contact_id):
     contact.email = request.json.get('email', contact.email)
     contact.name = request.json.get('name', contact.name)
     contact.user_id = request.json.get('user_id', contact.user_id)
+
+    avatar_url = request.json.get('avatar_url')
+
+    if avatar_url:
+        contact.avatar_url = avatar_url
+
     db.session.commit()
 
     response_body = {'email': contact.email,
-                     'name': contact.name,   
-                     'user_id': contact.user_id}
+                     'name': contact.name,
+                     'user_id': contact.user_id,
+                     'avatar_url': contact.avatar_url}
 
     return jsonify(response_body), 200
+
 
 
 @api.route('/contacts/<int:contact_id>', methods=['DELETE'])

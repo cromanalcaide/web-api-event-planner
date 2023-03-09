@@ -198,7 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				};
 			},
-			editContact: async (contactId, updatedName, updatedEmail) => {
+			editContact: async (contactId, updatedName, updatedEmail, updatedAvatarUrl) => {
 				const requestOptions = {
 					method: "PUT",
 					headers: {
@@ -206,15 +206,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						name: updatedName,
-						email: updatedEmail
+						email: updatedEmail,
+						avatar_url: updatedAvatarUrl 
 					})
 				}
-
+			
 				try {
 					const response = await fetch(`${BACKEND_URL}/api/contacts/${contactId}`, requestOptions)
 					const updatedContact = await response.json();
-
-
+			
 					const prevStore = getStore();
 					const updatedContacts = prevStore.userContacts.map((contact) => {
 						if (contact.id === contactId) {
@@ -223,7 +223,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							return contact;
 						}
 					});
-
+			
 					setStore({
 						...prevStore,
 						userContacts: updatedContacts
@@ -231,7 +231,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
-			},
+			},			
 			contactsAvatar: async (contacts, avatars) => {
 				try {
 					contacts.forEach((contact) => {
@@ -412,7 +412,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const res = await fetch(`${BACKEND_URL}/api/comments/${eventId}`, requestOptions);
 					const data = await res.json();
-					console.log("this data comes frome the Flux", data)
+					
 					setStore({ ...getStore(), comments: data });
 				} catch (error) {
 					console.log(error);
@@ -507,6 +507,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					}
 				};
+			},
+			updateRSVP : async (formData) => {
+				const requestOptions = {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formData),
+				  };
+				  try {
+					const resp = await fetch(`${BACKEND_URL}/api/actualizar-rsvp`, requestOptions)
+					if (resp.status != 200) {
+					  console.log("An error has occurred");
+					  return false;
+					}
+					const updatedGuest = await resp.json();
+					const currentGuests = getStore().eventguests;
+					const updatedGuests = currentGuests.concat(updatedGuest);
+					setStore({ ...getStore(), eventguests: updatedGuests });
+					return true;
+
+				}catch (error) {
+				  console.error("There has been an error with the RSVP")
+				}
 			},
 
 
