@@ -73,7 +73,7 @@ export const AddGuestsToEvent = () => {
         console.log(error.text);
       });
   }
- 
+
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -91,7 +91,7 @@ export const AddGuestsToEvent = () => {
 
   return (
     <div className='add-g-container container'>
-       <Toaster richColors />
+      <Toaster richColors />
       {arr.map((el, index) => {
         return (
           <div key={index} >
@@ -110,10 +110,11 @@ export const AddGuestsToEvent = () => {
                   <p className="add-g-title">Elige a los invitados</p>
                   {contactsList.map((el, index) => {
                     return (
-                      <div key={index} className="add-g-list">
-                        <input onChange={handleChexbox} type="checkbox" id={index} defaultValue></input>
-                        <label className="cont-name-label" htmlFor="cbox2">{el.name}</label>
-                      </div>
+                      <label key={index} className="container-check">
+                        <input id={index} type="checkbox" value="no" onChange={handleChexbox} />
+                        <div className="checkmark"></div>
+                        <p className="cont-name-label ml-1">{el.name}</p>
+                      </label>
                     )
                   })}
                   <button className="add-g-btn" type="submit"  >Agregar Invitados</button>
