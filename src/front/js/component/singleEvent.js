@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -22,27 +22,44 @@ export const SingleEvent = props => {
   const params = useParams();
 
   let eveResult = store.events.filter(el => el.id == params.theid);
-
+  let currentEvent = store.events.find((el) => el.id == params.theid);
   let eventGuestByEvent = store.eventguests.filter(el => el.event_id == params.theid);
 
+  let confirmedGuests = eventGuestByEvent.filter(
+    (el) => el.rsvp_status == true);
 
-  let allContacts = store.userContacts;
+  console.log(confirmedGuests)
+
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
+  let isEventCreator = currentEvent?.user_id === userId.id
+
+  const getAllContacts = async () => {
+    await actions.getAllContacts()
+  } 
   
+  useEffect(() => {
+    getAllContacts();
+  }, [])
+  
+  let allContacts = store.allContacts?.results;
+  console.log(allContacts)
 
   let namesByEvent = [];
-  for (let i = 0; i < eventGuestByEvent.length; i++) {
-    for (let j = 0; j < allContacts.length; j++) {
-      if (eventGuestByEvent[i].contact_id === allContacts[j].id) {
-        namesByEvent.push(allContacts[j]);
+  if (allContacts) {
+    for (let i = 0; i < eventGuestByEvent.length; i++) {
+      for (let j = 0; j < allContacts.length; j++) {
+        if (eventGuestByEvent[i].contact_id === allContacts[j].id) {
+          namesByEvent.push(allContacts[j]);
+        }
       }
     }
   }
 
-
   const handleDelete = (eventId) => {
     actions.deleteEvent(eventId)
   }
-
+  
   return (
     <div className="dash-container">
       <div className="column">
@@ -112,12 +129,30 @@ export const SingleEvent = props => {
                                 })}
                               </ul>
                             </div>
-                          </div>
+                            {isEventCreator && (
+                              <div>
+                                <div className="event-guests-s">
+                                  <p className="event-guests-list my-1"><strong>Invitados que confirmaron su asistencia:</strong></p>
+                                </div>
+                                <div className="guests-map">
+                                  <ul className="guest-list my-1">
+                                    {confirmedGuests.map((el, index) => {
+                                      let contact = store.userContacts.find(
+                                        (contact) => contact.id === el.contact_id
+                                      );
+                                      return (
+                                        <li className="each-guest" key={index}>
+                                          <img src="https://res.cloudinary.com/dkcoownwg/image/upload/v1677503257/avatar_knpmj6.png" alt="hugenerd" width="25" height="25" className="rounded-circle" />
+                                          <p key={index} className="guest-name mx-2 mt-1">{contact && contact.name}</p>
+                                        </li>
+                                      );
+                                    })}
+                                  </ul>
+                                </div>
+                              </div>
+                            )}</div>
                         </div>
                         <div className="col d-md-flex justify-content-md-end">
-                          {/* <Link to={"/private/"}>
-                      <button className="back-btn btn text-end">Regresar al Dashboard</button>
-                    </Link> */}
                         </div>
                       </div>
                     </div>
@@ -126,8 +161,8 @@ export const SingleEvent = props => {
               </div>
             </div>
             <div className="row com-map-row">
-            <Comments />
-            <MapComponent/>
+              <Comments />
+              <MapComponent />
             </div>
           </>
         ) : (
