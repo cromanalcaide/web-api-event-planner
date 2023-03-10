@@ -89,11 +89,11 @@ export const Login = () => {
                       </form>
                     </div>
                     <div className="pb-2">
-                      {/* <div className="forgot-pass-link">
+                      <div className="forgot-pass-link">
                         <button className=" btn mb-0" onClick={handleForgotPasswordClick}>
                           Olvidaste tu contraseña?
                         </button>
-                      </div> */}
+                      </div>
                     </div>
                     <div className="pb-2">
                       <p className="mb-0">

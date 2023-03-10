@@ -305,6 +305,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			setNewPassword: async (userId, password) => {
+				const user = getStore().user;
+
+				let updatedPassword = password;
+
+				const updatedUser = {
+					...user,
+					"password": updatedPassword
+				};
+				console.log(updatedUser)
+				try {
+
+					const updatedUserInfo = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
+						method: "PUT",
+						headers: {
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(updatedUser)
+					});
+
+					const updatedUserObject = await updatedUserInfo.json();
+
+					const prevStore = getStore();
+					setStore({
+						...prevStore,
+						user: updatedUserObject
+					});
+					return true
+				} catch (error) {
+					console.log(error);
+				}
+			},
 			deleteUser: async () => {
 				const userId = JSON.parse(localStorage.getItem("userId"));
 				const requestOptions = {

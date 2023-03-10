@@ -1,11 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
-import CryptoJS from 'crypto-js';
-import "crypto-js/aes";
-// import Base64 from 'crypto-js/enc-base64';
-// import Base64 from "crypto-js/enc-base64.js";
-// import { AES } from "crypto-js";
 import emailjs from 'emailjs-com';
 
 
@@ -13,51 +8,45 @@ import emailjs from 'emailjs-com';
 export const ForgotPass = () => {
     const [emailFP, setEmailFP] = useState('');
 
-    var CryptoJS = require("crypto-js");
-    console.log(CryptoJS.HmacSHA1("Message", "Key"));
-
-    const handleEmailChange = (event) => {
-        setEmailFP(event.target.value);
+    const handleEmailChange = (e) => {
+        setEmailFP(e.target.value)
     }
 
-    // const decipherToken = (encryptedToken) => {
-    //     const encodedCiphertext = encryptedToken.ciphertext;
-    //     const encodedNonce = encryptedToken.nonce;
-    //     const encodedTag = encryptedToken.tag;
-    //     const key = "una clave de 16 bytes";
 
-    //     // Decodifica los valores de la respuesta JSON desde base64
-    //     const ciphertext = CryptoJS.enc.Base64.parse(encodedCiphertext);
-    //     const nonce = CryptoJS.enc.Base64.parse(encodedNonce);
-    //     const tag = CryptoJS.enc.Base64.parse(encodedTag);
+    const sendEmail = (email, userId) => {
+        const mensaje = {
+            from_name: 'El equipo de ComMeet',
+            to_emails: email,
+            subject: `Recuperación de contraseña`,
+            message: `Hola!,
 
-    //     // Cifra el mensaje utilizando la etiqueta de autenticación
-    //     const encrypted = AES.encrypt(ciphertext, CryptoJS.enc.Utf8.parse(key), {
-    //       mode: CryptoJS.mode.EAX,
-    //       nonce: nonce,
-    //       tag: tag,
-    //     });
-
-    // Devuelve el mensaje cifrado en base64
-    //     return encrypted.toString();
-    //   };
-
-    const sendEmail = (email, decryptedToken) => {
-        const templateParams = {
-            to_email: email,
-            reset_token: decryptedToken,
+            Recibimos una solicitud para restablecer tu contraseña en nuestra web. Si no hiciste esta solicitud, puedes ignorar este correo electrónico y tu contraseña actual seguirá siendo válida.
+            
+            \nSi solicitaste el restablecimiento de la contraseña, haz clic en el siguiente enlace para continuar:
+            
+            \nhttps://3000-cromanalcai-webapievent-8evfm2s59z0.ws-eu89b.gitpod.io//set-new-pass/${userId}
+            
+            \nEste enlace es válido solo por un tiempo limitado, así que asegúrate de restablecer tu contraseña pronto. Si tienes problemas para restablecer tu contraseña, no dudes en ponerte en contacto con nuestro equipo de soporte.
+            
+            \nGracias,
+            \nEl equipo de ComMeet.`,
         };
-        emailjs
-            .send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
-            .then(() => {
-                console.log("Email sent successfully");
-            })
-            .catch((error) => {
-                console.log("Email sending failed:", error);
+
+        const servicioID = 'service_yrjx7ri';
+        const plantillaID = 'template_7tphbsi';
+        const userID = 'DSeMYPcDEYnErZESa';
+
+        emailjs.send(servicioID, plantillaID, mensaje, userID)
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
             });
+
+
     };
 
-    const getTokenAndSendEmail = async () => {
+    const getUserChecked = async () => {
         const BACKEND_URL = process.env.BACKEND_URL;
 
         const requestOptions = {
@@ -73,13 +62,13 @@ export const ForgotPass = () => {
             const res = await fetch(`${BACKEND_URL}/api/password-reset`, requestOptions);
 
             if (res.status !== 200) {
-                alert("An error has occurred while getting token");
+                alert("An error has occurred while checking the user");
                 return false;
             }
             const data = await res.json();
             console.log(data)
-            //   const decryptedToken = decipherToken(data.encrypted_token);
-            //   sendEmail(data.email, decryptedToken);
+            sendEmail(data.email, data.user_id)
+
         } catch (error) {
             console.log(error);
         }
@@ -97,7 +86,7 @@ export const ForgotPass = () => {
                 </label>
                 <br />
                 <p>Si estás registrado, recibirás un correo electrónico con un enlace y un token que deberás ingresar para recuperar tu contraseña. </p>
-                <button type='submit' className='forgot-pass-btn' onClick={() => { getTokenAndSendEmail() }}>Enviar</button>
+                <button type='submit' className='forgot-pass-btn' onClick={() => { getUserChecked() }}>Enviar</button>
             </div>
         </div>
     )

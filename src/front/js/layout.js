@@ -13,7 +13,7 @@ import { CookiePolicy } from "./pages/cookiepolicy";
 import { Profile } from "./component/profile";
 import { SingleEvent } from "./component/singleEvent";
 import { RsvpForm } from "./component/rsvpform";
-
+import { SetNewPass } from "./pages/setnewpass";
 
 
 const Layout = () => {
@@ -37,6 +37,7 @@ const Layout = () => {
                         <Route element={<Profile />} path="/profile"/>
                         <Route element={<SingleEvent />} path="/singleevent/:theid" />
                         <Route element={<RsvpForm />} path="/rsvp/:theid" />
+                        <Route element={<SetNewPass />} path="/set-new-pass/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
