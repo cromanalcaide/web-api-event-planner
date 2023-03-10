@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -10,9 +10,9 @@ import { MapComponent } from "./mapcomponent";
 
 import "../../styles/singleevent.css"
 
-export const SingleEvent = props => {
+export const SingleEvent = () => {
   const { store, actions } = useContext(Context);
-  const [showModal, setShowModal] = useState(false)
+  const [showPopup, setShowPopup] = useState(false);
   const [showCreateEvent, setShowCreateEvent] = useState(false);
 
   const handleCreateEventClick = () => {
@@ -36,12 +36,17 @@ export const SingleEvent = props => {
 
   const getAllContacts = async () => {
     await actions.getAllContacts()
-  } 
-  
+  }
+
   useEffect(() => {
     getAllContacts();
+    // getModal()
   }, [])
-  
+
+  // function getModal () {
+  //   setShowModal(true)
+  // }
+
   let allContacts = store.allContacts?.results;
   console.log(allContacts)
 
@@ -59,7 +64,8 @@ export const SingleEvent = props => {
   const handleDelete = (eventId) => {
     actions.deleteEvent(eventId)
   }
-  
+
+
   return (
     <div className="dash-container">
       <div className="column">
@@ -86,26 +92,36 @@ export const SingleEvent = props => {
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                               <li className="dropdown-item">Editar evento</li>
-                              <li className="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => { setShowModal(true) }}>Eliminar evento</li>
-                              {showModal == true ? (
-                                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <button className="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick={() => {setShowPopup(true) }}>
+                                Eliminar evento
+                              </button>
+                              {/* { showModal && (
+                                <div className="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                   <div className="modal-dialog">
                                     <div className="modal-content">
                                       <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="exampleModalLabel">¿Estás seguro?</h1>
+                                        <h1 className="modal-title fs-5" id="deleteModalLabel">¿Estás seguro?</h1>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div className="modal-body">
                                         Si eliminas el evento los invitados no podrán ver la información o acceder a los comentarios.
                                       </div>
                                       <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" className="btn btn-primary" onClick={() => { handleDelete(el.id) }}>EliminarEvento</button>
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+                                        <button type="button" className="btn btn-primary" onClick={() => { handleDelete(el.id) }}>Eliminar evento</button>
                                       </div>
                                     </div>
                                   </div>
-                                </div>)
-                                : null}
+                                </div>
+                              )} */}
+                              {showPopup && (
+                                <div className="popup">
+                                  <h1>¿Estás seguro?</h1>
+                                  <p>Si eliminas el evento los invitados no podrán ver la información o acceder a los comentarios.</p>
+                                  <button className="btn btn-secondary" onClick={() => setShowPopup(false)}>Cancelar</button>
+                                  <button className="btn btn-primary" onClick={() => { handleDelete(el.id); setShowPopup(false); }}>Eliminar evento</button>
+                                </div>
+                              )}
                             </ul>
                           </div>
                         </div>

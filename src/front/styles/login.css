@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Merienda&family=Merienda+One&family=Puritan:wght@400;700&display=swap");
 
 .title-login,
-.lg-input {
+.lg-input, .label-forgot-pass {
   font-family: "Puritan", sans-serif;
+
 }
 
 .bg {
@@ -14,7 +15,7 @@
   box-shadow: -7px 7px 11px 1px rgba(0, 0, 0, 0.25);
 }
 
-.lg-btn {
+.lg-btn, .forgot-pass-btn {
   font-family: "Puritan", sans-serif;
   font-size: large;
   color: white;
@@ -27,12 +28,16 @@
   background: #667dd2;
   box-shadow: 0px 7px 0px 0px #586db9, 0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
-.lg-btn:focus {
+.lg-btn:focus, .forgot-pass-btn:focus {
   outline: none;
 }
-.lg-btn:active {
+.lg-btn:active, .forgot-pass-btn:active {
   top: 5px;
   box-shadow: 0px 3px 0px 0px #586db9;
+}
+
+.forgot-pass-btn{
+  padding: 0.3em 1em 0.3em 1em;
 }
 
 .title-login {
@@ -45,7 +50,7 @@
   color: #65666a;
 }
 
-.lg-input {
+.lg-input, .lg-input-pass, .input-forgot-pass {
   box-shadow: -7px 7px 11px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border-style: none;
@@ -55,8 +60,23 @@
   margin-right: 0px;
 }
 
-.reg-link {
+.lg-input{
+  width: 16em;
+}
+
+.lg-input-pass{
+  width: 18em;
+}
+
+.input-forgot-pass{
+  width: 20em;
+}
+.reg-link, .forgot-pass-link {
   text-decoration: none;
   font-family: "Puritan", sans-serif;
   font-size: small;
+}
+
+.showPass{
+  margin-top: 15px !important;
 }

@@ -12,6 +12,9 @@ import json
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import base64
 
 
 api = Blueprint('api', __name__)
@@ -415,6 +418,32 @@ def actualizar_rsvp():
        return 'OK', 200
     else:
         return 'Error: invitado no encontrado en el evento', 400
+
+
+    # Forgot Password 
+
+@api.route('/password-reset', methods=['POST'])
+def password_reset():
+    email = request.json.get('email')
+    user = User.query.filter_by(email=email).first()
+
+    if not user or not user.is_active:
+        return jsonify({'error': 'No se pudo encontrar el usuario.'}), 400
+
+    access_token = create_access_token(identity=user.id)
+
+    data = access_token.encode()
+
+    key = get_random_bytes(16)
+    cipher = AES.new(key, AES.MODE_EAX)
+    ciphertext, tag = cipher.encrypt_and_digest(data)
+
+    # Encode ciphertext, nonce, and tag as base64
+    encoded_ciphertext = base64.b64encode(ciphertext).decode('utf-8')
+    encoded_nonce = base64.b64encode(cipher.nonce).decode('utf-8')
+    encoded_tag = base64.b64encode(tag).decode('utf-8')
+
+    return jsonify({'email': user.email, 'encrypted_token': {'ciphertext': encoded_ciphertext, 'nonce': encoded_nonce, 'tag': encoded_tag}}), 200
 
 if __name__ == "__main__":
     app.run()

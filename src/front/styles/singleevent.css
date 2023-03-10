@@ -86,3 +86,30 @@ li.each-guest{
 .com-map-row{
   margin-left: 0em;
 }
+
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.popup h1 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.popup p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.popup button {
+  margin-right: 10px;
+}
