@@ -1,3 +1,5 @@
+const BACKEND_URL = process.env.BACKEND_URL
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -30,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(requestOptions);
 					
 					try {
-						const resp = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/login", requestOptions)
+						const resp = await fetch((`${BACKEND_URL}/api/login/`), requestOptions)
 						console.log("resp", resp)
 						if (resp.status != 200){
 							console.log("An error has occurred");
@@ -68,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				
 				try {
-					const resp = await fetch("https://3001-cromanalcai-webapievent-rxvf69gg0tc.ws-eu86.gitpod.io/api/register", requestOptions)
+					const resp = await fetch((`${BACKEND_URL}/api/register/`), requestOptions)
 					if (resp.status != 200){
 						alert("An error has occurred while creating the user");
 						return false;
@@ -92,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  },
 					};
 					try {
-					  const res = await fetch("https://3001-cromanalcai-webapievent-21d9b0vaa71.ws-eu86.gitpod.io/api/private", requestOptions);
+					  const res = await fetch((`${BACKEND_URL}/api/private/`), requestOptions);
 					  const data = await res.json();
 					  return data;
 					} catch (error) {
@@ -107,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getEventsGuests: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events_guests`,
+					(`${BACKEND_URL}/api/events_guests/`),
 				  {
 					method: "GET",
 				  }
@@ -120,7 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getAllEvents: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events`,
+					(`${BACKEND_URL}/api/events/`),
 				  {
 					method: "GET",
 				  }
@@ -133,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			  getContacts: async () => {
 				const response = await fetch(
-				  `https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/contacts`,
+					(`${BACKEND_URL}/api/contacts/`),
 				  {
 					method: "GET",
 				  }

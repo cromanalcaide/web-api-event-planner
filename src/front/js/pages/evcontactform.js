@@ -10,6 +10,8 @@ import { array } from "prop-types";
 
 export const Evcontactform = () => {
 
+  const BACKEND_URL = process.env.BACKEND_URL
+
   const { store, actions } = useContext(Context);
 
   let eventsList = store.events;
@@ -40,8 +42,7 @@ export const Evcontactform = () => {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      const url =
-        "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/events_guest/register"
+      const url = (`${BACKEND_URL}/api/events_guest/register/`)
       const request = {
 
         method: "POST",

@@ -4,13 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { date } from 'yup';
 
 export const Geocoding = () => {
+    const BACKEND_URL = process.env.BACKEND_URL
     const [address, setAddress] = useState('');
-    const [listCoorden, setCoorden] = useState('');
+    const [listLati, setLati] = useState('');
+    const [listlongi, setLongi] = useState('');
     const [listTitle, setTitle] = useState('');
     const [listDate, setDate] = useState('');
     const [listTime, setTime] = useState('');
     const [listDescription, setDescription] = useState('');
     const [listImage, setImage] = useState('');
+
+    console.log(typeof(listLati));
+    console.log(listlongi);
   
     let dateTime = listDate+" "+listTime+":00"
    
@@ -21,7 +26,8 @@ export const Geocoding = () => {
       location: address,
       image: listImage,
       user_id: 11, // Modificar con datos de Local Storage
-      coord: listCoorden
+      lati: listLati,
+      longi: listlongi
     };
     console.log(objNewEvent)
     const navigate = useNavigate();
@@ -37,8 +43,7 @@ export const Geocoding = () => {
       try {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        const url =
-          "https://3001-cromanalcai-webapievent-7wlsqfghc93.ws-eu89.gitpod.io/api/event/register"
+        const url =(`${BACKEND_URL}/api/event/register/`)
         const request = {
           method: "POST",
           body: JSON.stringify(newEvent),
@@ -77,7 +82,8 @@ export const Geocoding = () => {
             (results, status) => {
 
                     if (status === "OK") { 
-                        setCoorden([results[0].geometry.location.lat(), results[0].geometry.location.lng()])
+                        setLati(results[0].geometry.location.lat); 
+                        setLongi(results[0].geometry.location.lng());
                         
                         console.log(`Latitud: ${results[0].geometry.location.lat()}, Longitud: ${results[0].geometry.location.lng()}`);
                     } else {

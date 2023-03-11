@@ -1,6 +1,7 @@
 import React from "react";
 import { Nextevent } from "../component/nextevent";
-import { Printeventslist } from "../component/printeventslist"
+import { Printeventslist } from "../component/printeventslist";
+import { Calendar } from "../component/calendar";
 import "../../styles/events.css"
 
 
@@ -9,5 +10,6 @@ export const Events = () => {
             <div className = "row dash-div">
                 <Nextevent/> 
                 <Printeventslist/>
+                <Calendar/>
             </div>)
 };
