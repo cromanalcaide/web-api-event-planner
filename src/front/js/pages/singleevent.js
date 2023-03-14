@@ -43,7 +43,7 @@ export const Singleevent = props => {
           <div className="col-sm-4">
             <h6 className="p-contacts">Evento</h6>
               <p className="p-singlee"><strong>{el.title}</strong></p>
-              <p className="p-singlee"><strong>Horario: </strong>{el.date}</p>
+              <p className="p-singlee"><strong>Horario: </strong>{el.date.slice(0 , 16)}</p>
               <p className="p-singlee"><strong>Lugar: </strong>{el.location}</p>
             <div className="p-singlee">
                 <br></br>

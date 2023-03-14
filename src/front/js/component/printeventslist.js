@@ -36,7 +36,7 @@ export const Printeventslist = ()=>{
                   return (
                     <div key={index}>
                     <Link to={"/singleevent/" + el.id}>
-                  <p className='p-event' > Fecha: {el.date} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location} &nbsp;&nbsp;&nbsp; Ver detalles</p>
+                  <p className='p-event' > Fecha: {el.date.slice(0 , 16)} &nbsp;&nbsp;&nbsp; {el.title} &nbsp;&nbsp;&nbsp;  Lugar: {el.location} &nbsp;&nbsp;&nbsp; Ver detalles</p>
                   </Link>
                   </div>
                   )})}

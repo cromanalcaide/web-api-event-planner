@@ -50,7 +50,7 @@ export const Nextevent = ()=>{
               </div>
               <div className="col-sm-3">
                 <p className="p-nextdate"><strong>{el.title}</strong></p>
-                <p className="p-nextdate"><strong>Horario: </strong>{el.date}</p>
+                <p className="p-nextdate"><strong>Horario: </strong>{el.date.slice(0 , 16)}</p>
               </div>
               <div className="col-sm-5">
                 <p className="p-nextdate"><strong>Lugar: </strong>{el.location}</p>
