@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 import { format } from 'date-fns';
-import { formatWithOptions } from 'date-fns/fp'
 import { DayPicker } from 'react-day-picker';
 import { es } from 'date-fns/locale';
 
@@ -30,10 +29,10 @@ export const Calendar = () => {
       }
     }
 
-    let form = format(selectedDay, 'PP');
-    let forma = format(selectedDay, 'PPPP', { locale: es });
+    let onlyDay = format(selectedDay, 'PP');
+    let formatDay = format(selectedDay, 'PPPP', { locale: es });
     
-    let futureDate = eventsByGuests.filter(item =>   format(new Date (item.date), 'PP') == form && new Date(item.date).getTime() > new Date().getTime());
+    let futureDate = eventsByGuests.filter(item =>   format(new Date (item.date), 'PP') == onlyDay && new Date(item.date).getTime() > new Date().getTime());
     futureDate.sort(function(a, b){return new Date(a.date).getTime() - new Date(b.date).getTime()});
      
     let bookedDays = eventsByGuests.map((el => new Date(el.date) > new Date() ? new Date(el.date) : null));
@@ -50,9 +49,9 @@ export const Calendar = () => {
         modifiersStyles={{ booked: bookedStyle }}
       />
       <div className='next-events'  >
-                  {futureDate.length === 0 ? <h5 className = "numEvent">No tienes ningún evento el {forma}</h5>
-                  :futureDate.length === 1 ? <h5 className = "numEvent">Tienes {futureDate.length} evento el {forma}</h5>
-                  :<h5 className = "numEvent">Tienes {futureDate.length} eventos el {forma}</h5>
+                  {futureDate.length === 0 ? <h5 className = "numEvent">No tienes ningún evento el {formatDay}</h5>
+                  :futureDate.length === 1 ? <h5 className = "numEvent">Tienes {futureDate.length} evento el {formatDay}</h5>
+                  :<h5 className = "numEvent">Tienes {futureDate.length} eventos el {formatDay}</h5>
                   } 
                   
                   {futureDate.map((el, index) => {
